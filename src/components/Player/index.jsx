@@ -1,9 +1,23 @@
 import React from "react";
 
-function Player({ user }) {
-  const { display_name } = user;
+import Body from "../Body";
+import Footer from "../Footer";
+import Sidebar from "../Sidebar";
 
-  return <h1>{`Welcome to Spotify, ${display_name}`}</h1>;
+import "./Player.css";
+
+function Player({ user }) {
+  //   const { display_name } = user;
+
+  return (
+    <div className="player">
+      <div className="player__body">
+        <Sidebar />
+        <Body />
+      </div>
+      <Footer />
+    </div>
+  );
 }
 
 export default Player;

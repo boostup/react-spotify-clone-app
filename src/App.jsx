@@ -1,25 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
-import "./App.css";
-
-import { getHashFromResponse, spotify } from "./spotify/utils";
+import { SET_PLAYLISTS, SET_TOKEN, SET_USER } from "./spotify/constants";
+import { getHashFromResponse, spotifyAPI } from "./spotify/utils";
+import { useDataLayerValue } from "./components/DataLayer";
 import Login from "./components/Login";
 import Player from "./components/Player";
 
+import "./App.css";
+
 function App() {
-  const [token, setToken] = useState(null);
-  const [user, setUser] = useState(null);
+  const [{ token }, dispatch] = useDataLayerValue();
 
   useEffect(() => {
     const hash = getHashFromResponse();
     const _token = hash.access_token;
 
     if (_token) {
-      setToken(_token);
-      spotify.setAccessToken(_token);
-      spotify.getMe().then((user) => {
-        console.log(":person", user);
-        setUser(user);
+      dispatch({
+        type: SET_TOKEN,
+        payload: _token,
+      });
+      spotifyAPI.setAccessToken(_token);
+      spotifyAPI.getMe().then((user) => {
+        dispatch({
+          type: SET_USER,
+          payload: user,
+        });
+      });
+      spotifyAPI.getUserPlaylists().then((playlists) => {
+        dispatch({
+          type: SET_PLAYLISTS,
+          payload: playlists,
+        });
       });
     }
   }, []);
@@ -28,8 +40,7 @@ function App() {
     <div className="app">
       {token ? (
         <div>
-          <Player user={user} />
-          <code>{JSON.stringify(user)}</code>
+          <Player spotifyAPI={spotifyAPI} />
         </div>
       ) : (
         <Login />

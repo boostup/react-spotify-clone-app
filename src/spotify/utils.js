@@ -30,4 +30,4 @@ export const loginUrl = `${authEndpoint}?client_id=${clientId}&redirect_uri=${re
   "%20"
 )}&response_type=token&show_dialog=true`;
 
-export const spotify = new SpotifyWebApi();
+export const spotifyAPI = new SpotifyWebApi();

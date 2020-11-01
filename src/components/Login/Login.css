@@ -1,6 +1,6 @@
 .login {
   display: grid;
-  place-items: center;
+  place-items: center; /* NICE TRICK */
   height: 100vh;
   background-color: black;
 }
