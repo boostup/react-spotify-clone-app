@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 
-import { SET_PLAYLISTS, SET_TOKEN, SET_USER } from "./spotify/constants";
+import {
+  SET_PLAYLISTS,
+  SET_TOKEN,
+  SET_USER,
+  SET_DISCOVER_WEEKLY,
+} from "./spotify/constants";
 import { getHashFromResponse, spotifyAPI } from "./spotify/utils";
 import { useDataLayerValue } from "./components/DataLayer";
 import Login from "./components/Login";
@@ -33,6 +38,13 @@ function App() {
           payload: playlists,
         });
       });
+
+      spotifyAPI.getPlaylist("37i9dQZEVXcDGlrEgKnU30").then((response) =>
+        dispatch({
+          type: SET_DISCOVER_WEEKLY,
+          payload: response,
+        })
+      );
     }
   }, []);
 

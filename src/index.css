@@ -1,5 +1,5 @@
 body::-webkit-scrollbar {
-  /* NICE TRICK */
+  /* NICE TRICK : it hides the scrollbar, but the scrolling behavior is maintained*/
   display: none;
 }
 

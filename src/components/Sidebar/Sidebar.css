@@ -5,6 +5,12 @@
   background-color: #040404;
   color: white;
   padding: 0 1rem;
+  overflow-y: overlay;
+}
+
+.sidebar::-webkit-scrollbar {
+  /* NICE TRICK : it hides the scrollbar, but the scrolling behavior is maintained*/
+  display: none;
 }
 
 .sidebar__logo {
