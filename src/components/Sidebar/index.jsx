@@ -14,8 +14,6 @@ import "./Sidebar.css";
 function Sidebar() {
   const [{ playlists }, dispatch] = useDataLayerValue();
 
-  console.log(playlists);
-
   return (
     <div className="sidebar">
       <img className="sidebar__logo" src={SPOTIFY_LOGO} alt="spotify logo" />
@@ -26,6 +24,7 @@ function Sidebar() {
       <strong className="sidebar__title">Playlists</strong>
       <hr />
 
+      {/* NICE TRICK : I need to make tests with this in the context of Async values */}
       {playlists?.items?.map(({ name }) => (
         <SidebarOption title={name} />
       ))}

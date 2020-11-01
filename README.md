@@ -1,3 +1,39 @@
+Search through the code for "NICE TRICK" string to find nice little tricks
+
+---
+
+# Roadmap
+
+## General
+
+- [ ] Find a SVG logo of spotify
+- [ ] use it instead of the current JPG
+- [ ] mobile-friendly pass
+- [ ] PWA
+- [ ] Tests
+- [ ] Netlify hosting
+- [ ] Treat any console logs warning and errors that are currently displayed (i.e. "useEffect" or "unique keys" on sidebar options)
+
+## Login & Logout
+
+- [ ] Once the user is connected, the fact that she is signed in must persist even after a browser tab closed/re-opened
+- [ ] The user must be able to disconnect
+
+## Sidebar
+
+- [ ] CSS bug : cannot scroll all the way down to the list of playlists
+- [ ] CSS bug : the background color stops, it does not fill up all the scroll height of the sidebar
+
+## Footer
+
+### Volume slider
+
+- [ ] have the volume icon change according to the volume
+
+- [ ] CSS bug on the right of the footer (had to set it to 96% for some unknown reason)
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

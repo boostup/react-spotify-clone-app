@@ -6,9 +6,7 @@ import Sidebar from "../Sidebar";
 
 import "./Player.css";
 
-function Player({ user }) {
-  //   const { display_name } = user;
-
+function Player() {
   return (
     <div className="player">
       <div className="player__body">
