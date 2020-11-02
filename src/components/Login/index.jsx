@@ -1,16 +1,20 @@
 import React from "react";
 
-import { loginUrl } from "../../spotify/utils";
+import { LOGIN_LOCATION } from "../../utils/spotify";
 
 import "./Login.css";
 
 const SPOTIFY_LOGO = require("../../assets/spotify830x350.jpg")?.default;
 
 function Login() {
+  const handleLogin = () => {
+    window.location = LOGIN_LOCATION;
+  };
+
   return (
     <div className="login">
       <img src={SPOTIFY_LOGO} alt="Spotify Logo" />
-      <a href={loginUrl}>Login with Spotify</a>
+      <button onClick={handleLogin}>Login with Spotify</button>
     </div>
   );
 }

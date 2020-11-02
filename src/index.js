@@ -1,17 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { DataLayer } from "./components/DataLayer";
-import reducer, { initialState } from "./spotify/reducers";
+import reducer, { initialState } from "./utils/reducers";
+
+import AppRouter from "./components/AppRouter";
 
 import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
     <DataLayer initialState={initialState} reducer={reducer}>
-      <App />
+      <AppRouter />
     </DataLayer>
   </React.StrictMode>,
   document.getElementById("root")

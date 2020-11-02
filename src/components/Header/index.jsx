@@ -1,7 +1,5 @@
 import React from "react";
 
-import { Avatar } from "@material-ui/core";
-
 import { useDataLayerValue } from "../DataLayer";
 
 import SearchField from "../SearchField";
@@ -10,7 +8,9 @@ import AvatarArea from "../AvatarArea";
 import "./Header.css";
 
 function Header() {
-  const [{ user }, dispatch] = useDataLayerValue();
+  const { state } = useDataLayerValue();
+  const { user } = state;
+
   return (
     <div className="header">
       <div className="header__left">

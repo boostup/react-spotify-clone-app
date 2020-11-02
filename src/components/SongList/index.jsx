@@ -7,11 +7,13 @@ import { useDataLayerValue } from "../DataLayer";
 import "./SongList.css";
 
 function SongList() {
-  const [{ discoverWeekly }, dispatch] = useDataLayerValue();
+  const { state } = useDataLayerValue();
+  const { discoverWeekly } = state;
+
   return (
     <div className="songList">
       {discoverWeekly?.tracks.items.map(({ track }) => (
-        <SongRow track={track} />
+        <SongRow key={track.id} track={track} />
       ))}
     </div>
   );

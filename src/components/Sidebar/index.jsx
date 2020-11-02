@@ -13,7 +13,8 @@ import "./Sidebar.css";
 const SPOTIFY_LOGO = require("../../assets/spotify166x70.jpg")?.default;
 
 function Sidebar() {
-  const [{ playlists }, dispatch] = useDataLayerValue();
+  const { state } = useDataLayerValue();
+  const { playlists } = state;
 
   return (
     <div className="sidebar">
@@ -26,8 +27,8 @@ function Sidebar() {
       <hr />
 
       {/* NICE TRICK : I need to make tests with this in the context of Async values */}
-      {playlists?.items?.map(({ name }) => (
-        <SidebarOption title={name} />
+      {playlists?.items?.map(({ id, name }) => (
+        <SidebarOption key={id} title={name} />
       ))}
     </div>
   );

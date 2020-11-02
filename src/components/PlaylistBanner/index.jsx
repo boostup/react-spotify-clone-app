@@ -5,7 +5,8 @@ import { useDataLayerValue } from "../DataLayer";
 import "./PlaylistBanner.css";
 
 function PlaylistBanner() {
-  const [{ discoverWeekly }, dispatch] = useDataLayerValue();
+  const { state } = useDataLayerValue();
+  const { discoverWeekly } = state;
 
   return (
     <div className="playlistBanner">
