@@ -1,7 +1,7 @@
 import React from "react";
 
-import Body from "../Body";
 import Footer from "../Footer";
+import PlaylistPage from "../PlaylistPage";
 import Sidebar from "../Sidebar";
 
 import "./Player.css";
@@ -11,7 +11,7 @@ function Player() {
     <div className="player">
       <div className="player__body">
         <Sidebar />
-        <Body />
+        <PlaylistPage />
       </div>
       <Footer />
     </div>

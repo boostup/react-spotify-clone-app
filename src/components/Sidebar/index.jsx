@@ -1,6 +1,5 @@
 import React from "react";
 
-import { SPOTIFY_LOGO } from "../../spotify/constants";
 import { useDataLayerValue } from "../DataLayer";
 
 import HomeIcon from "@material-ui/icons/Home";
@@ -10,6 +9,8 @@ import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
 import SidebarOption from "../SidebarOption";
 
 import "./Sidebar.css";
+
+const SPOTIFY_LOGO = require("../../assets/spotify166x70.jpg")?.default;
 
 function Sidebar() {
   const [{ playlists }, dispatch] = useDataLayerValue();

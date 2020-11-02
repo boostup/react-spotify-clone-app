@@ -1,0 +1,20 @@
+.playlistToolbar {
+  display: flex;
+  align-items: center;
+}
+
+.playlistToolbar > .MuiSvgIcon-root {
+  margin-right: 2rem;
+}
+
+.playlistToolbar__shuffle {
+  font-size: 5rem !important;
+  margin-left: 3rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.playlistToolbar__shuffle:hover {
+  transition: 100ms transform ease-in;
+  transform: scale(1.08);
+}

@@ -1,9 +1,10 @@
 import React from "react";
 
-import { SPOTIFY_LOGO } from "../../spotify/constants";
 import { loginUrl } from "../../spotify/utils";
 
 import "./Login.css";
+
+const SPOTIFY_LOGO = require("../../assets/spotify830x350.jpg")?.default;
 
 function Login() {
   return (

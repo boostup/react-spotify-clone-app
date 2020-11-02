@@ -1,14 +1,21 @@
 .sidebarOption {
   display: flex;
   align-items: center;
-  color: grey;
+  color: #b3b3b3;
   height: 40px;
   cursor: pointer;
   transition: 200ms color ease-in;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sidebarOption:hover {
   color: white;
+}
+
+.sidebarOption.small {
+  height: 32px;
 }
 
 .sidebarOption__icon {
