@@ -3,6 +3,9 @@ import {
   SET_PLAYLISTS,
   SET_TOKEN,
   SET_USER,
+  REACT_APP_AVATAR_MENU_PROFILE,
+  REACT_APP_AVATAR_MENU_ACCOUNT,
+  REACT_APP_AVATAR_MENU_LOGOUT,
 } from "./constants";
 
 export const initialState = {
@@ -11,10 +14,15 @@ export const initialState = {
   playing: false,
   item: null,
   token: null,
+  avatarMenu: [
+    { title: "Account", url: REACT_APP_AVATAR_MENU_ACCOUNT },
+    { title: "Profile", url: REACT_APP_AVATAR_MENU_PROFILE },
+    { title: "Logout", url: REACT_APP_AVATAR_MENU_LOGOUT },
+  ],
 };
 
 const reducer = (state, action) => {
-  console.log(action);
+  process.env.NODE_ENV === "development" && console.log(action);
 
   switch (action.type) {
     case SET_USER:

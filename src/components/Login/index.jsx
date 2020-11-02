@@ -4,7 +4,7 @@ import { LOGIN_LOCATION } from "../../utils/spotify";
 
 import "./Login.css";
 
-const SPOTIFY_LOGO = require("../../assets/spotify830x350.jpg")?.default;
+const SPOTIFY_LOGO = require("../../assets/spotifylogo.svg")?.default;
 
 function Login() {
   const handleLogin = () => {

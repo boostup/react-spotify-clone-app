@@ -6,7 +6,7 @@ import spotifyAPI from "../../utils/spotify";
 import { setToken, setUser } from "../../utils/localStorage";
 import { useDataLayerValue } from "../DataLayer";
 
-const SpotifyRedirect = ({ history }) => {
+const SpotifyLogin = ({ history }) => {
   const { dispatch } = useDataLayerValue();
 
   useEffect(() => {
@@ -39,4 +39,4 @@ const SpotifyRedirect = ({ history }) => {
   return null;
 };
 
-export default SpotifyRedirect;
+export default SpotifyLogin;

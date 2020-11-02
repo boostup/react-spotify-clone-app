@@ -10,7 +10,7 @@ import SidebarOption from "../SidebarOption";
 
 import "./Sidebar.css";
 
-const SPOTIFY_LOGO = require("../../assets/spotify166x70.jpg")?.default;
+const SPOTIFY_LOGO = require("../../assets/spotifylogo.svg")?.default;
 
 function Sidebar() {
   const { state } = useDataLayerValue();
@@ -19,9 +19,13 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <img className="sidebar__logo" src={SPOTIFY_LOGO} alt="spotify logo" />
-      <SidebarOption title="Home" Icon={HomeIcon} />
-      <SidebarOption title="Search" Icon={SearchIcon} />
-      <SidebarOption title="Your Library" Icon={LibraryMusicIcon} />
+      <SidebarOption title="Home" Icon={HomeIcon} to="/" />
+      <SidebarOption title="Search" Icon={SearchIcon} to="/search" />
+      <SidebarOption
+        title="Your Library"
+        Icon={LibraryMusicIcon}
+        to="/library"
+      />
       <br />
       <strong className="sidebar__title">Playlists</strong>
       <hr />

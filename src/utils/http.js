@@ -8,3 +8,7 @@ export const getHashFromResponse = (locationHash) => {
       return initial;
     }, {});
 };
+
+export const isExternalResource = (url) => {
+  return url.includes("http");
+};

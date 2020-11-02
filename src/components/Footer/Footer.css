@@ -3,11 +3,12 @@
   display: flex;
   justify-content: space-between;
   bottom: 0;
-  height: 65px;
-  width: 97%;
+  height: 85px;
+  width: 100%;
   background-color: #282828;
   color: white;
   padding: 1rem;
+  box-sizing: border-box;
 }
 
 .footer__left {

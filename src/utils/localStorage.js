@@ -8,11 +8,11 @@ function set(toStore) {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(toStore));
 }
 
-export function setUser(user) {
+export function setUser(_user) {
   const stored = get();
   set({
     ...stored,
-    user,
+    user: _user,
   });
 }
 
@@ -21,11 +21,11 @@ export function getUser() {
   return stored && stored.user ? stored.user : false;
 }
 
-export function setToken(token) {
+export function setToken(_token) {
   const stored = get();
   set({
     ...stored,
-    token,
+    token: _token,
   });
 }
 
