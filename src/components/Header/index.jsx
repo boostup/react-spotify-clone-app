@@ -2,9 +2,10 @@ import React from "react";
 
 import { Avatar } from "@material-ui/core";
 
-import SearchField from "../SearchField";
-
 import { useDataLayerValue } from "../DataLayer";
+
+import SearchField from "../SearchField";
+import AvatarArea from "../AvatarArea";
 
 import "./Header.css";
 
@@ -16,9 +17,7 @@ function Header() {
         <SearchField />
       </div>
       <div className="header__right">
-        {/* NICE TRICK : again-> optional chaining using `?` -> if object is still null when trying to access its properties, at least there won't be a JS error */}
-        <Avatar src={user?.images[0]?.url} alt={user?.display_name} />
-        <h4>{user?.display_name}</h4>
+        <AvatarArea user={user} />
       </div>
     </div>
   );
