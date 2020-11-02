@@ -1,7 +1,8 @@
 import React from "react";
 
-import SearchIcon from "@material-ui/icons/Search";
 import { Avatar } from "@material-ui/core";
+
+import SearchField from "../SearchField";
 
 import { useDataLayerValue } from "../DataLayer";
 
@@ -12,8 +13,7 @@ function Header() {
   return (
     <div className="header">
       <div className="header__left">
-        <SearchIcon />
-        <input type="text" placeholder="Search for Artists, Songs, Albums" />
+        <SearchField />
       </div>
       <div className="header__right">
         {/* NICE TRICK : again-> optional chaining using `?` -> if object is still null when trying to access its properties, at least there won't be a JS error */}
