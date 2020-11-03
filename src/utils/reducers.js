@@ -1,7 +1,8 @@
 import {
-  SET_DISCOVER_WEEKLY,
+  SET_PLAYLIST,
   SET_PLAYLISTS,
   SET_TOKEN,
+  SET_TOKEN_EXPIRY,
   SET_USER,
   REACT_APP_AVATAR_MENU_PROFILE,
   REACT_APP_AVATAR_MENU_ACCOUNT,
@@ -10,10 +11,12 @@ import {
 
 export const initialState = {
   user: null,
+  playlist: null,
   playlists: [],
   playing: false,
   item: null,
   token: null,
+  tokenExpiry: 0,
   avatarMenu: [
     { title: "Account", url: REACT_APP_AVATAR_MENU_ACCOUNT },
     { title: "Profile", url: REACT_APP_AVATAR_MENU_PROFILE },
@@ -22,7 +25,7 @@ export const initialState = {
 };
 
 const reducer = (state, action) => {
-  process.env.NODE_ENV === "development" && console.log(action);
+  process.env.NODE_ENV === "development" && console.log(action, state);
 
   switch (action.type) {
     case SET_USER:
@@ -37,16 +40,22 @@ const reducer = (state, action) => {
         token: action.payload,
       };
 
+    case SET_TOKEN_EXPIRY:
+      return {
+        ...state,
+        tokenExpiry: action.payload,
+      };
+
     case SET_PLAYLISTS:
       return {
         ...state,
         playlists: action.payload,
       };
 
-    case SET_DISCOVER_WEEKLY:
+    case SET_PLAYLIST:
       return {
         ...state,
-        discoverWeekly: action.payload,
+        playlist: action.payload,
       };
 
     default:

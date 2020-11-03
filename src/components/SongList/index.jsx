@@ -8,11 +8,11 @@ import "./SongList.css";
 
 function SongList() {
   const { state } = useDataLayerValue();
-  const { discoverWeekly } = state;
+  const { playlist } = state;
 
   return (
     <div className="songList">
-      {discoverWeekly?.tracks.items.map(({ track }) => (
+      {playlist?.tracks.items.map(({ track }) => (
         <SongRow key={track.id} track={track} />
       ))}
     </div>

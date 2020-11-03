@@ -1,4 +1,4 @@
-const LOCAL_STORAGE_KEY = "react-spotify-clone-app";
+import { REACT_APP_LOCAL_STORAGE_KEY as LOCAL_STORAGE_KEY } from "./constants";
 
 function get() {
   return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {};
@@ -32,4 +32,17 @@ export function setToken(_token) {
 export function getToken() {
   const stored = get();
   return stored && stored.token ? stored.token : false;
+}
+
+export function setTokenExpiry(_tokenExpiry) {
+  const stored = get();
+  set({
+    ...stored,
+    tokenExpiry: _tokenExpiry,
+  });
+}
+
+export function getTokenExpiry() {
+  const stored = get();
+  return stored && stored.tokenExpiry ? stored.tokenExpiry : false;
 }

@@ -32,7 +32,7 @@ function Sidebar() {
 
       {/* NICE TRICK : I need to make tests with this in the context of Async values */}
       {playlists?.items?.map(({ id, name }) => (
-        <SidebarOption key={id} title={name} to={`playlist/${id}`} />
+        <SidebarOption key={id} title={name} to={`/playlist/${id}`} />
       ))}
     </div>
   );

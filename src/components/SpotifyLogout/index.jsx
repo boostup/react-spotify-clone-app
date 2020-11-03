@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { SET_TOKEN, SET_USER } from "../../utils/constants";
+import { SET_TOKEN, SET_TOKEN_EXPIRY, SET_USER } from "../../utils/constants";
 
-import { setToken, setUser } from "../../utils/localStorage";
+import { setToken, setTokenExpiry, setUser } from "../../utils/localStorage";
 import { useDataLayerValue } from "../DataLayer";
 
 function SpotifyLogout({ history }) {
@@ -13,6 +13,12 @@ function SpotifyLogout({ history }) {
       payload: null,
     });
     setToken(null);
+
+    dispatch({
+      type: SET_TOKEN_EXPIRY,
+      payload: null,
+    });
+    setTokenExpiry(null);
 
     dispatch({
       type: SET_USER,
