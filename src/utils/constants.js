@@ -1,5 +1,6 @@
 export const SET_USER = "SET_USER";
 export const SET_TOKEN = "SET_TOKEN";
+export const SET_TOKEN_EXPIRY = "SET_TOKEN_EXPIRY";
 export const SET_PLAYLISTS = "SET_PLAYLISTS";
 export const SET_PLAYLIST = "SET_PLAYLIST";
 export const {
@@ -11,4 +12,5 @@ export const {
   REACT_APP_AVATAR_MENU_ACCOUNT,
   REACT_APP_AVATAR_MENU_LOGOUT,
   REACT_APP_HTML_HEAD_TITLE,
+  REACT_APP_LOCAL_STORAGE_KEY,
 } = process.env;
