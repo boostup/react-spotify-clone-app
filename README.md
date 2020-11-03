@@ -1,3 +1,11 @@
+[Live Demo](https://5fa12036e4db2d0007065815--jovial-mccarthy-6875cf.netlify.app)
+
+<a href="https://5fa12036e4db2d0007065815--jovial-mccarthy-6875cf.netlify.app" target="_blank">
+    <img src="public/images/react-spotify-clone-app-screenshot.png" />
+</a>
+
+---
+
 Search through the code for "NICE TRICK" string to find nice little tricks
 
 ---
