@@ -1,8 +1,6 @@
 import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
-import { REACT_APP_REDIRECT_PATH } from "../../utils/constants";
-
 import LoggedInOrNot from "../LoggedInOrNot";
 import SpotifyLogin from "../SpotifyLogin";
 import Player from "../Player";
