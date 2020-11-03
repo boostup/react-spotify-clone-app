@@ -1,0 +1,29 @@
+.sidebarOption {
+  display: flex;
+  align-items: center;
+  color: #b3b3b3;
+  height: 40px;
+  cursor: pointer;
+  transition: 200ms color ease-in;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebarOption:hover {
+  color: white;
+}
+
+.sidebarOption.small {
+  height: 32px;
+}
+
+.sidebarOption__icon {
+  padding: 1rem;
+}
+
+.sidebarOption > p {
+  margin-top: 1rem;
+  margin-left: 1rem;
+  font-size: 1rem;
+}

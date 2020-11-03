@@ -1,0 +1,9 @@
+.avatarArea__clicker {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.avatarArea__clicker > h4 {
+  margin-left: 0.5rem;
+}

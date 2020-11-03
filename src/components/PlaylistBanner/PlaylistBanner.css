@@ -1,0 +1,32 @@
+.playlistBanner {
+}
+
+.playlistBanner__info {
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+}
+
+.playlistBanner__info > img {
+  height: 20vw; /* NICE TRICK */
+  min-height: 200px;
+  margin: 0 1.2rem;
+  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+}
+
+.playlistBanner__infoText {
+  flex: 1;
+}
+
+.playlistBanner__infoText > strong {
+  text-transform: uppercase;
+}
+
+.playlistBanner__infoText > h2 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.playlistBanner__infoText > p {
+  font-size: 1rem;
+}

@@ -1,0 +1,35 @@
+.sidebar {
+  /* box-sizing: border-box; */
+  height: 100vh;
+  min-width: 230px;
+  flex: 0.2;
+  background-color: #040404;
+  color: white;
+  padding: 0 1rem;
+  overflow-y: overlay;
+}
+
+.sidebar::-webkit-scrollbar {
+  /* NICE TRICK : it hides the scrollbar, but the scrolling behavior is maintained*/
+  display: none;
+}
+
+.sidebar__logo {
+  object-fit: contain; /* NICE TRICK */
+  height: 70px;
+  width: 166px;
+  padding: 1rem;
+}
+
+.sidebar > hr {
+  border: 1px solid #282828;
+  width: 90%;
+  margin: 10px auto;
+}
+
+.sidebar__title {
+  text-transform: uppercase;
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 1rem;
+}

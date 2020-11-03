@@ -1,0 +1,53 @@
+.notFoundPage,
+.notFoundPage * {
+  box-sizing: border-box;
+}
+
+.notFoundPage {
+  background: linear-gradient(45deg, #8c1932, #ff6437 60%);
+  color: #fff;
+  font-size: 1.5rem;
+  height: 100vh;
+  width: 100vw;
+  padding: 1rem;
+  position: relative;
+}
+
+.notFoundPage__logo {
+  padding: 20px;
+  width: 70vw;
+  max-width: 700px;
+  display: block;
+}
+
+.notFoundPage__logo,
+.notFoundPage__message {
+  z-index: 2;
+  position: relative;
+}
+
+.notFoundPage__vinylContainer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.notFoundPage__vinylContainer > img {
+  position: absolute;
+  bottom: -230px;
+  right: -260px;
+  width: 600px;
+  height: 600px;
+}
+
+@media screen and (min-width: 600px) {
+  .notFoundPage__vinylContainer > img {
+    height: 100vh;
+    width: 100vw;
+    right: -560px;
+  }
+}

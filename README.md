@@ -1,3 +1,11 @@
+Search through the code for "NICE TRICK" string to find nice little tricks
+
+---
+
+[Roadmap available here](https://github.com/boostup/react-spotify-clone-app/issues/1)
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
