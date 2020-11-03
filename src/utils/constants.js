@@ -1,7 +1,7 @@
 export const SET_USER = "SET_USER";
 export const SET_TOKEN = "SET_TOKEN";
 export const SET_PLAYLISTS = "SET_PLAYLISTS";
-export const SET_DISCOVER_WEEKLY = "SET_DISCOVER_WEEKLY";
+export const SET_PLAYLIST = "SET_PLAYLIST";
 export const {
   REACT_APP_CLIENT_ID,
   REACT_APP_AUTHORIZE_URL,

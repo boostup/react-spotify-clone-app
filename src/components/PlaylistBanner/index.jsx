@@ -6,16 +6,16 @@ import "./PlaylistBanner.css";
 
 function PlaylistBanner() {
   const { state } = useDataLayerValue();
-  const { discoverWeekly } = state;
+  const { playlist } = state;
 
   return (
     <div className="playlistBanner">
       <div className="playlistBanner__info">
-        <img src={discoverWeekly?.images[0].url} alt="" />
+        <img src={playlist?.images[0].url} alt="" />
         <div className="playlistBanner__infoText">
           <strong>Playlist</strong>
-          <h2>{discoverWeekly?.name}</h2>
-          <p>{discoverWeekly?.description}</p>
+          <h2>{playlist?.name}</h2>
+          <p>{playlist?.description}</p>
         </div>
       </div>
     </div>

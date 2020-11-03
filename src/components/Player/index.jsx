@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { SET_PLAYLISTS, SET_DISCOVER_WEEKLY } from "../../utils/constants";
+import { SET_PLAYLISTS, SET_PLAYLIST } from "../../utils/constants";
 
 import spotifyAPI from "../../utils/spotify";
 import { useDataLayerValue } from "../DataLayer";
@@ -12,7 +12,11 @@ import Sidebar from "../Sidebar";
 
 import "./Player.css";
 
-function Player() {
+function Player({
+  match: {
+    params: { id },
+  },
+}) {
   const { dispatch } = useDataLayerValue();
 
   useEffect(() => {
@@ -27,15 +31,15 @@ function Player() {
       });
 
     spotifyAPI
-      .getPlaylist("37i9dQZEVXcDGlrEgKnU30")
+      .getPlaylist(id || "37i9dQZEVXcDGlrEgKnU30")
       //
       .then((playlist) =>
         dispatch({
-          type: SET_DISCOVER_WEEKLY,
+          type: SET_PLAYLIST,
           payload: playlist,
         })
       );
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <>

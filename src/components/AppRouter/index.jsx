@@ -14,6 +14,7 @@ const AppRouter = () => {
         <Switch>
           <Route exact path="/" component={LoggedInOrNot} />
           <Route exact path="/home" component={Player} />
+          <Route exact path="/playlist/:id" component={Player} />
           <Route exact path="/access_token=:params" component={SpotifyLogin} />
           <Route path="/logout" component={SpotifyLogout} />
           <Route component={NotFoundPage} />

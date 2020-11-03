@@ -1,5 +1,5 @@
 import {
-  SET_DISCOVER_WEEKLY,
+  SET_PLAYLIST,
   SET_PLAYLISTS,
   SET_TOKEN,
   SET_USER,
@@ -10,6 +10,7 @@ import {
 
 export const initialState = {
   user: null,
+  playlist: null,
   playlists: [],
   playing: false,
   item: null,
@@ -43,10 +44,10 @@ const reducer = (state, action) => {
         playlists: action.payload,
       };
 
-    case SET_DISCOVER_WEEKLY:
+    case SET_PLAYLIST:
       return {
         ...state,
-        discoverWeekly: action.payload,
+        playlist: action.payload,
       };
 
     default:
