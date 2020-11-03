@@ -6,6 +6,7 @@ import spotifyAPI from "../../utils/spotify";
 import { useDataLayerValue } from "../DataLayer";
 
 import Footer from "../Footer";
+import HtmlHeadTitle from "../HtmlHeadTitle";
 import PlaylistPage from "../PlaylistPage";
 import Sidebar from "../Sidebar";
 
@@ -37,13 +38,16 @@ function Player() {
   }, [dispatch]);
 
   return (
-    <div className="player">
-      <div className="player__body">
-        <Sidebar />
-        <PlaylistPage />
+    <>
+      <HtmlHeadTitle title="Home" />
+      <div className="player">
+        <div className="player__body">
+          <Sidebar />
+          <PlaylistPage />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 }
 
