@@ -11,7 +11,8 @@ const SpotifyLogin = ({ history }) => {
 
   useEffect(() => {
     const hash = getHashFromResponse(window.location.hash);
-    const _token = hash.access_token;
+
+    const _token = hash["/access_token"];
 
     if (_token) {
       dispatch({

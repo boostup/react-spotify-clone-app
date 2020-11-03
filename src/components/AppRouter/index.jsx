@@ -16,7 +16,7 @@ const AppRouter = () => {
         <Switch>
           <Route exact path="/" component={LoggedInOrNot} />
           <Route exact path="/home" component={Player} />
-          <Route path={REACT_APP_REDIRECT_PATH} component={SpotifyLogin} />
+          <Route exact path="/access_token=:params" component={SpotifyLogin} />
           <Route path="/logout" component={SpotifyLogout} />
           <Route component={NotFoundPage} />
         </Switch>
