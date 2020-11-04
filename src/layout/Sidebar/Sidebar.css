@@ -2,21 +2,20 @@
 }
 
 .sidebar__logo {
-  object-fit: contain; /* NICE TRICK */
+  object-fit: contain;
   height: 70px;
   width: 166px;
   padding: 1rem;
 }
 
-.sidebar > hr {
+.sidebar hr {
   border: 1px solid #282828;
-  width: 90%;
+  width: calc(100% - 2rem);
   margin: 10px auto;
 }
 
 .sidebar__title {
   text-transform: uppercase;
   margin-left: 10px;
-  padding: 5px;
   font-size: 1rem;
 }

@@ -1,5 +1,5 @@
 :root {
-  --main-layout-header-height: 88px;
+  --main-layout-header-height: 68px;
   --main-layout-sidebar-width: 273px;
   --main-layout-footer-height: 85px;
 }
@@ -9,24 +9,27 @@
 }
 
 .mainLayout__sidebar {
-  min-width: var(--main-layout-sidebar-width);
-  padding-bottom: var(--main-layout-footer-height);
-}
-
-.mainLayout__sidebar {
   box-sizing: border-box;
-  padding: 0 1rem;
+  padding: 1rem;
+  min-width: var(--main-layout-sidebar-width);
+  max-width: var(--main-layout-sidebar-width);
+  max-height: calc(100vh - var(--main-layout-footer-height));
+  overflow-y: hidden;
 }
 
 .mainLayout__header {
-  position: fixed;
   box-sizing: border-box;
+  position: fixed;
+  z-index: 1;
+  height: var(--main-layout-header-height);
   padding: 1rem;
-  width: calc(100% - var(--main-layout-sidebar-width) - 2rem);
-  left: calc(var(--main-layout-sidebar-width) + 2rem);
+  width: calc(100vw - var(--main-layout-sidebar-width));
+  right: 0;
 }
 
 .mainLayout__body {
+  box-sizing: border-box;
+  position: relative;
   width: 100%;
   min-height: 100vh;
   padding: 0 1rem;
@@ -36,20 +39,15 @@
 
 .mainLayout__body > * {
   width: 100%;
-  overflow-y: overlay;
-}
-
-.mainLayout__body > *::-webkit-scrollbar {
-  display: none;
 }
 
 .mainLayout__footer {
+  box-sizing: border-box;
   position: fixed;
   display: flex;
   justify-content: space-between;
   bottom: 0;
   width: 100%;
   padding: 1rem;
-  box-sizing: border-box;
   height: var(--main-layout-footer-height);
 }

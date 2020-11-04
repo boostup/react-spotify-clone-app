@@ -12,7 +12,7 @@
   height: 60px;
   width: 60px;
   margin-right: 1rem;
-  object-fit: contain; /* NICE TRICK : maintains aspect ratio*/
+  object-fit: contain;
 }
 
 .footer__center {
@@ -25,7 +25,7 @@
 }
 
 .footer__green {
-  color: #1ed15e;
+  color: var(--main-theme-color-secondary);
 }
 
 .footer__songInfo > h4 {
@@ -49,7 +49,7 @@
   justify-content: space-between;
 }
 
-/* NICE TRICK  : what is this star meaning here ????  */
-.footer__right * .MuiSlider-root {
-  color: #1ed15e;
+.footer__right .MuiSlider-root {
+  color: var(--main-theme-color-secondary);
+  width: 70%;
 }

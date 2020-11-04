@@ -4,13 +4,13 @@
 .playlistBanner__info {
   display: flex;
   align-items: flex-end;
-  padding: 1rem;
+  padding: 0;
 }
 
 .playlistBanner__info > img {
-  height: 20vw; /* NICE TRICK */
+  height: 20vw;
   min-height: 200px;
-  margin: 0 1.2rem;
+  margin: 0 1.2rem 0 0;
   box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
 }
 

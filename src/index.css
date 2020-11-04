@@ -4,10 +4,11 @@
 
 * {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body::-webkit-scrollbar {
-  /* NICE TRICK : it hides the scrollbar, but the scrolling behavior is maintained*/
   display: none;
 }
 
@@ -25,7 +26,22 @@ button {
 * APP THEME
 */
 
+:root {
+  --main-font-color: white;
+  --main-font-size: 1.4rem;
+  --main-theme-color: 0, 0, 0;
+  --main-theme-color-secondary: #1ed15e;
+  --main-background-color: 4, 4, 4;
+  --main-interactive-text-color: #b3b3b3;
+}
+
+html {
+  /*This means that 1rem = 10px, 1.1rem = 11px, etc */
+  font-size: 62.5%;
+}
+
 body {
+  font-size: 1.4rem;
   color: var(--main-font-color);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -35,11 +51,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-:root {
-  --main-font-color: white;
-  --main-theme-color: 0, 0, 0;
-  --main-background-color: 4, 4, 4;
-  --main-interactive-text-color: #b3b3b3;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 1.4rem;
 }
 
 button {

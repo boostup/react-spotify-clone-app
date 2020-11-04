@@ -6,9 +6,10 @@ import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
 
-import SidebarOption from "../../components/SidebarOption";
+import SidebarOption from "./SidebarOption";
 
 import "./Sidebar.css";
+import SidebarPlaylistsList from "./SidebarPlaylistsList";
 
 const SPOTIFY_LOGO = require("../../assets/spotifylogo.svg")?.default;
 
@@ -26,14 +27,8 @@ function Sidebar(props) {
         Icon={LibraryMusicIcon}
         to="/library"
       />
-      <br />
-      <strong className="sidebar__title">Playlists</strong>
-      <hr />
 
-      {/* NICE TRICK : I need to make tests with this in the context of Async values */}
-      {playlists?.items?.map(({ id, name }) => (
-        <SidebarOption key={id} title={name} to={`/playlist/${id}`} />
-      ))}
+      <SidebarPlaylistsList playlists={playlists} />
     </div>
   );
 }
