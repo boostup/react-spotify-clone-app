@@ -1,10 +1,8 @@
 .sidebar {
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
   height: 100vh;
-  min-width: 230px;
   flex: 0.2;
   background-color: #040404;
-  color: white;
   padding: 0 1rem;
   overflow-y: overlay;
 }

@@ -11,9 +11,9 @@ import { Grid, Slider } from "@material-ui/core";
 
 import "./Footer.css";
 
-function Footer() {
+function Footer(props) {
   return (
-    <div className="footer">
+    <div {...props}>
       <div className="footer__left">
         <img
           className="footer__albumLogo"

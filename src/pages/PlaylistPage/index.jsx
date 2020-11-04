@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 
+import PlaylistBanner from "../../components/PlaylistBanner";
+import PlaylistToolbar from "../../components/PlaylistToolbar";
+import SongList from "../../components/SongList";
+import MainLayout from "../../layout/MainLayout";
+
 import { SET_PLAYLISTS, SET_PLAYLIST } from "../../utils/constants";
 
 import spotifyAPI from "../../utils/spotify";
-import { useDataLayerValue } from "../DataLayer";
+import { useDataLayerValue } from "../../components/DataLayer";
 
-import Footer from "../Footer";
-import HtmlHeadTitle from "../HtmlHeadTitle";
-import PlaylistPage from "../PlaylistPage";
-import Sidebar from "../Sidebar";
+import "./PlaylistPage.css";
 
-import "./Player.css";
-
-function Player({
+function PlaylistPage({
   match: {
     params: { id },
   },
@@ -42,17 +42,14 @@ function Player({
   }, [dispatch, id]);
 
   return (
-    <>
-      <HtmlHeadTitle title="Home" />
-      <div className="player">
-        <div className="player__body">
-          <Sidebar />
-          <PlaylistPage />
-        </div>
-        <Footer />
+    <MainLayout title="Home">
+      <div className="playlistPage">
+        <PlaylistBanner />
+        <PlaylistToolbar />
+        <SongList />
       </div>
-    </>
+    </MainLayout>
   );
 }
 
-export default Player;
+export default PlaylistPage;
