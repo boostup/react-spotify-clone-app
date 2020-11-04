@@ -1,6 +1,6 @@
 :root {
   --main-layout-header-height: 88px;
-  --main-layout-sidebar-width: 230px;
+  --main-layout-sidebar-width: 273px;
   --main-layout-footer-height: 85px;
 }
 
@@ -13,15 +13,22 @@
   padding-bottom: var(--main-layout-footer-height);
 }
 
+.mainLayout__sidebar {
+  box-sizing: border-box;
+  padding: 0 1rem;
+}
+
 .mainLayout__header {
   position: fixed;
   box-sizing: border-box;
-  width: calc(100% - var(--main-layout-sidebar-width));
-  left: var(--main-layout-sidebar-width);
+  padding: 1rem;
+  width: calc(100% - var(--main-layout-sidebar-width) - 2rem);
+  left: calc(var(--main-layout-sidebar-width) + 2rem);
 }
 
 .mainLayout__body {
   width: 100%;
+  min-height: 100vh;
   padding: 0 1rem;
   padding-top: var(--main-layout-header-height);
   padding-bottom: var(--main-layout-footer-height);
@@ -29,15 +36,20 @@
 
 .mainLayout__body > * {
   width: 100%;
-  height: 100vh;
   overflow-y: overlay;
 }
 
 .mainLayout__body > *::-webkit-scrollbar {
-  /* NICE TRICK : it hides the scrollbar, but the scrolling behavior is maintained*/
   display: none;
 }
 
 .mainLayout__footer {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
   height: var(--main-layout-footer-height);
 }

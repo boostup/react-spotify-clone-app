@@ -1,7 +1,7 @@
 .sidebarOption {
   display: flex;
   align-items: center;
-  color: #b3b3b3;
+  color: var(--main-interactive-text-color);
   height: 40px;
   cursor: pointer;
   transition: 200ms color ease-in;

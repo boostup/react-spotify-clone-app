@@ -26,7 +26,7 @@ button {
 */
 
 body {
-  color: white;
+  color: var(--main-font-color);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -35,14 +35,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+:root {
+  --main-font-color: white;
+  --main-theme-color: 0, 0, 0;
+  --main-background-color: 4, 4, 4;
+  --main-interactive-text-color: #b3b3b3;
+}
+
 button {
-  color: white;
+  color: var(--main-font-color);
 }
 
 .header {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(var(--main-theme-color), 0.3);
 }
 
-.mainLayout__body {
-  background: linear-gradient(rgb(91, 87, 115), rgba(0, 0, 0, 1));
+.mainLayout {
+  background-color: rgb(var(--main-background-color));
+}
+
+.body {
+  background: linear-gradient(
+    rgb(91, 87, 115),
+    rgba(var(--main-theme-color), 1)
+  );
+}
+
+.footer {
+  background-color: rgb(40, 40, 40, 0.95);
 }

@@ -13,7 +13,7 @@ function MainLayout({ title, children }) {
       <HtmlHeadTitle title={title} />
       <Sidebar className="mainLayout__sidebar sidebar" />
       <Header className="mainLayout__header header" />
-      <div className="mainLayout__body">{children}</div>
+      <div className="mainLayout__body body">{children}</div>
       <Footer className="mainLayout__footer footer" />
     </div>
   );
