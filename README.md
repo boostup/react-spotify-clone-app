@@ -6,10 +6,6 @@
 
 ---
 
-Search through the code for "NICE TRICK" string to find nice little tricks
-
----
-
 [Roadmap available here](https://github.com/boostup/react-spotify-clone-app/issues/1)
 
 ---

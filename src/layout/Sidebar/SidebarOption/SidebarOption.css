@@ -1,12 +1,10 @@
 .sidebarOption {
   display: flex;
-  align-items: center;
-  color: #b3b3b3;
+  color: var(--main-interactive-text-color);
   height: 40px;
-  cursor: pointer;
   transition: 200ms color ease-in;
-  white-space: nowrap;
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
 
@@ -19,11 +17,9 @@
 }
 
 .sidebarOption__icon {
-  padding: 1rem;
+  margin-right: 1rem;
 }
 
 .sidebarOption > p {
-  margin-top: 1rem;
-  margin-left: 1rem;
-  font-size: 1rem;
+  margin: 1rem;
 }

@@ -1,0 +1,20 @@
+.sidebar {
+}
+
+.sidebar__logo {
+  height: 80px;
+  width: 166px;
+  padding: 1rem;
+}
+
+.sidebar hr {
+  border: 1px solid #282828;
+  width: calc(100% - 2rem);
+  margin: 10px auto;
+}
+
+.sidebar__title {
+  text-transform: uppercase;
+  margin-left: 10px;
+  font-size: 1rem;
+}

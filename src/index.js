@@ -5,7 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { DataLayer } from "./components/DataLayer";
 import reducer, { initialState } from "./utils/reducers";
 
-import AppRouter from "./components/AppRouter";
+import AppRouter from "./router/AppRouter";
 
 import "./index.css";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import HtmlHeadTitle from "../HtmlHeadTitle";
+import HtmlHeadTitle from "../../layout/HtmlHeadTitle";
 
 import "./NotFoundPage.css";
 

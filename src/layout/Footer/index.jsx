@@ -7,13 +7,13 @@ import ShuffleIcon from "@material-ui/icons/Shuffle";
 import RepeatIcon from "@material-ui/icons/Repeat";
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay";
 import VolumeDownIcon from "@material-ui/icons/VolumeDown";
-import { Grid, Slider } from "@material-ui/core";
+import { Slider } from "@material-ui/core";
 
 import "./Footer.css";
 
-function Footer() {
+function Footer(props) {
   return (
-    <div className="footer">
+    <div {...props}>
       <div className="footer__left">
         <img
           className="footer__albumLogo"
@@ -35,17 +35,9 @@ function Footer() {
       </div>
 
       <div className="footer__right">
-        <Grid container spacing={2}>
-          <Grid item>
-            <PlaylistPlayIcon />
-          </Grid>
-          <Grid item>
-            <VolumeDownIcon />
-          </Grid>
-          <Grid item xs>
-            <Slider />
-          </Grid>
-        </Grid>
+        <PlaylistPlayIcon />
+        <VolumeDownIcon />
+        <Slider />
       </div>
     </div>
   );

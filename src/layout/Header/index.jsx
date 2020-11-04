@@ -1,18 +1,18 @@
 import React from "react";
 
-import { useDataLayerValue } from "../DataLayer";
+import { useDataLayerValue } from "../../components/DataLayer";
 
-import SearchField from "../SearchField";
-import AvatarArea from "../AvatarArea";
+import SearchField from "../../components/SearchField";
+import AvatarArea from "../../components/AvatarArea";
 
 import "./Header.css";
 
-function Header() {
+function Header(props) {
   const { state } = useDataLayerValue();
   const { user } = state;
 
   return (
-    <div className="header">
+    <div {...props}>
       <div className="header__left">
         <SearchField />
       </div>

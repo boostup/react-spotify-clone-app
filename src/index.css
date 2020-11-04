@@ -1,10 +1,15 @@
-body::-webkit-scrollbar {
-  /* NICE TRICK : it hides the scrollbar, but the scrolling behavior is maintained*/
-  display: none;
-}
+/**
+* CSS RESETS
+*/
 
 * {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 a {
@@ -17,16 +22,60 @@ button {
   cursor: pointer;
 }
 
+/**
+* APP THEME
+*/
+
+:root {
+  --main-font-color: white;
+  --main-font-size: 1.4rem;
+  --main-theme-color: 0, 0, 0;
+  --main-theme-color-secondary: #1ed15e;
+  --main-background-color: 23, 23, 23;
+  --main-interactive-text-color: #b3b3b3;
+}
+
+html {
+  /*This means that 1rem = 10px, 1.1rem = 11px, etc */
+  font-size: 62.5%;
+}
+
 body {
+  font-size: 1.4rem;
+  color: var(--main-font-color);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(var(--main-background-color));
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 1.4rem;
+}
+
+button {
+  color: var(--main-font-color);
+}
+
+.header {
+  background-color: rgba(var(--main-theme-color), 0.3);
+}
+
+.body {
+  background: linear-gradient(
+    rgb(91, 87, 115),
+    rgba(var(--main-theme-color), 1)
+  );
+}
+
+.footer {
+  background-color: rgba(40, 40, 40, 0.95);
 }
