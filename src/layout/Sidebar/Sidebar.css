@@ -2,8 +2,7 @@
 }
 
 .sidebar__logo {
-  object-fit: contain;
-  height: 70px;
+  height: 80px;
   width: 166px;
   padding: 1rem;
 }
