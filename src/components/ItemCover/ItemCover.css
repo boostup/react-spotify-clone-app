@@ -1,0 +1,21 @@
+.itemCover {
+  height: 250px;
+  width: 170px;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  background-color: rgba(var(--main-background-color), 0.3);
+  padding: 1rem;
+  box-shadow: 0 4px 60px rgba(var(--main-theme-color), 0.5);
+  cursor: pointer;
+}
+
+.itemCover img,
+.itemCover svg {
+  max-height: 150px;
+  width: 100%;
+}
+
+.itemCover__name {
+  font-weight: 800;
+}

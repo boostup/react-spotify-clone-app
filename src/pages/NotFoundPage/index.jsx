@@ -1,26 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import HtmlHeadTitle from "../../layout/HtmlHeadTitle";
+import { ReactComponent as Logo } from "../../assets/spotifLylogo.svg";
 
 import "./NotFoundPage.css";
 
-const logoPath = require("../../assets/spotifylogo.svg").default;
 const vinylTopLayerPath = require("../../assets/vinyl-top-layer.svg").default;
 const vinylTopBottomPath = require("../../assets/vinyl-bottom-layer.svg")
   .default;
 
-const NotFoundPage = () => {
+const NotFoundPage = ({ message }) => {
+  const _message = message ? message : "Sorry, couldn't find that page.";
+
   return (
     <>
       <HtmlHeadTitle title="Oopsy doopsy ┐(´•_•`)┌ " />
       <div className="notFoundPage">
         <Link to="/" className="notFoundPage__logo">
-          <img src={logoPath} alt="spotify logo" />
+          <Logo />
         </Link>
 
         <div className="notFoundPage__message">
-          <p>Sorry, couldn't find that page.</p>
-          <p></p>
+          <p>{_message}</p>
         </div>
 
         <div className="notFoundPage__vinylContainer">

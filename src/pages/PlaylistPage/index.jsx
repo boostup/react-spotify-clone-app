@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 
+import { actionTypes } from "../../state/actionTypes";
+import { spotifyAPI } from "../../utils/spotify";
+import { hydrateSpotifyApi } from "../../utils/hydrateSpotifyApi";
+
+import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
 import PlaylistBanner from "../../components/PlaylistBanner";
 import PlaylistToolbar from "../../components/PlaylistToolbar";
-import SongList from "../../components/SongList";
-import MainLayout from "../../layout/MainLayout";
-
-import { SET_PLAYLISTS, SET_PLAYLIST } from "../../utils/constants";
-
-import spotifyAPI from "../../utils/spotify";
-import { useDataLayerValue } from "../../components/DataLayer";
+import TrackList from "../../components/TrackList";
+import { useDataLayerValue } from "../../state/DataLayer";
 
 import "./PlaylistPage.css";
 
@@ -17,38 +17,42 @@ function PlaylistPage({
     params: { id },
   },
 }) {
-  const { dispatch } = useDataLayerValue();
+  const { state, dispatch } = useDataLayerValue();
+  const { playlist } = state;
 
   useEffect(() => {
-    spotifyAPI
-      .getUserPlaylists()
-      //
-      .then((playlists) => {
-        dispatch({
-          type: SET_PLAYLISTS,
-          payload: playlists,
-        });
-      });
-
     spotifyAPI
       .getPlaylist(id || "37i9dQZEVXcDGlrEgKnU30")
       //
       .then((playlist) =>
         dispatch({
-          type: SET_PLAYLIST,
+          type: actionTypes.SET_PLAYLIST,
           payload: playlist,
         })
       );
-  }, [dispatch, id]);
+    spotifyAPI
+      .getUserPlaylists()
+      .then((playlists) => {
+        dispatch({
+          type: actionTypes.SET_PLAYLISTS,
+          payload: playlists,
+        });
+      })
+      .catch((error) => {
+        hydrateSpotifyApi(error, dispatch);
+      });
+  }, [dispatch, id, state.token]);
+
+  const pageTitle = playlist?.name || "Home";
 
   return (
-    <MainLayout title="Home">
+    <MainLayoutPageWrapper title={pageTitle}>
       <div className="playlistPage">
         <PlaylistBanner />
         <PlaylistToolbar />
-        <SongList />
+        <TrackList />
       </div>
-    </MainLayout>
+    </MainLayoutPageWrapper>
   );
 }
 

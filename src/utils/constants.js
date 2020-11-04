@@ -1,16 +1,10 @@
-export const SET_USER = "SET_USER";
-export const SET_TOKEN = "SET_TOKEN";
-export const SET_TOKEN_EXPIRY = "SET_TOKEN_EXPIRY";
-export const SET_PLAYLISTS = "SET_PLAYLISTS";
-export const SET_PLAYLIST = "SET_PLAYLIST";
-export const {
-  REACT_APP_CLIENT_ID,
-  REACT_APP_AUTHORIZE_URL,
-  REACT_APP_REDIRECT_BASE_URL,
-  REACT_APP_REDIRECT_PATH,
-  REACT_APP_AVATAR_MENU_PROFILE,
-  REACT_APP_AVATAR_MENU_ACCOUNT,
-  REACT_APP_AVATAR_MENU_LOGOUT,
-  REACT_APP_HTML_HEAD_TITLE,
-  REACT_APP_LOCAL_STORAGE_KEY,
-} = process.env;
+export const avatarMenuOptions = [
+  { title: "Account", url: process.env.REACT_APP_AVATAR_MENU_ACCOUNT },
+  { title: "Profile", url: process.env.REACT_APP_AVATAR_MENU_PROFILE },
+  { title: "Logout", url: process.env.REACT_APP_AVATAR_MENU_LOGOUT },
+];
+
+export const debug = {
+  ROUTING: true,
+  REDUCERS: true,
+};

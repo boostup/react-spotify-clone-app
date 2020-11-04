@@ -14,12 +14,18 @@ body::-webkit-scrollbar {
 
 a {
   text-decoration: none;
+  color: unset;
 }
 
 button {
+  cursor: pointer;
+}
+
+a,
+button,
+img {
   outline: none;
   border: none;
-  cursor: pointer;
 }
 
 /**
@@ -30,7 +36,8 @@ button {
   --main-font-color: white;
   --main-font-size: 1.4rem;
   --main-theme-color: 0, 0, 0;
-  --main-theme-color-secondary: #1ed15e;
+  --main-theme-color-secondary: #1db954;
+  --main-theme-color-secondary-hover: #1ed760;
   --main-background-color: 23, 23, 23;
   --main-interactive-text-color: #b3b3b3;
 }
@@ -59,10 +66,15 @@ h4,
 h5,
 h6 {
   font-size: 1.4rem;
+  margin: 1rem 0;
 }
 
 button {
   color: var(--main-font-color);
+}
+
+.spotifLyLogo path {
+  fill: var(--main-font-color);
 }
 
 .header {

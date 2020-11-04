@@ -1,5 +1,6 @@
 .sidebarOption {
   display: flex;
+  align-items: center;
   color: var(--main-interactive-text-color);
   height: 40px;
   transition: 200ms color ease-in;
@@ -17,7 +18,12 @@
 }
 
 .sidebarOption__icon {
-  margin-right: 1rem;
+  margin: 1rem;
+  font-size: 2.6rem !important;
+}
+
+.sidebarOption > h4 {
+  font-size: 1.4rem;
 }
 
 .sidebarOption > p {

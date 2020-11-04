@@ -1,12 +1,7 @@
-import { REACT_APP_HTML_HEAD_TITLE } from "../../utils/constants";
-
 const HtmlHeadTitle = ({ title }) => {
-  var defaultTitle = REACT_APP_HTML_HEAD_TITLE;
+  var defaultTitle = process.env.REACT_APP_HTML_HEAD_TITLE;
 
-  document.title = title
-    ? title + " - " + REACT_APP_HTML_HEAD_TITLE
-    : defaultTitle;
-
+  document.title = title ? `${title} - ${defaultTitle}` : defaultTitle;
   return null;
 };
 

@@ -27,16 +27,16 @@ function Footer(props) {
       </div>
 
       <div className="footer__center">
-        <ShuffleIcon className="footer__green" />
+        <ShuffleIcon className="footer__icon footer__green" />
         <SkipPreviousIcon className="footer__icon" />
-        <PlayCircleOutlineIcon fontSize="large" className="footer__icon" />
+        <PlayCircleOutlineIcon className="footer__icon large" />
         <SkipNextIcon className="footer__icon" />
-        <RepeatIcon className="footer__green" />
+        <RepeatIcon className="footer__icon footer__green" />
       </div>
 
       <div className="footer__right">
-        <PlaylistPlayIcon />
-        <VolumeDownIcon />
+        <PlaylistPlayIcon className="footer__icon" />
+        <VolumeDownIcon className="footer__icon" />
         <Slider />
       </div>
     </div>

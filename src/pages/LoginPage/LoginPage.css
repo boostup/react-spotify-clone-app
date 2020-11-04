@@ -1,0 +1,27 @@
+.login {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background-color: black;
+}
+
+.login .spotifLyLogo {
+  width: 70%;
+  max-width: 830px;
+}
+
+.login > button {
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1;
+  text-transform: uppercase;
+  background-color: var(--main-theme-color-secondary);
+  padding: 1.6rem 4.8rem 1.8rem;
+  border-radius: 70px;
+  min-width: 250px;
+  transition: 0.3s background-color;
+}
+
+.login > button:hover {
+  background-color: var(--main-theme-color-secondary-hover);
+}
