@@ -1,19 +1,22 @@
 import React from "react";
 
-import { useDataLayerValue } from "../../components/DataLayer";
+import { useDataLayerValue } from "../../state/DataLayer";
 
-import SearchField from "../../components/SearchField";
-import AvatarArea from "../../components/AvatarArea";
+import SearchField from "./SearchField";
+import AvatarArea from "./AvatarArea";
 
 import "./Header.css";
 
 function Header(props) {
+  const { className } = props;
   const { state } = useDataLayerValue();
-  const { user } = state;
+  const { user, displaySearchBar } = state;
+
+  const conditionalClassName = () => (displaySearchBar ? "show" : "hide");
 
   return (
-    <div {...props}>
-      <div className="header__left">
+    <div className={`${className} ${conditionalClassName()}`}>
+      <div className={`header__left ${conditionalClassName()} `}>
         <SearchField />
       </div>
       <div className="header__right">

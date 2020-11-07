@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useDataLayerValue } from "../DataLayer";
+import { useDataLayerValue } from "../../state/DataLayer";
 
 import "./PlaylistBanner.css";
 

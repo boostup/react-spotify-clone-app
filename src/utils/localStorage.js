@@ -1,11 +1,11 @@
-import { REACT_APP_LOCAL_STORAGE_KEY as LOCAL_STORAGE_KEY } from "./constants";
+const { REACT_APP_LOCAL_STORAGE_KEY } = process.env;
 
 function get() {
-  return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || {};
+  return JSON.parse(localStorage.getItem(REACT_APP_LOCAL_STORAGE_KEY)) || {};
 }
 
 function set(toStore) {
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(toStore));
+  localStorage.setItem(REACT_APP_LOCAL_STORAGE_KEY, JSON.stringify(toStore));
 }
 
 export function setUser(_user) {

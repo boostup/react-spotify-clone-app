@@ -1,7 +1,7 @@
 .sidebar {
 }
 
-.sidebar__logo {
+.sidebar .spotifLyLogo {
   height: 80px;
   width: 166px;
   padding: 1rem;

@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import reportWebVitals from "./reportWebVitals";
-import { DataLayer } from "./components/DataLayer";
-import reducer, { initialState } from "./utils/reducers";
+import { DataLayer } from "./state/DataLayer";
+import reducer, { initialState } from "./state/reducers";
 
 import AppRouter from "./router/AppRouter";
 

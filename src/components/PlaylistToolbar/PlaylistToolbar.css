@@ -9,6 +9,7 @@
 
 .playlistToolbar__shuffle {
   font-size: 5rem !important;
+  color: var(--main-theme-color-secondary);
   margin-left: 3rem;
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;

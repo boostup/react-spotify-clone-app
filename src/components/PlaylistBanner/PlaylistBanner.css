@@ -11,7 +11,7 @@
   height: 20vw;
   min-height: 200px;
   margin: 0 1.2rem 0 0;
-  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 60px rgba(var(--main-theme-color), 0.5);
 }
 
 .playlistBanner__infoText {
@@ -28,5 +28,4 @@
 }
 
 .playlistBanner__infoText > p {
-  font-size: 1rem;
 }

@@ -1,27 +1,39 @@
 import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
-import LoggedInOrNot from "../components/LoggedInOrNot";
-import SpotifyLogin from "../components/SpotifyLogin";
-import SpotifyLogout from "../components/SpotifyLogout";
+import RouteDebugging from "./RouteDebugging";
 
-// import Player from "../components/Player";
+import SpotifyLogin from "../redirects/SpotifyLogin";
+import SpotifyLogout from "../redirects/SpotifyLogout";
+
+import Index from "../pages/Index";
 import NotFoundPage from "../pages/NotFoundPage";
-import YourLibraryPage from "../pages/YourLibraryPage";
+import SearchPage from "../pages/SearchPage";
+import UserLibraryPage from "../pages/UserLibraryPage";
 import PlaylistPage from "../pages/PlaylistPage";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 const AppRouter = () => {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/" component={LoggedInOrNot} />
-        <Route exact path="/home" component={PlaylistPage} />
-        <Route exact path="/playlist/:id" component={PlaylistPage} />
-        <Route exact path="/library" component={YourLibraryPage} />
-        <Route exact path="/access_token=:params" component={SpotifyLogin} />
-        <Route path="/logout" component={SpotifyLogout} />
-        <Route component={NotFoundPage} />
-      </Switch>
+      <RouteDebugging>
+        <ErrorBoundary>
+          <Switch>
+            <Route exact path="/" component={Index} />
+            <Route exact path="/home" component={PlaylistPage} />
+            <Route exact path="/playlist/:id" component={PlaylistPage} />
+            <Route exact path="/search" component={SearchPage} />
+            <Route exact path="/library" component={UserLibraryPage} />
+            <Route
+              exact
+              path="/access_token=:params"
+              component={SpotifyLogin}
+            />
+            <Route path="/logout" component={SpotifyLogout} />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </ErrorBoundary>
+      </RouteDebugging>
     </Router>
   );
 };
