@@ -10,7 +10,6 @@ import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
 import ShuffleIcon from "@material-ui/icons/Shuffle";
 import RepeatIconOff from "@material-ui/icons/Repeat";
-import RepeatIconTrack from "@material-ui/icons/RepeatOne";
 
 import VolumeDownIcon from "@material-ui/icons/VolumeDown";
 import VolumeUpIcon from "@material-ui/icons/VolumeUp";
@@ -36,19 +35,23 @@ function SpotifyAudioPlayer() {
 
   console.log(currentplaybackState);
 
+  function computeMuteButtonState(_volume) {
+    let muteState = _volume >= 75 ? "loud" : null;
+    if (_volume < 51) muteState = "standard";
+    if (_volume === 0) muteState = "mute";
+    return muteState;
+  }
+
   const [volume, setVolume] = useState(
     currentplaybackState?.device.volume_percent
   );
+  const [volumeBackupWhileMute, setVolumeBackupWhileMute] = useState(0);
   const [shuffle, setShuffle] = useState(currentplaybackState?.shuffle_state);
   const [repeat, setRepeat] = useState(currentplaybackState?.repeat_state);
   const [isPlaying, setIsPlaying] = useState(currentplaybackState?.is_playing);
-
-  let muteState = volume >= 75 ? "loud" : null;
-  muteState = volume < 51 ? "standard" : null;
-  muteState = volume === 0 ? "muted" : null;
-
-  const [muteButtonState, setMuteButtonState] = useState(muteState);
-
+  const [muteButtonState, setMuteButtonState] = useState(
+    computeMuteButtonState(volume)
+  );
   const currentTrackName = currentplaybackState?.item.name;
   const albumImage = currentplaybackState?.item.album.images[2].url;
   const albumName = currentplaybackState?.item.album?.name;
@@ -67,10 +70,6 @@ function SpotifyAudioPlayer() {
   console.log("ALBUM IMAGE", albumImage);
   console.log("ALBUM NAME", albumName);
   console.log("ARTISTS", artists);
-
-  function onSliderChangeCommitted(event, value) {
-    console.log("onSliderChangeCommitted", value);
-  }
 
   function onSliderChange(event, value) {
     console.log("onSliderChange", value);
@@ -94,7 +93,15 @@ function SpotifyAudioPlayer() {
     setIsPlaying((isPlaying) => !isPlaying);
   }
   function onMuteClicked() {
-    //dispatch Mute=true
+    setMuteButtonState((muteStateValue) =>
+      muteStateValue === "mute"
+        ? computeMuteButtonState(volumeBackupWhileMute)
+        : "mute"
+    );
+    setVolumeBackupWhileMute(volume);
+    setVolume((volumeStateValue) =>
+      volumeStateValue === 0 ? volumeBackupWhileMute : 0
+    );
   }
 
   return (
@@ -146,16 +153,31 @@ function SpotifyAudioPlayer() {
         <RepeatIconOff
           onClick={onRepeatClicked}
           className={`spotifyAudioPlayer__icon ${
-            repeat == "track" ? "spotifyAudioPlayer__green" : null
+            repeat === "track" ? "spotifyAudioPlayer__green" : null
           }`}
         />
       </div>
 
       <div className="spotifyAudioPlayer__right">
-        <VolumeDownIcon
-          onClick={onMuteClicked}
-          className="spotifyAudioPlayer__icon"
-        />
+        {muteButtonState === "loud" ? (
+          <VolumeUpIcon
+            onClick={onMuteClicked}
+            className="spotifyAudioPlayer__icon"
+          />
+        ) : null}
+        {muteButtonState === "standard" ? (
+          <VolumeDownIcon
+            onClick={onMuteClicked}
+            className="spotifyAudioPlayer__icon"
+          />
+        ) : null}
+        {muteButtonState === "mute" ? (
+          <VolumeMuteIcon
+            onClick={onMuteClicked}
+            className="spotifyAudioPlayer__icon"
+          />
+        ) : null}
+
         <Slider
           className={`spotifyAudioPlayer__slider ${
             currentplaybackState
@@ -163,10 +185,9 @@ function SpotifyAudioPlayer() {
               : "spotifyAudioPlayer__disabled"
           }`}
           onChange={onSliderChange}
-          onChange={onSliderChangeCommitted}
           min={0}
           max={100}
-          defaultValue={volume}
+          value={volume}
         />
       </div>
     </div>
