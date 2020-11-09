@@ -57,8 +57,6 @@
 .mainLayout__footer {
   box-sizing: border-box;
   position: fixed;
-  display: flex;
-  justify-content: space-between;
   bottom: 0;
   width: 100%;
   padding: 1rem;

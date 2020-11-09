@@ -29,7 +29,11 @@ function PlaylistPage({
           type: actionTypes.SET_PLAYLIST,
           payload: playlist,
         })
-      );
+      )
+      .catch((error) => {
+        hydrateSpotifyApi(error, dispatch);
+      });
+
     spotifyAPI
       .getUserPlaylists()
       .then((playlists) => {
@@ -39,6 +43,20 @@ function PlaylistPage({
         });
       })
       .catch((error) => {
+        hydrateSpotifyApi(error, dispatch);
+      });
+
+    spotifyAPI
+      .getMyCurrentPlaybackState()
+      .then((res) => {
+        if (res === "") return; //No tracks currently playing
+        dispatch({
+          type: actionTypes.SET_CURRENT_PLAYBACK_STATE,
+          payload: res,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
         hydrateSpotifyApi(error, dispatch);
       });
   }, [dispatch, id, state.token]);

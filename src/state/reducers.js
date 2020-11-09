@@ -12,6 +12,7 @@ export const initialState = {
   searchResults: [],
   token: "",
   tokenExpiry: 0,
+  currentplaybackState: null, //includes current Playing Track => currentplaybackState.item
 };
 
 const reducer = (state, action) => {
@@ -66,6 +67,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         searchResults: action.payload,
+      };
+
+    case actionTypes.SET_CURRENT_PLAYBACK_STATE:
+      return {
+        ...state,
+        currentplaybackState: action.payload,
       };
 
     default:
