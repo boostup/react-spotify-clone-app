@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+
+import { spotifyAPI } from "../../utils/spotify";
 import { useDataLayerValue } from "../../state/DataLayer";
 
 import "./SpotifyAudioPlayer.css";
@@ -36,9 +38,10 @@ function SpotifyAudioPlayer() {
   console.log(currentplaybackState);
 
   function computeMuteButtonState(_volume) {
-    let muteState = _volume >= 75 ? "loud" : null;
-    if (_volume < 51) muteState = "standard";
-    if (_volume === 0) muteState = "mute";
+    let muteState;
+    if (_volume >= 70) muteState = "loud";
+    else if (_volume >= 1) muteState = "standard";
+    else muteState = "mute";
     return muteState;
   }
 
@@ -50,7 +53,7 @@ function SpotifyAudioPlayer() {
   const [repeat, setRepeat] = useState(currentplaybackState?.repeat_state);
   const [isPlaying, setIsPlaying] = useState(currentplaybackState?.is_playing);
   const [muteButtonState, setMuteButtonState] = useState(
-    computeMuteButtonState(volume)
+    computeMuteButtonState(currentplaybackState?.device.volume_percent)
   );
   const currentTrackName = currentplaybackState?.item.name;
   const albumImage = currentplaybackState?.item.album.images[2].url;
@@ -71,26 +74,40 @@ function SpotifyAudioPlayer() {
   console.log("ALBUM NAME", albumName);
   console.log("ARTISTS", artists);
 
-  function onSliderChange(event, value) {
+  function onVolumeSliderChange(event, value) {
     console.log("onSliderChange", value);
     setVolume(value);
+    setMuteButtonState(computeMuteButtonState(value));
+    spotifyAPI.setVolume(value);
   }
 
   function onRepeatClicked() {
-    setRepeat((repeat) => (repeat === "track" ? "off" : "track"));
+    setRepeat((repeat) => {
+      const value = repeat === "track" ? "off" : "track";
+      spotifyAPI.setRepeat(value);
+      return value;
+    });
   }
 
   function onShuffleClicked() {
-    setShuffle((shuffle) => !shuffle);
+    setShuffle((shuffle) => {
+      spotifyAPI.setShuffle(!shuffle);
+      return !shuffle;
+    });
   }
   function onSkipPreviousClicked() {
-    //dispatch Prev track
+    spotifyAPI.skipToPrevious();
   }
   function onSkipNextClicked() {
-    //dispatch Next track
+    spotifyAPI.skipToNext();
   }
   function onPlayPauseClicked() {
-    setIsPlaying((isPlaying) => !isPlaying);
+    setIsPlaying((isPlaying) => {
+      const play = !isPlaying;
+      if (play) spotifyAPI.play();
+      else spotifyAPI.pause();
+      return !isPlaying;
+    });
   }
   function onMuteClicked() {
     setMuteButtonState((muteStateValue) =>
@@ -99,9 +116,11 @@ function SpotifyAudioPlayer() {
         : "mute"
     );
     setVolumeBackupWhileMute(volume);
-    setVolume((volumeStateValue) =>
-      volumeStateValue === 0 ? volumeBackupWhileMute : 0
-    );
+    setVolume((volumeStateValue) => {
+      const value = volumeStateValue === 0 ? volumeBackupWhileMute : 0;
+      spotifyAPI.setVolume(value);
+      return value;
+    });
   }
 
   return (
@@ -184,7 +203,7 @@ function SpotifyAudioPlayer() {
               ? "spotifyAudioPlayer__enabled"
               : "spotifyAudioPlayer__disabled"
           }`}
-          onChange={onSliderChange}
+          onChange={onVolumeSliderChange}
           min={0}
           max={100}
           value={volume}
