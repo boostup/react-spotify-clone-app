@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 
 import { actionTypes } from "../../state/actionTypes";
-import { spotifyAPI } from "../../utils/spotify";
-import { hydrateSpotifyApi } from "../../utils/hydrateSpotifyApi";
+import { spotifyAPI, hydrateSpotifyApi } from "../../libs/spotify";
 
 import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
 import PlaylistBanner from "../../components/PlaylistBanner";

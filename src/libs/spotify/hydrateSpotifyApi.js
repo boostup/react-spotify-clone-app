@@ -1,6 +1,6 @@
-import { actionTypes } from "../state/actionTypes";
-import { getToken } from "./localStorage";
-import { spotifyAPI } from "./spotify";
+import { actionTypes } from "../../state/actionTypes";
+import { getToken } from "../../utils/localStorage";
+import { spotifyAPI } from "./index";
 
 /**
  * * Note on usage

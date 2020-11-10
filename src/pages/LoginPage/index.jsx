@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-import { LOGIN_LOCATION } from "../../utils/spotify";
+import { LOGIN_LOCATION } from "../../libs/spotify";
 
 import { ReactComponent as Logo } from "../../assets/spotifLylogo.svg";
 
