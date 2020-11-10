@@ -1,6 +1,7 @@
 .playlistToolbar {
   display: flex;
   align-items: center;
+  border-bottom: 1px solid rgba(var(--main-theme-color), 0.5);
 }
 
 .playlistToolbar > .MuiSvgIcon-root {
