@@ -40,6 +40,9 @@ img {
   --main-theme-color-secondary-hover: #1ed760;
   --main-background-color: 23, 23, 23;
   --main-interactive-text-color: #b3b3b3;
+  --chrome-main-color: #282828;
+  --main-theme-favorite-color: #ed4545;
+  --main-theme-favorite-color-hover: red;
 }
 
 html {

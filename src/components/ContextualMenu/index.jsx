@@ -16,13 +16,20 @@ export default function ContextualMenu({
 }) {
   const history = useHistory();
 
-  const handlClick = (url) => {
+  const handleUrl = (url) => {
     if (isExternalResource(url)) {
       window.location = url;
     } else {
       onClose();
       history.push(url);
     }
+  };
+
+  const handleClick = (url, fn) => {
+    // When a menu item is clicked, it can either be a function to invoke
+    if (fn instanceof Function) return fn();
+    // or a link/location
+    handleUrl(url);
   };
 
   return (
@@ -34,9 +41,9 @@ export default function ContextualMenu({
         open={Boolean(anchorEl)}
         onClose={onClose}
       >
-        {menuOptions.map(({ title, url }) => {
+        {menuOptions.map(({ title, url, fn }) => {
           return (
-            <MenuItem key={url} onClick={() => handlClick(url)}>
+            <MenuItem key={url} onClick={() => handleClick(url, fn)}>
               {title}
             </MenuItem>
           );

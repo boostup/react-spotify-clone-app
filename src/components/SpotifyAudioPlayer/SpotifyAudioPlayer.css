@@ -23,16 +23,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 500px;
+  max-width: 620px;
 }
 
 .spotifyAudioPlayer__icon.MuiSvgIcon-root {
-  font-size: 2.3rem;
+  font-size: 3rem;
   cursor: pointer;
 }
 
 .spotifyAudioPlayer__icon.large {
-  font-size: 4rem;
+  font-size: 6rem;
 }
 
 .spotifyAudioPlayer__green {
@@ -49,6 +49,19 @@
   transition: all 0.4s ease-in-out;
   transition-property: transform, color;
   transform: scale(1.2) !important;
+}
+
+/* For touch devices
+* On touch device, these icons would stay on their hover state after being touched, which ends up confusing from a UX standpoint, so unsetting everthing to make sure this does not happen.
+*/
+@media (hover: none) {
+  .spotifyAudioPlayer__icon:hover,
+  .spotifyAudioPlayer__green:hover {
+    color: unset;
+    transition: unset;
+    transition-property: unset;
+    transform: unset !important;
+  }
 }
 
 .spotifyAudioPlayer__right {
