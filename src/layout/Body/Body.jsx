@@ -1,16 +1,12 @@
 import React from "react";
 
-function Body({ children, className }) {
-  const handlScroll = (e) => {
-    let element = e.target;
-    // => condition to reach bottom in case I need it: `element.scrollHeight - element.scrollTop === element.clientHeight`
-    if (element.scrollTop > 50) {
-      // console.log("do it", element.scrollTop);
-    }
+function Body({ children, className, onScroll }) {
+  const handleScroll = (e) => {
+    e.target.scrollTop >= 70 ? onScroll(true) : onScroll(false);
   };
 
   return (
-    <div className={className} onScroll={handlScroll}>
+    <div className={className} onScroll={handleScroll}>
       {children}
     </div>
   );

@@ -15,7 +15,7 @@ function Header(props) {
   const conditionalClassName = () => (displaySearchBar ? "show" : "hide");
 
   return (
-    <div className={`${className} ${conditionalClassName()}`}>
+    <div className={`${className}`}>
       <div className={`header__left ${conditionalClassName()} `}>
         <SearchField />
       </div>

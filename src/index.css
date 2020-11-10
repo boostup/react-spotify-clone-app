@@ -81,10 +81,9 @@ button {
   fill: var(--main-font-color);
 }
 
-.header {
-  background-color: rgba(var(--main-theme-color), 0.3);
+.header.scrolled {
+  background-color: rgba(var(--main-theme-color), 0.6);
 }
-
 .body {
   background: linear-gradient(
     rgb(91, 87, 115),

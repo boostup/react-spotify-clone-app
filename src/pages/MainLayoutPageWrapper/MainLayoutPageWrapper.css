@@ -41,7 +41,7 @@
   height: 100vh;
   right: 0;
   padding: 0 1rem;
-  padding-top: calc(1rem + var(--main-layout-header-height));
+  padding-top: 1rem;
   padding-bottom: var(--main-layout-footer-height);
   overflow-y: auto;
 }
