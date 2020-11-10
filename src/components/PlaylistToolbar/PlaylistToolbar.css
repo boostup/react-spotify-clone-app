@@ -5,6 +5,7 @@
 
 .playlistToolbar > .MuiSvgIcon-root {
   margin-right: 2rem;
+  cursor: pointer;
 }
 
 .playlistToolbar__shuffle {

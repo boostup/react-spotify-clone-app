@@ -6,10 +6,13 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 import "./PlaylistToolbar.css";
 
-function PlaylistToolbar() {
+function PlaylistToolbar({ onPlay }) {
   return (
     <div className="playlistToolbar">
-      <PlayCircleFilledIcon className="playlistToolbar__shuffle" />
+      <PlayCircleFilledIcon
+        onClick={() => onPlay()}
+        className="playlistToolbar__shuffle"
+      />
       <FavoriteIcon fontSize="large" />
       <MoreHorizIcon />
     </div>

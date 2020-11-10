@@ -33,6 +33,10 @@ function PlaylistPage({
         hydrateSpotifyApi(error, dispatch);
       });
 
+    /**
+     *
+     *
+     */
     spotifyAPI
       .getUserPlaylists()
       .then((playlists) => {
@@ -45,6 +49,10 @@ function PlaylistPage({
         hydrateSpotifyApi(error, dispatch);
       });
 
+    /**
+     *
+     *
+     */
     spotifyAPI
       .getMyCurrentPlaybackState()
       .then((res) => {
@@ -60,14 +68,63 @@ function PlaylistPage({
       });
   }, [dispatch, id, state.token]);
 
+  /**
+   *
+   * @param {*} id
+   */
+  const playPlaylist = (id) => {
+    spotifyAPI
+      .play({
+        context_uri: `spotify:playlist:${id}`,
+      })
+      .then((res) => {
+        spotifyAPI.getMyCurrentPlayingTrack().then((r) => {
+          dispatch({
+            type: "SET_ITEM",
+            item: r.item,
+          });
+          dispatch({
+            type: "SET_PLAYING",
+            playing: true,
+          });
+        });
+      });
+  };
+
+  /**
+   *
+   * @param {*} id
+   */
+  const playTrack = (id) => {
+    spotifyAPI
+      .play({
+        uris: [`spotify:track:${id}`],
+      })
+      .then((res) => {
+        spotifyAPI
+          .getMyCurrentPlaybackState()
+          .then((res) => {
+            if (res === "") return; //No tracks currently playing
+            dispatch({
+              type: actionTypes.SET_CURRENT_PLAYBACK_STATE,
+              payload: res,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            hydrateSpotifyApi(error, dispatch);
+          });
+      });
+  };
+
   const pageTitle = playlist?.name || "Home";
 
   return (
     <MainLayoutPageWrapper title={pageTitle}>
       <div className="playlistPage">
         <PlaylistBanner />
-        <PlaylistToolbar />
-        <TrackList />
+        <PlaylistToolbar onPlay={() => playPlaylist(playlist.id)} />
+        <TrackList onPlay={playTrack} />
       </div>
     </MainLayoutPageWrapper>
   );
