@@ -7,7 +7,7 @@ import { useDataLayerValue } from "../../state/DataLayer";
 
 import "./TrackList.css";
 
-function TrackList() {
+function TrackList({ onPlay }) {
   const { state } = useDataLayerValue();
   const { playlist } = state;
 
@@ -15,8 +15,14 @@ function TrackList() {
     <div className="trackList">
       {playlist?.tracks.items
         .filter((item) => item.is_local === false)
-        .map(({ track }) => (
-          <TrackRow key={uuid()} track={track} />
+        .map(({ track }, i) => (
+          <TrackRow
+            //
+            onPlay={onPlay}
+            order={i + 1}
+            key={uuid()}
+            track={track}
+          />
         ))}
     </div>
   );

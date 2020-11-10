@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { spotifyAPI } from "../../../utils/spotify";
-import { hydrateSpotifyApi } from "../../../utils/hydrateSpotifyApi";
+import { spotifyAPI, hydrateSpotifyApi } from "../../../libs/spotify";
 
 import SearchIcon from "@material-ui/icons/Search";
 

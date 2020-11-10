@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { getTokenExpiry } from "../../utils/localStorage";
 import { isPast } from "../../utils/time";
@@ -22,12 +22,23 @@ function MainLayoutPageWrapper({ title, children }) {
     });
   }
 
+  const [headerScrolledClassname, setHeaderScrolledClassname] = useState(false);
+
   return (
     <div className="mainLayout">
       <HtmlHeadTitle title={title} />
       <Sidebar className="mainLayout__sidebar sidebar" />
-      <Header className="mainLayout__header header" />
-      <Body className="mainLayout__body body">{children}</Body>
+      <Header
+        className={`mainLayout__header header  ${
+          headerScrolledClassname ? "scrolled" : "top"
+        }`}
+      />
+      <Body
+        onScroll={(bool) => setHeaderScrolledClassname(bool)}
+        className="mainLayout__body body"
+      >
+        {children}
+      </Body>
       <Footer className="mainLayout__footer footer" />
     </div>
   );

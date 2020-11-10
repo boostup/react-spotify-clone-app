@@ -4,11 +4,12 @@ import { convertMiliseconds } from "../../utils/time";
 
 import "./TrackRow.css";
 
-function TrackRow({ track }) {
+function TrackRow({ order, track, onPlay }) {
   const duration = convertMiliseconds(track.duration_ms);
 
   return (
-    <div className="trackRow">
+    <div className="trackRow" onClick={() => onPlay(track.id)}>
+      <span className="trackRow__order">{order}</span>
       <img
         className="trackRow__album"
         src={track.album.images[0].url}

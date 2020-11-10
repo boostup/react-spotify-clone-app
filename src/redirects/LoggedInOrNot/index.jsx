@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { spotifyAPI } from "../../utils/spotify";
+import { spotifyAPI } from "../../libs/spotify";
 
 import { actionTypes } from "../../state/actionTypes";
 import { getUser, getToken, getTokenExpiry } from "../../utils/localStorage";

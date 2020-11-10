@@ -1,0 +1,19 @@
+/* add menuId to customize for different menus in the app, for example:
+
+#avatar-menu .MuiMenuItem-root {
+  font-size: 1.4rem !important;
+}
+*/
+
+.MuiList-root {
+  color: var(--main-font-color) !important;
+  background-color: var(--chrome-main-color) !important;
+}
+
+.MuiMenuItem-root {
+  font-size: 1.4rem !important;
+}
+
+.MuiListItem-button:hover {
+  background-color: rgba(var(--main-theme-color), 0.4) !important;
+}

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { actionTypes } from "../../state/actionTypes";
 import { getHashFromResponse } from "../../utils/http";
-import { spotifyAPI } from "../../utils/spotify";
+import { spotifyAPI } from "../../libs/spotify";
 import { setToken, setTokenExpiry, setUser } from "../../utils/localStorage";
 import { addMsToNow } from "../../utils/time";
 

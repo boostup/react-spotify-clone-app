@@ -1,2 +1,3 @@
 .searchPage {
+  padding-top: calc(1rem + var(--main-layout-header-height));
 }
