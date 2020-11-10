@@ -15,17 +15,15 @@ function TrackList({ onPlay }) {
     <div className="trackList">
       {playlist?.tracks.items
         .filter((item) => item.is_local === false)
-        .map(({ track }, i) => {
-          console.log(arguments);
-          return (
-            <TrackRow
-              onPlay={onPlay}
-              order={i + 1}
-              key={uuid()}
-              track={track}
-            />
-          );
-        })}
+        .map(({ track }, i) => (
+          <TrackRow
+            //
+            onPlay={onPlay}
+            order={i + 1}
+            key={uuid()}
+            track={track}
+          />
+        ))}
     </div>
   );
 }
