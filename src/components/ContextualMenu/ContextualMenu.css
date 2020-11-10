@@ -1,0 +1,10 @@
+/* add menuId to customize for different menus in the app, for example:
+
+#avatar-menu .MuiMenuItem-root {
+  font-size: 1.4rem !important;
+}
+*/
+
+.MuiMenuItem-root {
+  font-size: 1.4rem !important;
+}

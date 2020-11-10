@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Avatar } from "@material-ui/core";
 
 import { avatarMenuOptions } from "../../../utils/constants";
-import AvatarMenu from "../AvatarMenu";
+import ContextualMenu from "../../../components/ContextualMenu";
 
 import "./AvatarArea.css";
 
@@ -23,7 +23,8 @@ function AvatarArea({ user }) {
         <Avatar src={user?.images[0]?.url} alt={user?.display_name} />
         <h4>{user?.display_name}</h4>
       </div>
-      <AvatarMenu
+      <ContextualMenu
+        menuId="avatar-menu"
         menuOptions={avatarMenuOptions}
         anchorEl={anchorEl}
         onClose={handleClose}

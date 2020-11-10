@@ -1,14 +1,19 @@
 import React from "react";
 
 import { useHistory } from "react-router-dom";
-import { isExternalResource } from "../../../utils/http";
+import { isExternalResource } from "../../utils/http";
 
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import "./AvatarMenu.css";
+import "./ContextualMenu.css";
 
-export default function AvatarMenu({ menuOptions, anchorEl, onClose }) {
+export default function ContextualMenu({
+  menuId,
+  menuOptions,
+  anchorEl,
+  onClose,
+}) {
   const history = useHistory();
 
   const handlClick = (url) => {
@@ -21,9 +26,9 @@ export default function AvatarMenu({ menuOptions, anchorEl, onClose }) {
   };
 
   return (
-    <div className="avatarMenu">
+    <div className="contextualMenu">
       <Menu
-        id="avatar-menu"
+        id={menuId}
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
