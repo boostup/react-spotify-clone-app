@@ -8,6 +8,7 @@ import PlaylistBanner from "../../components/PlaylistBanner";
 import PlaylistToolbar from "../../components/PlaylistToolbar";
 import TrackList from "../../components/TrackList";
 import { useDataLayerValue } from "../../state/DataLayer";
+import { playPlaylist, playTrack } from "../../state/actions";
 
 import "./PlaylistPage.css";
 
@@ -20,6 +21,10 @@ function PlaylistPage({
   const { playlist } = state;
 
   useEffect(() => {
+    /**
+     *
+     * getPlaylist
+     */
     spotifyAPI
       .getPlaylist(id || "37i9dQZEVXcDGlrEgKnU30")
       //
@@ -35,7 +40,7 @@ function PlaylistPage({
 
     /**
      *
-     *
+     * getUserPlaylists
      */
     spotifyAPI
       .getUserPlaylists()
@@ -48,74 +53,7 @@ function PlaylistPage({
       .catch((error) => {
         hydrateSpotifyApi(error, dispatch);
       });
-
-    /**
-     *
-     *
-     */
-    spotifyAPI
-      .getMyCurrentPlaybackState()
-      .then((res) => {
-        if (res === "") return; //No tracks currently playing
-        dispatch({
-          type: actionTypes.SET_CURRENT_PLAYBACK_STATE,
-          payload: res,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        hydrateSpotifyApi(error, dispatch);
-      });
   }, [dispatch, id, state.token]);
-
-  /**
-   *
-   * @param {*} id
-   */
-  const playPlaylist = (id) => {
-    spotifyAPI
-      .play({
-        context_uri: `spotify:playlist:${id}`,
-      })
-      .then((res) => {
-        spotifyAPI.getMyCurrentPlayingTrack().then((r) => {
-          dispatch({
-            type: "SET_ITEM",
-            item: r.item,
-          });
-          dispatch({
-            type: "SET_PLAYING",
-            playing: true,
-          });
-        });
-      });
-  };
-
-  /**
-   *
-   * @param {*} id
-   */
-  const playTrack = (id) => {
-    spotifyAPI
-      .play({
-        uris: [`spotify:track:${id}`],
-      })
-      .then((res) => {
-        spotifyAPI
-          .getMyCurrentPlaybackState()
-          .then((res) => {
-            if (res === "") return; //No tracks currently playing
-            dispatch({
-              type: actionTypes.SET_CURRENT_PLAYBACK_STATE,
-              payload: res,
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-            hydrateSpotifyApi(error, dispatch);
-          });
-      });
-  };
 
   const pageTitle = playlist?.name || "Home";
 
@@ -123,8 +61,8 @@ function PlaylistPage({
     <MainLayoutPageWrapper title={pageTitle}>
       <div className="playlistPage">
         <PlaylistBanner />
-        <PlaylistToolbar onPlay={() => playPlaylist(playlist.id)} />
-        <TrackList onPlay={playTrack} />
+        <PlaylistToolbar onPlay={() => playPlaylist(dispatch, playlist.id)} />
+        <TrackList onPlay={(id) => playTrack(dispatch, id)} />
       </div>
     </MainLayoutPageWrapper>
   );
