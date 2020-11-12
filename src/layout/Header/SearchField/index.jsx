@@ -6,8 +6,8 @@ import SearchIcon from "@material-ui/icons/Search";
 
 import "./SearchField.css";
 import useDebounce from "../../../hooks/useDebounce";
-import { actionTypes } from "../../../state/actionTypes";
 import { useDataLayerValue } from "../../../state/DataLayer";
+import { setSearchFilter, setSearchResults } from "../../../state/actions";
 
 const filters = {
   ARTIST: "artist",
@@ -41,14 +41,8 @@ function SearchField() {
             hydrateSpotifyApi(error, dispatch);
           })
           .then((results) => {
-            dispatch({
-              type: actionTypes.SET_SEARCH_RESULTS,
-              payload: results,
-            });
-            dispatch({
-              type: actionTypes.SET_SEARCH_FILTER,
-              payload: searchFilter,
-            });
+            dispatch(setSearchResults(results));
+            dispatch(setSearchFilter(searchFilter));
           });
     },
     [dispatch, searchFilter, debouncedSearchTerm] // Only call effect if debounced search term changes

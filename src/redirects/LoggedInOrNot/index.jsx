@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { spotifyAPI } from "../../libs/spotify";
 
-import { actionTypes } from "../../state/actionTypes";
 import { getUser, getToken, getTokenExpiry } from "../../utils/localStorage";
 import { useDataLayerValue } from "../../state/DataLayer";
 
 import LoginPage from "../../pages/LoginPage";
+import { setToken, setTokenExpiry, setUser } from "../../state/actions";
 
 const LoggedInOrNot = () => {
   const { state, dispatch } = useDataLayerValue();
@@ -17,26 +17,16 @@ const LoggedInOrNot = () => {
     const { token } = state;
     const { user } = state;
 
+    //This is to avoid unnecessary value changes
     if (user && token) return;
 
     if (lsToken) {
       spotifyAPI.setAccessToken(lsToken);
-      dispatch({
-        type: actionTypes.SET_TOKEN,
-        payload: lsToken,
-      });
-
-      dispatch({
-        type: actionTypes.SET_TOKEN_EXPIRY,
-        payload: getTokenExpiry(),
-      });
+      dispatch(setToken(lsToken));
+      dispatch(setTokenExpiry(getTokenExpiry()));
     }
 
-    lsUser &&
-      dispatch({
-        type: actionTypes.SET_USER,
-        payload: lsUser,
-      });
+    lsUser && dispatch(setUser(lsUser));
   }, [lsUser, state, dispatch]);
 
   return lsUser ? (

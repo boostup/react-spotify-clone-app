@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import { actionTypes } from "../../state/actionTypes";
-
 import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
 import { useDataLayerValue } from "../../state/DataLayer";
 import SearchResultsGrid from "../../components/SearchResultsGrid";
 
 import "./SearchPage.css";
+import { toggleDisplaySearchBar } from "../../state/actions";
 
 const resultKeys = {
   artist: "artists",
@@ -18,10 +17,11 @@ function SearchPage() {
   const { state, dispatch } = useDataLayerValue();
 
   useEffect(() => {
-    dispatch({ type: actionTypes.SET_SEARCH_BAR_DISPLAY, payload: true });
+    dispatch(toggleDisplaySearchBar(true));
+
     //Cleaning up
     return () => {
-      dispatch({ type: actionTypes.SET_SEARCH_BAR_DISPLAY, payload: false });
+      dispatch(toggleDisplaySearchBar(false));
     };
   }, [dispatch]);
 

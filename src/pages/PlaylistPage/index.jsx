@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 
-import { actionTypes } from "../../state/actionTypes";
 import { spotifyAPI, hydrateSpotifyApi } from "../../libs/spotify";
 
 import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
@@ -8,7 +7,12 @@ import PlaylistBanner from "../../components/PlaylistBanner";
 import PlaylistToolbar from "../../components/PlaylistToolbar";
 import TrackList from "../../components/TrackList";
 import { useDataLayerValue } from "../../state/DataLayer";
-import { playPlaylist, playTrack } from "../../state/actions";
+import {
+  playPlaylist,
+  playTrack,
+  setPlaylist,
+  setPlaylists,
+} from "../../state/actions";
 
 import "./PlaylistPage.css";
 
@@ -28,12 +32,7 @@ function PlaylistPage({
     spotifyAPI
       .getPlaylist(id || "37i9dQZEVXcDGlrEgKnU30")
       //
-      .then((playlist) =>
-        dispatch({
-          type: actionTypes.SET_PLAYLIST,
-          payload: playlist,
-        })
-      )
+      .then((playlist) => dispatch(setPlaylist(playlist)))
       .catch((error) => {
         hydrateSpotifyApi(error, dispatch);
       });
@@ -45,10 +44,7 @@ function PlaylistPage({
     spotifyAPI
       .getUserPlaylists()
       .then((playlists) => {
-        dispatch({
-          type: actionTypes.SET_PLAYLISTS,
-          payload: playlists,
-        });
+        dispatch(setPlaylists(playlists));
       })
       .catch((error) => {
         hydrateSpotifyApi(error, dispatch);

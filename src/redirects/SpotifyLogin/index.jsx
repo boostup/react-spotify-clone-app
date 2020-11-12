@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 
-import { actionTypes } from "../../state/actionTypes";
 import { getHashFromResponse } from "../../utils/http";
 import { spotifyAPI } from "../../libs/spotify";
-import { setToken, setTokenExpiry, setUser } from "../../utils/localStorage";
+import * as ls from "../../utils/localStorage";
 import { addMsToNow } from "../../utils/time";
 
 import { useDataLayerValue } from "../../state/DataLayer";
+import * as actions from "../../state/actions";
 
 const SpotifyLogin = ({ history }) => {
   const { dispatch } = useDataLayerValue();
@@ -23,33 +23,18 @@ const SpotifyLogin = ({ history }) => {
     const _token = hash["/access_token"];
 
     if (_token) {
-      dispatch({
-        type: actionTypes.SET_TOKEN,
-        payload: _token,
-      });
-      setToken(_token);
+      dispatch(actions.setToken(_token));
+      ls.setToken(_token);
       spotifyAPI.setAccessToken(_token);
-
       const expiryTime = addMsToNow(hash["expires_in"]);
-      dispatch({
-        type: actionTypes.SET_TOKEN_EXPIRY,
-        payload: expiryTime,
-      });
-      setTokenExpiry(expiryTime);
+      dispatch(actions.setTokenExpiry(expiryTime));
+      ls.setTokenExpiry(expiryTime);
 
-      spotifyAPI
-        .getMe()
-        .then((user) => {
-          dispatch({
-            type: actionTypes.SET_USER,
-            payload: user,
-          });
-          return user;
-        })
-        .then((user) => {
-          setUser(user);
-          history.push("/");
-        });
+      spotifyAPI.getMe().then((user) => {
+        dispatch(actions.setUser(user));
+        ls.setUser(user);
+        history.push("/");
+      });
     }
   }, [dispatch, history]);
 
