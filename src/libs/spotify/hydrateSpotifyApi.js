@@ -1,4 +1,4 @@
-import { actionTypes } from "../../state/actionTypes";
+import { setToken } from "../../state/actions";
 import { getToken } from "../../utils/localStorage";
 import { spotifyAPI } from "./index";
 
@@ -13,11 +13,9 @@ import { spotifyAPI } from "./index";
  */
 export function hydrateSpotifyApi(error, dispatch) {
   if (error?.status >= 400) {
-    spotifyAPI.setAccessToken(getToken());
-    dispatch({
-      type: actionTypes.SET_TOKEN,
-      payload: spotifyAPI.getAccessToken(),
-    });
+    const token = getToken();
+    spotifyAPI.setAccessToken(token);
+    dispatch(setToken(token));
   }
 }
 

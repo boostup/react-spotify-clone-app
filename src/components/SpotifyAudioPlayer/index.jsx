@@ -1,10 +1,10 @@
 import React from "react";
 
-import { spotifyAPI, useSpotifyWebPlaybackSDK } from "../../libs/spotify";
+import { DEVICE_NAME, useSpotifyWebPlaybackSDK } from "../../libs/spotify";
 import { getToken } from "../../utils/localStorage";
 
 import { useDataLayerValue } from "../../state/DataLayer";
-import { getMyCurrentPlaybackState } from "../../state/actions";
+import * as actions from "../../state/actions";
 
 import "./SpotifyAudioPlayer.css";
 
@@ -17,9 +17,11 @@ function SpotifyAudioPlayer() {
   const { currentplaybackState } = state;
 
   useSpotifyWebPlaybackSDK({
+    deviceName: DEVICE_NAME,
     token: getToken(),
     onPlayerStateChanged: (playbackState) => {
-      getMyCurrentPlaybackState(dispatch);
+      //Normally, i would use the values of the `playbackState` object returned here, however, the Spotify Playback SDK is in BETA at this very moment, and the data is not consistent with the data provided through the Spotify Web API.  Therefore, I make here yet another request, just to get consistent data object types
+      actions.getMyCurrentPlaybackStateAsync(dispatch);
     },
   });
 
@@ -49,13 +51,16 @@ function SpotifyAudioPlayer() {
           isPlaying={currentplaybackState?.is_playing}
           shuffle={currentplaybackState?.shuffle_state}
           repeat={currentplaybackState?.repeat_state}
-          onRepeatChange={(value) => spotifyAPI.setRepeat(value)}
-          onShuffleChange={(value) => spotifyAPI.setShuffle(value)}
-          onSkipPrevious={() => spotifyAPI.skipToPrevious()}
-          onSkipNext={() => spotifyAPI.skipToNext()}
+          onRepeatChange={(value) => actions.toggleRepeat(value)}
+          onShuffleChange={(value) => actions.toggleShuffle(value)}
+          onSkipPrevious={() => actions.skipToPrevious()}
+          onSkipNext={() => actions.skipToNext()}
           onPlayPause={(value) => {
-            if (value) spotifyAPI.play();
-            else spotifyAPI.pause();
+            currentplaybackState?.item
+              ? actions.togglePlayPause(value)
+              : alert(
+                  `In order to use this remote control, please open any official Spotify app, and than select the device called "${DEVICE_NAME}" (Spotify Premium accounts only).`
+                );
           }}
         />
       </div>
@@ -63,8 +68,8 @@ function SpotifyAudioPlayer() {
       <div className="spotifyAudioPlayer__right">
         <RightPanel
           isPlaying={currentplaybackState?.is_playing}
-          onMuteChange={(_value) => spotifyAPI.setVolume(_value)}
-          onVolumeChange={(_value) => spotifyAPI.setVolume(_value)}
+          onMuteChange={(_value) => actions.setVolume(_value)}
+          onVolumeChange={(_value) => actions.setVolume(_value)}
           volume={currentplaybackState?.device.volume_percent}
         />
       </div>

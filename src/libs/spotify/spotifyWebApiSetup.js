@@ -26,4 +26,6 @@ export const LOGIN_LOCATION = `${REACT_APP_AUTHORIZE_URL}?client_id=${REACT_APP_
   "%20"
 )}`;
 
+export const DEVICE_NAME = `${process.env.REACT_APP_SPOTIFLY_DEVICE_ID} (${process.env.NODE_ENV})`;
+
 export const spotifyAPI = new SpotifyWebApi();

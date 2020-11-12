@@ -1,33 +1,21 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import { actionTypes } from "../../state/actionTypes";
-
-import { setToken, setTokenExpiry, setUser } from "../../utils/localStorage";
+import * as ls from "../../utils/localStorage";
 import { useDataLayerValue } from "../../state/DataLayer";
+import * as actions from "../../state/actions";
 
 function SpotifyLogout({ history }) {
   const { state } = useLocation();
   const { dispatch } = useDataLayerValue();
 
   useEffect(() => {
-    dispatch({
-      type: actionTypes.SET_TOKEN,
-      payload: null,
-    });
-    setToken(null);
-
-    dispatch({
-      type: actionTypes.SET_TOKEN_EXPIRY,
-      payload: null,
-    });
-    setTokenExpiry(null);
-
-    dispatch({
-      type: actionTypes.SET_USER,
-      payload: null,
-    });
-    setUser(null);
+    dispatch(actions.setToken(null));
+    ls.setToken(null);
+    dispatch(actions.setTokenExpiry(null));
+    ls.setTokenExpiry(null);
+    dispatch(actions.setUser(null));
+    ls.setUser(null);
 
     history.push({
       pathname: "/",
