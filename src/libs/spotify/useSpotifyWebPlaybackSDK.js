@@ -2,13 +2,14 @@ import { useEffect } from "react";
 const noop = () => {};
 export function useSpotifyWebPlaybackSDK({
   token,
+  deviceName,
   onPlayerStateChanged = noop,
 }) {
   useEffect(() => {
     window.onSpotifyWebPlaybackSDKReady = () => {
       const _token = token;
       const player = new window.Spotify.Player({
-        name: "SpotifLy Demo (b00stup ;)",
+        name: deviceName,
         getOAuthToken: (cb) => {
           cb(_token);
         },
@@ -29,7 +30,7 @@ export function useSpotifyWebPlaybackSDK({
 
       // Playback status updates
       player.addListener("player_state_changed", (state) => {
-        console.log("Player State Changed");
+        // console.log("Player State Changed");
         onPlayerStateChanged(state);
       });
 
@@ -52,5 +53,5 @@ export function useSpotifyWebPlaybackSDK({
       scriptTag.src = "https://sdk.scdn.co/spotify-player.js";
       document.head.appendChild(scriptTag);
     }
-  }, [onPlayerStateChanged, token]);
+  }, [onPlayerStateChanged, token, deviceName]);
 }

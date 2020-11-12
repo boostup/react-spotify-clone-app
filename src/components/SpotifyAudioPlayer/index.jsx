@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useSpotifyWebPlaybackSDK } from "../../libs/spotify";
+import { DEVICE_NAME, useSpotifyWebPlaybackSDK } from "../../libs/spotify";
 import { getToken } from "../../utils/localStorage";
 
 import { useDataLayerValue } from "../../state/DataLayer";
@@ -17,6 +17,7 @@ function SpotifyAudioPlayer() {
   const { currentplaybackState } = state;
 
   useSpotifyWebPlaybackSDK({
+    deviceName: DEVICE_NAME,
     token: getToken(),
     onPlayerStateChanged: (playbackState) => {
       //Normally, i would use the values of the `playbackState` object returned here, however, the Spotify Playback SDK is in BETA at this very moment, and the data is not consistent with the data provided through the Spotify Web API.  Therefore, I make here yet another request, just to get consistent data object types
@@ -55,7 +56,11 @@ function SpotifyAudioPlayer() {
           onSkipPrevious={() => actions.skipToPrevious()}
           onSkipNext={() => actions.skipToNext()}
           onPlayPause={(value) => {
-            actions.togglePlayPause(value);
+            currentplaybackState?.item
+              ? actions.togglePlayPause(value)
+              : alert(
+                  `In order to use this remote control, please open any official Spotify app, and than select the device called "${DEVICE_NAME}" (Spotify Premium accounts only).`
+                );
           }}
         />
       </div>
