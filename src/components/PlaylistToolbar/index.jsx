@@ -36,7 +36,7 @@ function PlaylistToolbar({ onPlay }) {
   return (
     <div className="playlistToolbar">
       <PlayCircleFilledIcon
-        onClick={() => onPlay()}
+        onClick={onPlay}
         className="playlistToolbar__shuffle"
       />
       <FavoriteIcon className="playlistToolbar__favorite" fontSize="large" />

@@ -1,9 +1,9 @@
 import React from "react";
 
-function TrackPanel({ isPlaying, image, title, artists, album }) {
+function TrackPanel({ shouldDisplay, image, title, artists, album }) {
   return (
     <>
-      {isPlaying ? (
+      {shouldDisplay ? (
         <>
           <img
             className="spotifyAudioPlayer__albumLogo"
