@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   PlayCircleOutline,
@@ -27,6 +27,12 @@ function CentralPanel({
   const [_shuffle, _setShuffle] = useState(shuffle);
   const [_repeat, _setRepeat] = useState(repeat);
   const [_isPlaying, _setIsPlaying] = useState(isPlaying);
+
+  useEffect(() => {
+    _setShuffle(shuffle);
+    _setRepeat(repeat);
+    _setIsPlaying(isPlaying);
+  }, [shuffle, repeat, isPlaying]);
 
   function _onRepeatClicked() {
     _setRepeat((repeat) => {

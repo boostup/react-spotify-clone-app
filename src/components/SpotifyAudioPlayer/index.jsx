@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { spotifyAPI, useSpotifyWebPlaybackSDK } from "../../libs/spotify";
 import { getToken } from "../../utils/localStorage";
 
-// import { actionTypes } from "../../state/actionTypes";
 import { useDataLayerValue } from "../../state/DataLayer";
+import { getMyCurrentPlaybackState } from "../../state/actions";
 
 import "./SpotifyAudioPlayer.css";
 
@@ -19,17 +19,9 @@ function SpotifyAudioPlayer() {
   useSpotifyWebPlaybackSDK({
     token: getToken(),
     onPlayerStateChanged: (playbackState) => {
-      console.log(playbackState);
-      // dispatch({
-      //   type: actionTypes.SET_CURRENT_PLAYBACK_STATE,
-      //   payload: playbackState,
-      // });
+      getMyCurrentPlaybackState(dispatch);
     },
   });
-
-  useEffect(() => {}, [dispatch, state.currentplaybackState]);
-
-  console.log(currentplaybackState);
 
   const currentTrackName = currentplaybackState?.item.name;
   const albumImage = currentplaybackState?.item.album.images[2].url;
@@ -44,7 +36,7 @@ function SpotifyAudioPlayer() {
     <div className="spotifyAudioPlayer">
       <div className="spotifyAudioPlayer__left">
         <TrackPanel
-          isPlaying={currentplaybackState?.is_playing}
+          shouldDisplay={currentplaybackState?.item}
           image={albumImage}
           title={currentTrackName}
           artists={artists}

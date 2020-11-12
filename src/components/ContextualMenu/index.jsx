@@ -43,7 +43,7 @@ export default function ContextualMenu({
       >
         {menuOptions.map(({ title, url, fn }) => {
           return (
-            <MenuItem key={url} onClick={() => handleClick(url, fn)}>
+            <MenuItem key={title} onClick={() => handleClick(url, fn)}>
               {title}
             </MenuItem>
           );
