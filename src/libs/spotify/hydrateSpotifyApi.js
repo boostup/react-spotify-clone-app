@@ -13,8 +13,9 @@ import { spotifyAPI } from "./index";
  */
 export function hydrateSpotifyApi(error, dispatch) {
   if (error?.status >= 400) {
-    spotifyAPI.setAccessToken(getToken());
-    dispatch(setToken(spotifyAPI.getAccessToken()));
+    const token = getToken();
+    spotifyAPI.setAccessToken(token);
+    dispatch(setToken(token));
   }
 }
 

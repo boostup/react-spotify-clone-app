@@ -30,8 +30,7 @@ const SpotifyLogin = ({ history }) => {
       dispatch(actions.setTokenExpiry(expiryTime));
       ls.setTokenExpiry(expiryTime);
 
-      spotifyAPI.getMe().then((user) => {
-        dispatch(actions.setUser(user));
+      actions.getMeAsync(dispatch).then((user) => {
         ls.setUser(user);
         history.push("/");
       });
