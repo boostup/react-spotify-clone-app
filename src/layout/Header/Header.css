@@ -2,14 +2,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: var(--transition);
 }
 .header__left {
   flex: 0.5;
+  transition: transform 300ms cubic-bezier(1, 0, 0, 1);
+}
+
+.header__left.show {
+  opacity: 1;
+  transform: scaleY(1);
 }
 
 .header__left.hide {
-  opacity: 0;
+  opacity: 0.3;
+  transform: scaleY(0);
   pointer-events: none;
   user-select: none;
 }

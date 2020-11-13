@@ -82,7 +82,7 @@ button {
 }
 
 .header.scrolled {
-  background-color: rgba(var(--main-theme-color), 0.6);
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
 }
 .body {
   background: linear-gradient(

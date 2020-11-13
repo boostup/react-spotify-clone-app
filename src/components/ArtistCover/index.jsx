@@ -1,6 +1,7 @@
 import React from "react";
 
 import { ReactComponent as ArtistPlaceholderImage } from "../../assets/artist.placeholder.svg";
+import ImageFader from "../ImageFader";
 
 import "./ArtistCover.css";
 
@@ -12,9 +13,9 @@ function ArtistCover({ item, onClick }) {
   return (
     <div className="artistCover" onClick={onClick}>
       {image ? (
-        <img src={image} alt="spotify playlist cover" />
+        <ImageFader src={image} alt={name} />
       ) : (
-        <ArtistPlaceholderImage />
+        <ArtistPlaceholderImage title={name} />
       )}
 
       <div className="artistCover__name">{name}</div>

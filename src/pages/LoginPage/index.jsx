@@ -17,10 +17,13 @@ function LoginPage() {
 
   return (
     <div className="login">
-      {error && <div>{error}</div>}
-
       <Logo />
       <button onClick={handleLogin}>Login with Spotify</button>
+      {error && (
+        <div>
+          <p>{error}</p>
+        </div>
+      )}
     </div>
   );
 }
