@@ -10,7 +10,6 @@ export const initialState = {
   displaySearchBar: false,
   isPlaylistPage: false,
   displayPlaylistToolbar: false,
-  searchFilter: "",
   searchResults: [],
   token: "",
   tokenExpiry: 0,
@@ -75,12 +74,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         headerScrolled: action.payload,
-      };
-
-    case actionTypes.SET_SEARCH_FILTER:
-      return {
-        ...state,
-        searchFilter: action.payload,
       };
 
     case actionTypes.SET_SEARCH_RESULTS:

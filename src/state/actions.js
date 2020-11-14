@@ -109,11 +109,6 @@ export const setSearchResults = (results) => ({
   payload: results,
 });
 
-export const setSearchFilter = (searchFilter) => ({
-  type: actionTypes.SET_SEARCH_FILTER,
-  payload: searchFilter,
-});
-
 /**
  *
  * Shared/Cloud Playback state ASYNC function

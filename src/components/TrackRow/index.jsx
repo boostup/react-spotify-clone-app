@@ -1,5 +1,6 @@
 import React from "react";
 
+import Artists from "../Artists";
 import Duration from "../Duration";
 import ImageFader from "../ImageFader";
 
@@ -24,8 +25,7 @@ function TrackRow({ order, track, onPlay }) {
               e
             </span>
           )}
-          {track.artists.map((artist) => artist.name).join(", ")} -{" "}
-          {track.album.name}
+          <Artists items={track.artists} /> • {track.album.name}
         </p>
       </div>
     </div>
