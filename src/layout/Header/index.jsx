@@ -1,8 +1,10 @@
 import React from "react";
 
 import { useDataLayerValue } from "../../state/DataLayer";
+import { playPlaylist } from "../../state/actions";
 
 import SearchField from "./SearchField";
+import MiniPlaylistToolBar from "./MiniPlaylistToolBar";
 import AvatarArea from "./AvatarArea";
 
 import "./Header.css";
@@ -10,14 +12,32 @@ import "./Header.css";
 function Header(props) {
   const { className } = props;
   const { state } = useDataLayerValue();
-  const { user, displaySearchBar } = state;
+  const {
+    user,
+    displaySearchBar,
+    isPlaylistPage,
+    displayPlaylistToolbar,
+    playlist,
+  } = state;
 
-  const conditionalClassName = () => (displaySearchBar ? "show" : "hide");
+  const searchBarClassName = () =>
+    displaySearchBar ? "showSearchbar" : "hideSearchbar";
+
+  const playlistToolbarClassName = () =>
+    isPlaylistPage && displayPlaylistToolbar
+      ? "showPlToolbar"
+      : "hidePlToolbar";
 
   return (
     <div className={`${className}`}>
-      <div className={`header__left ${conditionalClassName()} `}>
+      <div
+        className={`header__left ${searchBarClassName()} ${playlistToolbarClassName()} `}
+      >
         <SearchField />
+        <MiniPlaylistToolBar
+          title={playlist?.name}
+          onPlay={() => playPlaylist(playlist?.id)}
+        />
       </div>
       <div className="header__right">
         <AvatarArea user={user} />

@@ -1,6 +1,7 @@
 import React from "react";
 
 import { convertMiliseconds } from "../../utils/time";
+import ImageFader from "../ImageFader";
 
 import "./TrackRow.css";
 
@@ -10,10 +11,9 @@ function TrackRow({ order, track, onPlay }) {
   return (
     <div className="trackRow" onClick={() => onPlay(track.id)}>
       <span className="trackRow__order">{order}</span>
-      <img
-        className="trackRow__album"
+      <ImageFader
+        containerClass="trackRow__album"
         src={track.album.images[0].url}
-        alt={track.album.name}
       />
       <div className="trackRow__info">
         <span className="trackRow__info__duration">

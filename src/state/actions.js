@@ -76,13 +76,33 @@ export function getPlaylistsAync(dispatch) {
 
 /**
  *
- * SEARCH ACTION CREATORS
+ * HEADER ACTION CREATORS
  */
+
+export const toggleHeaderScrolled = (value) => ({
+  type: actionTypes.SET_HEADER_SCROLLED,
+  payload: value,
+});
 
 export const toggleDisplaySearchBar = (displayToggle) => ({
   type: actionTypes.SET_SEARCH_BAR_DISPLAY,
   payload: displayToggle,
 });
+
+export const toggleDisplayPlaylistToolbar = (displayToggle) => ({
+  type: actionTypes.SET_PLAYLIST_TOOLBAR_DISPLAY,
+  payload: displayToggle,
+});
+
+export const toggleIsPlaylistPage = (displayToggle) => ({
+  type: actionTypes.SET_IS_PLAYLIST_PAGE,
+  payload: displayToggle,
+});
+
+/**
+ *
+ * SEARCH ACTION CREATORS
+ */
 
 export const setSearchResults = (results) => ({
   type: actionTypes.SET_SEARCH_RESULTS,

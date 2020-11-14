@@ -1,0 +1,28 @@
+.miniPlaylistToolbar {
+  background: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  height: var(--main-layout-header-height);
+}
+.miniPlaylistToolbar svg {
+  transform: scale(0);
+  margin: 0 1rem;
+  font-size: 5rem;
+  color: var(--main-theme-color-secondary);
+  animation: reveal 300ms ease 1 forwards;
+  cursor: pointer;
+}
+
+.miniPlaylistToolbar > svg:hover {
+  transition: 100ms transform cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform: scale(1.1) !important;
+}
+
+.miniPlaylistToolbar__title {
+  font-size: 2rem;
+  transform: scale(0);
+  animation: reveal 300ms ease 300ms 1 forwards;
+}

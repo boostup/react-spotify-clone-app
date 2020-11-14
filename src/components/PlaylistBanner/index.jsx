@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useDataLayerValue } from "../../state/DataLayer";
+import ImageFader from "../ImageFader";
 
 import "./PlaylistBanner.css";
 
@@ -11,7 +12,7 @@ function PlaylistBanner() {
   return (
     <div className="playlistBanner">
       <div className="playlistBanner__info">
-        <img src={playlist?.images[0].url} alt="" />
+        <ImageFader src={playlist?.images[0].url} type="crossFade" />
         <div className="playlistBanner__infoText">
           <strong>Playlist</strong>
           <h2>{playlist?.name}</h2>

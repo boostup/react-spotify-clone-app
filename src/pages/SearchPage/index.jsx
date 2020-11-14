@@ -21,7 +21,8 @@ function SearchPage() {
 
     //Cleaning up
     return () => {
-      dispatch(toggleDisplaySearchBar(false));
+      //This timer allows to give time for the CSS transition to hide the search bar
+      setTimeout(() => dispatch(toggleDisplaySearchBar(false)), 100);
     };
   }, [dispatch]);
 

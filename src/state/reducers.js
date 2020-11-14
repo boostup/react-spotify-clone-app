@@ -8,6 +8,8 @@ export const initialState = {
   playlists: [],
   playing: false,
   displaySearchBar: false,
+  isPlaylistPage: false,
+  displayPlaylistToolbar: false,
   searchFilter: "",
   searchResults: [],
   token: "",
@@ -55,6 +57,24 @@ const reducer = (state, action) => {
       return {
         ...state,
         displaySearchBar: action.payload,
+      };
+
+    case actionTypes.SET_PLAYLIST_TOOLBAR_DISPLAY:
+      return {
+        ...state,
+        displayPlaylistToolbar: action.payload,
+      };
+
+    case actionTypes.SET_IS_PLAYLIST_PAGE:
+      return {
+        ...state,
+        isPlaylistPage: action.payload,
+      };
+
+    case actionTypes.SET_HEADER_SCROLLED:
+      return {
+        ...state,
+        headerScrolled: action.payload,
       };
 
     case actionTypes.SET_SEARCH_FILTER:
