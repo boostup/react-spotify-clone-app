@@ -10,6 +10,7 @@
 .header__left.showSearchbar .searchField {
   opacity: 1;
   display: inline-flex;
+  width: -webkit-fill-available;
 }
 
 .header__left.hideSearchbar .searchField {
@@ -21,14 +22,10 @@
 }
 
 .header__left.showPlToolbar .miniPlaylistToolbar {
-  opacity: 1;
-  transform: scaleY(1) scaleX(1);
-  display: inline-flex;
+  width: -webkit-fill-available;
 }
 
 .header__left.hidePlToolbar .miniPlaylistToolbar {
-  opacity: 0.3;
-  transform: scaleY(0) scaleX(0);
   pointer-events: none;
   user-select: none;
   display: none;

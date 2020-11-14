@@ -10,15 +10,15 @@ import "./PlaylistToolbar.css";
 function PlaylistToolbar({ onPlay }) {
   const menuOptions = [
     {
-      title: "add to queue",
+      title: "add to queue (in construction 👷)",
       fn: () => {},
     },
     {
-      title: "modify",
+      title: "modify (in construction 🚧)",
       fn: () => {},
     },
     {
-      title: "delete",
+      title: "delete (in construction 🏗)",
       fn: () => {},
     },
   ];

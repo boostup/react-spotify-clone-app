@@ -1,19 +1,13 @@
 import React from "react";
 
 import { useDataLayerValue } from "../../state/DataLayer";
+import { playPlaylist } from "../../state/actions";
 
 import SearchField from "./SearchField";
+import MiniPlaylistToolBar from "./MiniPlaylistToolBar";
 import AvatarArea from "./AvatarArea";
 
 import "./Header.css";
-
-function PlaylistHeaderToolBar() {
-  return (
-    <div className="miniPlaylistToolbar">
-      <button>PLAY</button> | playlist title here
-    </div>
-  );
-}
 
 function Header(props) {
   const { className } = props;
@@ -23,6 +17,7 @@ function Header(props) {
     displaySearchBar,
     isPlaylistPage,
     displayPlaylistToolbar,
+    playlist,
   } = state;
 
   const searchBarClassName = () =>
@@ -39,7 +34,10 @@ function Header(props) {
         className={`header__left ${searchBarClassName()} ${playlistToolbarClassName()} `}
       >
         <SearchField />
-        <PlaylistHeaderToolBar />
+        <MiniPlaylistToolBar
+          title={playlist?.name}
+          onPlay={() => playPlaylist(playlist?.id)}
+        />
       </div>
       <div className="header__right">
         <AvatarArea user={user} />
