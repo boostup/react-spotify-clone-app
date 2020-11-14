@@ -10,6 +10,8 @@ import {
   getPlaylistsAync,
   playPlaylist,
   playTrack,
+  toggleIsPlaylistPage,
+  toggleDisplayPlaylistToolbar,
 } from "../../state/actions";
 
 import "./PlaylistPage.css";
@@ -23,6 +25,18 @@ function PlaylistPage({
   const { playlist } = state;
 
   useEffect(() => {
+    // @TODO:
+    // window.scrollTo(0, 0); => need to do this for the Body component scroll level
+
+    dispatch(toggleIsPlaylistPage(true));
+    //Cleaning up
+    return () => {
+      dispatch(toggleDisplayPlaylistToolbar(false));
+      dispatch(toggleIsPlaylistPage(false));
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
     getPlaylistAsync(id, dispatch);
     getPlaylistsAync(dispatch);
   }, [dispatch, id, state.token]);
@@ -34,7 +48,7 @@ function PlaylistPage({
       <div className="playlistPage">
         <PlaylistBanner />
         <PlaylistToolbar onPlay={() => playPlaylist(playlist.id)} />
-        <TrackList onPlay={(id) => playTrack(id)} />
+        <TrackList playlist={playlist} onPlay={(id) => playTrack(id)} />
       </div>
     </MainLayoutPageWrapper>
   );

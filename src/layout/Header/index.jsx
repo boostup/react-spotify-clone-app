@@ -7,17 +7,39 @@ import AvatarArea from "./AvatarArea";
 
 import "./Header.css";
 
+function PlaylistHeaderToolBar() {
+  return (
+    <div className="miniPlaylistToolbar">
+      <button>PLAY</button> | playlist title here
+    </div>
+  );
+}
+
 function Header(props) {
   const { className } = props;
   const { state } = useDataLayerValue();
-  const { user, displaySearchBar } = state;
+  const {
+    user,
+    displaySearchBar,
+    isPlaylistPage,
+    displayPlaylistToolbar,
+  } = state;
 
-  const conditionalClassName = () => (displaySearchBar ? "show" : "hide");
+  const searchBarClassName = () =>
+    displaySearchBar ? "showSearchbar" : "hideSearchbar";
+
+  const playlistToolbarClassName = () =>
+    isPlaylistPage && displayPlaylistToolbar
+      ? "showPlToolbar"
+      : "hidePlToolbar";
 
   return (
     <div className={`${className}`}>
-      <div className={`header__left ${conditionalClassName()} `}>
+      <div
+        className={`header__left ${searchBarClassName()} ${playlistToolbarClassName()} `}
+      >
         <SearchField />
+        <PlaylistHeaderToolBar />
       </div>
       <div className="header__right">
         <AvatarArea user={user} />
