@@ -28,11 +28,7 @@ function SpotifyAudioPlayer() {
   const currentTrackName = currentplaybackState?.item.name;
   const albumImage = currentplaybackState?.item.album.images[2].url;
   const albumName = currentplaybackState?.item.album?.name;
-  const artists = currentplaybackState?.item.artists
-    .reduce((prevVal, currVal) => {
-      return [...prevVal, currVal.name];
-    }, [])
-    .join(", ");
+  const artists = currentplaybackState?.item.artists;
 
   return (
     <div className="spotifyAudioPlayer">

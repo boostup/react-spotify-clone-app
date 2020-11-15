@@ -7,13 +7,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import "./SearchField.css";
 import useDebounce from "../../../hooks/useDebounce";
 import { useDataLayerValue } from "../../../state/DataLayer";
-import { setSearchFilter, setSearchResults } from "../../../state/actions";
-
-const filters = {
-  ARTIST: "artist",
-  ALBUM: "album",
-  PLAYLIST: "playlist",
-};
+import { setSearchResults } from "../../../state/actions";
 
 function SearchField() {
   const searchInputRef = useRef(null);
@@ -28,24 +22,21 @@ function SearchField() {
   const handleChange = (e) => setSearchTerm(e.target.value);
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  const [searchFilter] = useState(filters.ARTIST);
-
   useEffect(
     () => {
       debouncedSearchTerm &&
         spotifyAPI
           //
-          .search(debouncedSearchTerm, ["artist"])
+          .search(debouncedSearchTerm, ["artist", "album", "playlist"])
           .catch((error) => {
-            console.log(error);
+            // console.log(error);
             hydrateSpotifyApi(error, dispatch);
           })
           .then((results) => {
             dispatch(setSearchResults(results));
-            dispatch(setSearchFilter(searchFilter));
           });
     },
-    [dispatch, searchFilter, debouncedSearchTerm] // Only call effect if debounced search term changes
+    [dispatch, debouncedSearchTerm] // Only call effect if debounced search term changes
   );
 
   return (

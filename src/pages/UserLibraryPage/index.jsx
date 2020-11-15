@@ -15,7 +15,7 @@ function UserLibraryPage() {
     <MainLayoutPageWrapper title="Your Library">
       <div className="yourLibrary">
         <h1>Your Playlists</h1>
-        <PlaylistsGrid playlists={items} />
+        <PlaylistsGrid items={items} />
       </div>
     </MainLayoutPageWrapper>
   );

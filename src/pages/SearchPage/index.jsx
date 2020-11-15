@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
 import { useDataLayerValue } from "../../state/DataLayer";
-import SearchResultsGrid from "../../components/SearchResultsGrid";
+import ArtistsGrid from "../../components/ArtistsGrid";
 
 import "./SearchPage.css";
 import { toggleDisplaySearchBar } from "../../state/actions";
-
-const resultKeys = {
-  artist: "artists",
-  album: "albums",
-  playlist: "playlists",
-};
+import PlaylistsGrid from "../../components/PlaylistsGrid";
 
 function SearchPage() {
   const { state, dispatch } = useDataLayerValue();
+  const { searchResults } = state;
+  const artists = searchResults?.artists?.items;
+  const albums = searchResults?.albums?.items;
+  const playlists = searchResults?.playlists?.items;
 
   useEffect(() => {
     dispatch(toggleDisplaySearchBar(true));
@@ -26,27 +25,31 @@ function SearchPage() {
     };
   }, [dispatch]);
 
-  const { searchFilter, searchResults } = state;
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    const filterKey = resultKeys[searchFilter];
-    //Once API results are in state, get the items dynamically according to the value of filterKey (searchResults["artists" | "playlists" | "albums"])
-    if (filterKey && searchResults) {
-      setItems(searchResults[filterKey].items);
-    }
-  }, [searchFilter, searchResults]);
-
   return (
     <MainLayoutPageWrapper title="Your Library">
       <div className="searchPage">
-        {!items && <h1>Search millions of tracks...</h1>}
+        {!searchResults && <h1>Search millions of tracks...</h1>}
 
-        <SearchResultsGrid
-          itemTypes={resultKeys}
-          itemType={`${searchFilter}s`}
-          items={items}
-        />
+        {playlists && (
+          <>
+            <h1>Playlists</h1>
+            <PlaylistsGrid items={playlists} />
+          </>
+        )}
+
+        {artists && (
+          <>
+            <h1>Artists</h1>
+            <ArtistsGrid items={artists} />
+          </>
+        )}
+
+        {albums && (
+          <>
+            <h1>Albums</h1>
+            <PlaylistsGrid items={albums} />
+          </>
+        )}
       </div>
     </MainLayoutPageWrapper>
   );

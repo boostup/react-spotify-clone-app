@@ -1,13 +1,12 @@
 import React from "react";
 
-import { convertMiliseconds } from "../../utils/time";
+import Artists from "../Artists";
+import Duration from "../Duration";
 import ImageFader from "../ImageFader";
 
 import "./TrackRow.css";
 
 function TrackRow({ order, track, onPlay }) {
-  const duration = convertMiliseconds(track.duration_ms);
-
   return (
     <div className="trackRow" onClick={() => onPlay(track.id)}>
       <span className="trackRow__order">{order}</span>
@@ -17,9 +16,7 @@ function TrackRow({ order, track, onPlay }) {
       />
       <div className="trackRow__info">
         <span className="trackRow__info__duration">
-          {duration.h ? `${duration.h}:` : null}
-          {duration.m ? `${duration.m}:` : null}
-          {duration.s ? `${duration.s}` : null}
+          <Duration ms={track.duration_ms} />
         </span>{" "}
         <h1>{track.name}</h1>
         <p>
@@ -28,8 +25,7 @@ function TrackRow({ order, track, onPlay }) {
               e
             </span>
           )}
-          {track.artists.map((artist) => artist.name).join(", ")} -{" "}
-          {track.album.name}
+          <Artists items={track.artists} /> • {track.album.name}
         </p>
       </div>
     </div>

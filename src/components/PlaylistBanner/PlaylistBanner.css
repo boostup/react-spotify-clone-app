@@ -2,15 +2,14 @@
 }
 
 .playlistBanner__info {
-  /* position: relative; */
   display: flex;
   align-items: flex-end;
   padding: 0;
 }
 
 .playlistBanner__info img {
-  height: 20vw;
-  min-height: 200px;
+  height: 232px;
+  width: 232px;
   margin: 0 1.2rem 0 0;
   box-shadow: 0 4px 60px rgba(var(--main-theme-color), 0.5);
 }
@@ -29,4 +28,13 @@
 }
 
 .playlistBanner__infoText > p {
+  margin: 0.6rem 0;
+}
+
+.playlistBanner__infoText--tracks {
+  color: var(--main-interactive-text-color);
+}
+
+.playlistBanner__infoText--description {
+  font-size: 1.6rem;
 }

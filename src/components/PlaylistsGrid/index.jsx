@@ -5,12 +5,12 @@ import ItemCover from "../ItemCover";
 
 import "./PlaylistsGrid.css";
 
-function PlaylistsGrid({ playlists }) {
+function PlaylistsGrid({ items }) {
   const history = useHistory();
 
   return (
     <div className="playlistsGrid">
-      {playlists?.map((playlist) => (
+      {items?.map((playlist) => (
         <ItemCover
           key={playlist.id}
           item={playlist}
