@@ -18,7 +18,6 @@ function RightArea({ isPlaying, volume, onMuteChange, onVolumeChange }) {
   const [_volumeBackupWhileMute, _setVolumeBackupWhileMute] = useState(0);
 
   const _onVolumeSliderChange = (event, value) => {
-    console.log("onVolumeSliderChange", value);
     _setVolume(value);
     _setMuteButtonStatus(computeMuteButtonState(value));
     onVolumeChange(value);

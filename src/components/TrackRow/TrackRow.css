@@ -56,3 +56,21 @@
   height: 50px;
   width: 50px;
 }
+
+/**
+* FIRST LARGE TRACK (keyword: firstLarge)
+*/
+
+.trackRow.large .trackRow__info {
+  align-self: flex-end;
+}
+
+.trackRow.large .trackRow__info p {
+  font-size: 4rem;
+  color: var(--main-font-color);
+}
+
+.trackRow.large .trackRow__album {
+  height: 300px;
+  width: 300px;
+}

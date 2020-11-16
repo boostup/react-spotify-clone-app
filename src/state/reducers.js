@@ -6,6 +6,8 @@ export const initialState = {
   user: null,
   playlist: null,
   playlists: [],
+  recentTracks: [],
+  topTracks: [],
   playing: false,
   displaySearchBar: false,
   isPlaylistPage: false,
@@ -50,6 +52,18 @@ const reducer = (state, action) => {
       return {
         ...state,
         playlist: action.payload,
+      };
+
+    case actionTypes.SET_RECENT_TRACKS:
+      return {
+        ...state,
+        recentTracks: action.payload,
+      };
+
+    case actionTypes.SET_TOP_TRACKS:
+      return {
+        ...state,
+        topTracks: action.payload,
       };
 
     case actionTypes.SET_SEARCH_BAR_DISPLAY:

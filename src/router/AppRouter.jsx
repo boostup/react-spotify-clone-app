@@ -7,6 +7,7 @@ import SpotifyLogin from "../redirects/SpotifyLogin";
 import SpotifyLogout from "../redirects/SpotifyLogout";
 
 import Index from "../pages/Index";
+import Home from "../pages/Home";
 import NotFoundPage from "../pages/NotFoundPage";
 import SearchPage from "../pages/SearchPage";
 import UserLibraryPage from "../pages/UserLibraryPage";
@@ -20,7 +21,7 @@ const AppRouter = () => {
         <ErrorBoundary>
           <Switch>
             <Route exact path="/" component={Index} />
-            <Route exact path="/home" component={PlaylistPage} />
+            <Route exact path="/home" component={Home} />
             <Route exact path="/playlist/:id" component={PlaylistPage} />
             <Route exact path="/search" component={SearchPage} />
             <Route exact path="/library" component={UserLibraryPage} />

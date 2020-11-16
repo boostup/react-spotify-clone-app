@@ -33,6 +33,37 @@ export function getMeAsync(dispatch) {
   });
 }
 
+export const setRecentTracks = (tracks) => ({
+  type: actionTypes.SET_RECENT_TRACKS,
+  payload: tracks,
+});
+
+export function getMyRecentTracksAsync(dispatch) {
+  spotifyAPI
+    .getMyRecentlyPlayedTracks({ limit: 5 })
+    .then((data) => {
+      return data.items.map((item) => item.track);
+    })
+    .then((tracks) => dispatch(setRecentTracks(tracks)))
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
+export const setTopTracks = (tracks) => ({
+  type: actionTypes.SET_TOP_TRACKS,
+  payload: tracks,
+});
+
+export function getMyTopTracksAsync(dispatch) {
+  spotifyAPI
+    .getMyTopTracks({ limit: 5 })
+    .then((data) => dispatch(setTopTracks(data.items)))
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
 /**
  *
  * USER PLAYLISTS ACTION CREATORS
@@ -55,7 +86,7 @@ export const setPlaylist = (playlist) => ({
 
 export function getPlaylistAsync(id, dispatch) {
   spotifyAPI
-    .getPlaylist(id || "37i9dQZEVXcDGlrEgKnU30")
+    .getPlaylist(id)
     //
     .then((playlist) => dispatch(setPlaylist(playlist)))
     .catch((error) => {
@@ -72,6 +103,17 @@ export function getPlaylistsAync(dispatch) {
     .catch((error) => {
       hydrateSpotifyApi(error, dispatch);
     });
+}
+
+export function togglefollowPlaylist({ id, follow }) {
+  follow
+    ? //
+      spotifyAPI.areFollowingPlaylist.followPlaylist(id)
+    : spotifyAPI.unfollowPlaylist(id);
+}
+
+export function isPlaylistFollowedByUser({ playlistId, userId }) {
+  spotifyAPI.areFollowingPlaylist(playlistId, [userId]);
 }
 
 /**
