@@ -1,0 +1,41 @@
+.homePage > h1 {
+  display: flex;
+  align-items: center;
+  font-size: 4rem;
+}
+
+.homePage__icon {
+  color: var(--main-theme-favorite-color-hover);
+  font-size: 4rem !important;
+  margin-right: 2rem;
+}
+
+.homePage .trackList {
+  margin-bottom: 4rem;
+}
+
+/**
+* FIRST LARGE TRACK (keyword: firstLarge)
+*/
+.large .trackRow.large {
+  margin-left: 0;
+}
+
+.trackRow.large .trackRow__info {
+  align-self: flex-end;
+}
+
+.large .trackRow.large .trackRow__order,
+.trackRow.large .trackRow__info p {
+  font-size: 4rem;
+  color: var(--main-font-color);
+}
+
+.trackRow.large .trackRow__album {
+  height: 300px;
+  width: 300px;
+}
+
+.large .trackRow {
+  margin-left: 4rem;
+}

@@ -7,7 +7,7 @@ import "./TrackList.css";
 
 function TrackList({ items, onPlay, firstLarge = true }) {
   return (
-    <div className="trackList">
+    <div className={`trackList ${firstLarge ? "large" : ""}`}>
       {items
         .filter((item) => item?.is_local === false)
         .map((track, i) => (
