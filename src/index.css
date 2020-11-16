@@ -95,6 +95,19 @@ button {
 .header.scrolled {
   background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
 }
+
+.mainLayout__body > div > h1 {
+  display: flex;
+  align-items: center;
+  font-size: 4rem;
+}
+
+.mainLayout__body .mainLayout__icon {
+  color: var(--main-theme-favorite-color-hover);
+  font-size: 4rem !important;
+  margin-right: 2rem;
+}
+
 .body {
   background: linear-gradient(
     rgb(91, 87, 115),

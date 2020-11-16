@@ -33,17 +33,17 @@ function Home() {
     <MainLayoutPageWrapper title={pageTitle}>
       <div className="homePage">
         <h1>
-          <SavedTracksIcon className="homePage__icon" /> Saved Tracks
+          <SavedTracksIcon className="mainLayout__icon" /> Saved Tracks
         </h1>
         {<TrackList items={savedTracks} onPlay={(id) => playTrack(id)} />}
 
         <h1>
-          <TopTracksIcon className="homePage__icon" /> Your Top Tracks
+          <TopTracksIcon className="mainLayout__icon" /> Your Top Tracks
         </h1>
         {<TrackList items={topTracks} onPlay={(id) => playTrack(id)} />}
 
         <h1>
-          <RecentTracksIcon className="homePage__icon" />
+          <RecentTracksIcon className="mainLayout__icon" />
           Recently Played
         </h1>
         <TrackList items={recentTracks} onPlay={(id) => playTrack(id)} />

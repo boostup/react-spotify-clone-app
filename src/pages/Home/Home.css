@@ -1,15 +1,3 @@
-.homePage > h1 {
-  display: flex;
-  align-items: center;
-  font-size: 4rem;
-}
-
-.homePage__icon {
-  color: var(--main-theme-favorite-color-hover);
-  font-size: 4rem !important;
-  margin-right: 2rem;
-}
-
 .homePage .trackList {
   margin-bottom: 4rem;
 }

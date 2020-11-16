@@ -5,6 +5,7 @@ import { getPlaylistsAync } from "../../state/actions";
 
 import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
 import PlaylistsGrid from "../../components/PlaylistsGrid";
+import PlaylistIcon from "@material-ui/icons/QueueMusic";
 
 import "./UserLibraryPage.css";
 
@@ -20,7 +21,10 @@ function UserLibraryPage() {
   return (
     <MainLayoutPageWrapper title="Your Library">
       <div className="yourLibrary">
-        <h1>Your Playlists</h1>
+        <h1>
+          <PlaylistIcon className="mainLayout__icon" />
+          Your Playlists
+        </h1>
         <PlaylistsGrid items={items} />
       </div>
     </MainLayoutPageWrapper>
