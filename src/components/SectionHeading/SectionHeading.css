@@ -1,0 +1,11 @@
+h1.sectionHeading {
+  display: flex;
+  align-items: center;
+  font-size: 4rem;
+}
+
+.sectionHeading .sectionHeading__icon {
+  color: var(--main-theme-favorite-color-hover);
+  font-size: 4rem !important;
+  margin-right: 2rem;
+}

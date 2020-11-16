@@ -6,6 +6,10 @@ import ArtistsGrid from "../../components/ArtistsGrid";
 
 import "./SearchPage.css";
 import { toggleDisplaySearchBar } from "../../state/actions";
+import SectionHeading from "../../components/SectionHeading";
+import PlaylistIcon from "@material-ui/icons/QueueMusic";
+import ArtistIcon from "@material-ui/icons/RecordVoiceOver";
+import AlbumIcon from "@material-ui/icons/Album";
 import PlaylistsGrid from "../../components/PlaylistsGrid";
 
 function SearchPage() {
@@ -30,23 +34,23 @@ function SearchPage() {
       <div className="searchPage">
         {!searchResults && <h1>Search millions of tracks...</h1>}
 
-        {playlists && (
+        {artists && (
           <>
-            <h1>Playlists</h1>
-            <PlaylistsGrid items={playlists} />
+            <SectionHeading icon={ArtistIcon} title="Artists" />
+            <ArtistsGrid items={artists} />
           </>
         )}
 
-        {artists && (
+        {playlists && (
           <>
-            <h1>Artists</h1>
-            <ArtistsGrid items={artists} />
+            <SectionHeading icon={PlaylistIcon} title="Playlists" />
+            <PlaylistsGrid items={playlists} />
           </>
         )}
 
         {albums && (
           <>
-            <h1>Albums</h1>
+            <SectionHeading icon={AlbumIcon} title="Albums" />
             <PlaylistsGrid items={albums} />
           </>
         )}

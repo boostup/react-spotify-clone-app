@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
 
-import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
-import PlaylistBanner from "../../components/PlaylistBanner";
-import PlaylistToolbar from "../../components/PlaylistToolbar";
-import TrackList from "../../components/TrackList";
 import { useDataLayerValue } from "../../state/DataLayer";
 import {
   getPlaylistAsync,
@@ -12,6 +8,11 @@ import {
   toggleIsPlaylistPage,
   toggleDisplayPlaylistToolbar,
 } from "../../state/actions";
+
+import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
+import PlaylistBanner from "../../components/PlaylistBanner";
+import PlaylistToolbar from "../../components/PlaylistToolbar";
+import TrackList from "../../components/TrackList";
 
 import "./PlaylistPage.css";
 
@@ -27,8 +28,6 @@ function PlaylistPage({
   const tracks = playlist?.tracks.items.map((item) => item.track) || [];
 
   useEffect(() => {
-    // @TODO:
-    // window.scrollTo(0, 0); => need to do this for the Body component scroll level
     getPlaylistAsync(id, dispatch);
     dispatch(toggleIsPlaylistPage(true));
     //Cleaning up
