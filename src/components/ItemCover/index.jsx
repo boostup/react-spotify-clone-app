@@ -11,7 +11,7 @@ function ItemCover({ item, onClick }) {
     <div className="itemCover" onClick={onClick}>
       <div className="itemCover__cover">
         <PlayIcon className="itemCover__play" />
-        <img src={images[0].url} alt="spotify playlist cover" />
+        <img src={images[0]?.url} alt="spotify playlist cover" />
       </div>
       <div className="itemCover__name">{name}</div>
 

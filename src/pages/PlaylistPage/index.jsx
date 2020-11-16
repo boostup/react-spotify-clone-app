@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 
-import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
-import PlaylistBanner from "../../components/PlaylistBanner";
-import PlaylistToolbar from "../../components/PlaylistToolbar";
-import TrackList from "../../components/TrackList";
 import { useDataLayerValue } from "../../state/DataLayer";
 import {
   getPlaylistAsync,
-  getPlaylistsAync,
   playPlaylist,
   playTrack,
   toggleIsPlaylistPage,
   toggleDisplayPlaylistToolbar,
 } from "../../state/actions";
+
+import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
+import PlaylistBanner from "../../components/PlaylistBanner";
+import PlaylistToolbar from "../../components/PlaylistToolbar";
+import TrackList from "../../components/TrackList";
 
 import "./PlaylistPage.css";
 
@@ -21,34 +21,32 @@ function PlaylistPage({
     params: { id },
   },
 }) {
-  const { state, dispatch } = useDataLayerValue();
+  const { state, dispatch, token } = useDataLayerValue();
   const { playlist } = state;
 
-  useEffect(() => {
-    // @TODO:
-    // window.scrollTo(0, 0); => need to do this for the Body component scroll level
+  const pageTitle = playlist?.name;
+  const tracks = playlist?.tracks.items.map((item) => item.track) || [];
 
+  useEffect(() => {
+    getPlaylistAsync(id, dispatch);
     dispatch(toggleIsPlaylistPage(true));
     //Cleaning up
     return () => {
       dispatch(toggleDisplayPlaylistToolbar(false));
       dispatch(toggleIsPlaylistPage(false));
     };
-  }, [dispatch]);
-
-  useEffect(() => {
-    getPlaylistAsync(id, dispatch);
-    getPlaylistsAync(dispatch);
-  }, [dispatch, id, state.token]);
-
-  const pageTitle = playlist?.name || "Home";
+  }, [dispatch, id, token]);
 
   return (
     <MainLayoutPageWrapper title={pageTitle}>
       <div className="playlistPage">
         <PlaylistBanner />
         <PlaylistToolbar onPlay={() => playPlaylist(playlist.id)} />
-        <TrackList playlist={playlist} onPlay={(id) => playTrack(id)} />
+        <TrackList
+          firstLarge={false}
+          items={tracks}
+          onPlay={(id) => playTrack(id)}
+        />
       </div>
     </MainLayoutPageWrapper>
   );
