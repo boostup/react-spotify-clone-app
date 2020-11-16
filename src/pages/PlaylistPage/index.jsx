@@ -8,6 +8,7 @@ import {
   toggleIsPlaylistPage,
   toggleDisplayPlaylistToolbar,
   addToQueue,
+  // isPlaylistFollowedByUser,
 } from "../../state/actions";
 
 import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
@@ -22,15 +23,27 @@ function PlaylistPage({
     params: { id },
   },
 }) {
-  const { state, dispatch, token } = useDataLayerValue();
-  const { playlist } = state;
+  const { state, dispatch } = useDataLayerValue();
+  const {
+    // user,
+    token,
+    playlist,
+  } = state;
 
   const pageTitle = playlist?.name;
   const tracks = playlist?.tracks.items.map((item) => item.track) || [];
+  // const userId = user?.id;
+  // const isPlaylistOwner = playlist?.owner.id === userId;
+
+  // console.log(userId, id, isPlaylistOwner);
 
   useEffect(() => {
-    getPlaylistAsync(id, dispatch);
     dispatch(toggleIsPlaylistPage(true));
+    getPlaylistAsync(id, dispatch);
+    // userId &&
+    //   !isPlaylistOwner &&
+    //   isPlaylistFollowedByUser({ playlistId: id, userId }, dispatch);
+
     //Cleaning up
     return () => {
       dispatch(toggleDisplayPlaylistToolbar(false));
@@ -42,7 +55,13 @@ function PlaylistPage({
     <MainLayoutPageWrapper title={pageTitle}>
       <div className="playlistPage">
         <PlaylistBanner />
+        {/* <p>
+          {id} * {playlist?.owner.id} * {userId}
+        </p> */}
         <PlaylistToolbar
+          // isOwner={isPlaylistOwner}
+          // isPlaylistFollower={}
+          // toggleFollowPlayist={}
           onQueue={() => addToQueue(tracks[0].uri)}
           onPlay={() => playPlaylist(playlist.id)}
         />

@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { spotifyAPI, hydrateSpotifyApi } from "../../../libs/spotify";
-
 import SearchIcon from "@material-ui/icons/Search";
 
-import "./SearchField.css";
 import useDebounce from "../../../hooks/useDebounce";
 import { useDataLayerValue } from "../../../state/DataLayer";
-import { setSearchResults } from "../../../state/actions";
+import { searchSpotifyAsync } from "../../../state/actions";
+
+import "./SearchField.css";
 
 function SearchField() {
   const searchInputRef = useRef(null);
@@ -24,17 +23,7 @@ function SearchField() {
 
   useEffect(
     () => {
-      debouncedSearchTerm &&
-        spotifyAPI
-          //
-          .search(debouncedSearchTerm, ["artist", "album", "playlist"])
-          .catch((error) => {
-            // console.log(error);
-            hydrateSpotifyApi(error, dispatch);
-          })
-          .then((results) => {
-            dispatch(setSearchResults(results));
-          });
+      debouncedSearchTerm && searchSpotifyAsync(debouncedSearchTerm, dispatch);
     },
     [dispatch, debouncedSearchTerm] // Only call effect if debounced search term changes
   );

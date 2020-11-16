@@ -1,12 +1,7 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-import {
-  addToMySavedTracks,
-  addToQueue,
-  getRecommendationsAsync,
-} from "../../state/actions";
-
-import { useDataLayerValue } from "../../state/DataLayer";
+import { addToMySavedTracks, addToQueue } from "../../state/actions";
 
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import QueueIcon from "@material-ui/icons/Queue";
@@ -24,8 +19,7 @@ import ContextualMenu from "../ContextualMenu";
 import "./TrackRow.css";
 
 function TrackRow({ order, track, large = true, onPlay }) {
-  const { dispatch } = useDataLayerValue();
-
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -65,10 +59,9 @@ function TrackRow({ order, track, large = true, onPlay }) {
       <div className="trackRow__toolbar">
         <HeartToggle
           status={false}
-          // @TODO:  toggle AND refactor with playlist toolbar!
-          //  @TODO : create new `featured` page
-          // @ TODO : new Radio page => using `setMyRecommendedTracks` action
-          onToggle={() => console.log("toggled!!!!!!!!!!!!!!!!!!!!!")}
+          onToggle={() => {
+            // console.log("toggled!!!!!!!!!!!!!!!!!!!!!");
+          }}
         />
         <MoreHorizIcon className="trackRow__more" onClick={handleClick} />
       </div>
@@ -87,14 +80,17 @@ function TrackRow({ order, track, large = true, onPlay }) {
             fn: () => addToQueue(track.uri),
           },
           {
+            icon: RadioIcon,
+            title: "go to radio...",
+            fn: () =>
+              history.push(
+                `/featured/${track.id}/${encodeURIComponent(track.name)}`
+              ),
+          },
+          {
             icon: PlaylistAddIcon,
             title: "add to playlist... (in construction)",
             fn: () => {},
-          },
-          {
-            icon: RadioIcon,
-            title: "go to radio...",
-            fn: () => getRecommendationsAsync(track.id, dispatch),
           },
         ]}
         anchorEl={anchorEl}

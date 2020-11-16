@@ -12,6 +12,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import SearchPage from "../pages/SearchPage";
 import UserLibraryPage from "../pages/UserLibraryPage";
 import PlaylistPage from "../pages/PlaylistPage";
+import FeaturedPage from "../pages/FeaturedPage";
 import ErrorBoundary from "../components/ErrorBoundary";
 
 const AppRouter = () => {
@@ -23,6 +24,11 @@ const AppRouter = () => {
             <Route exact path="/" component={Index} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/playlist/:id" component={PlaylistPage} />
+            <Route
+              exact
+              path="/featured/:trackId/:trackName"
+              component={FeaturedPage}
+            />
             <Route exact path="/search" component={SearchPage} />
             <Route exact path="/library" component={UserLibraryPage} />
             <Route

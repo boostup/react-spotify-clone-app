@@ -5,7 +5,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import "./HeartToggle.css";
 
-function HeartToggle({ status, onToggle }) {
+function HeartToggle({ status = false, onToggle = () => {} }) {
   const handleClick = (event) => {
     event.stopPropagation();
     onToggle();

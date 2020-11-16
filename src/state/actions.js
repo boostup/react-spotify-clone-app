@@ -106,9 +106,25 @@ export function getRecommendationsAsync(trackId, dispatch) {
     });
 }
 
+export const setMyPlaylistsFeatured = (playlists) => ({
+  type: actionTypes.SET_MY_PLAYLISTS_FEATURED,
+  payload: playlists,
+});
+
+export function getMyPlaylistsFeaturedAsync(dispatch) {
+  spotifyAPI
+    .getFeaturedPlaylists({ limit: 5, locale: navigator.language || "en-US" })
+    .then((data) => {
+      return dispatch(setMyPlaylistsFeatured(data));
+    })
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
 /**
  *
- * USER PLAYLISTS ACTION CREATORS
+ * USER PLAYLISTS ACTION CREATORS & ASYNC ACTIONS
  */
 
 export const setPlaylists = (playlists) => ({
@@ -121,16 +137,27 @@ export const setPlaylist = (playlist) => ({
   payload: playlist,
 });
 
-/**
- *
- * USER PLAYLISTS ASYNC ACTIONS
- */
-
 export function getPlaylistAsync(id, dispatch) {
   spotifyAPI
     .getPlaylist(id)
     //
     .then((playlist) => dispatch(setPlaylist(playlist)))
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
+export const setIsPlaylistFollower = (value) => ({
+  type: actionTypes.SET_PLAYLIST_IS_FOLLOWER,
+  payload: value,
+});
+
+export function isPlaylistFollowedByUser({ playlistId, userId }, dispatch) {
+  spotifyAPI
+    .areFollowingPlaylist(playlistId, [userId])
+    .then((data) => {
+      return dispatch(setIsPlaylistFollower(data[0]));
+    })
     .catch((error) => {
       hydrateSpotifyApi(error, dispatch);
     });
@@ -152,10 +179,6 @@ export function togglefollowPlaylist({ id, follow }) {
     ? //
       spotifyAPI.areFollowingPlaylist.followPlaylist(id)
     : spotifyAPI.unfollowPlaylist(id);
-}
-
-export function isPlaylistFollowedByUser({ playlistId, userId }) {
-  spotifyAPI.areFollowingPlaylist(playlistId, [userId]);
 }
 
 /**
@@ -185,13 +208,24 @@ export const toggleIsPlaylistPage = (displayToggle) => ({
 
 /**
  *
- * SEARCH ACTION CREATORS
+ * SEARCH ACTION CREATORS && ASYNC ACTIONS
  */
 
 export const setSearchResults = (results) => ({
   type: actionTypes.SET_SEARCH_RESULTS,
   payload: results,
 });
+
+export function searchSpotifyAsync(searchString, dispatch) {
+  spotifyAPI
+    .search(searchString, ["artist", "album", "playlist"])
+    .then((results) => {
+      dispatch(setSearchResults(results));
+    })
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
 
 /**
  *

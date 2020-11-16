@@ -9,6 +9,7 @@ export const initialState = {
   isPlaylistPage: false,
   playlist: null,
   playlists: [],
+  playlistsFeatured: [],
   playing: false,
   savedTracks: [],
   searchResults: [],
@@ -50,10 +51,25 @@ const reducer = (state, action) => {
         playlists: action.payload,
       };
 
+    case actionTypes.SET_MY_PLAYLISTS_FEATURED:
+      return {
+        ...state,
+        playlistsFeatured: action.payload,
+      };
+
     case actionTypes.SET_PLAYLIST:
       return {
         ...state,
         playlist: action.payload,
+      };
+
+    case actionTypes.SET_PLAYLIST_IS_FOLLOWER:
+      return {
+        ...state,
+        playlist: {
+          ...state.playlist,
+          isFollower: action.payload,
+        },
       };
 
     case actionTypes.SET_MY_RECENT_TRACKS:

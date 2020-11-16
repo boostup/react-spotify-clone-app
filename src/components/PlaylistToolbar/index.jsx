@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilledTwoTone";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+// import FavoriteIcon from "@material-ui/icons/Favorite";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import QueueIcon from "@material-ui/icons/Queue";
 
 import ContextualMenu from "../ContextualMenu";
+import HeartToggle from "../HeartToggle";
 
 import "./PlaylistToolbar.css";
 
-function PlaylistToolbar({ onQueue, onPlay }) {
+function PlaylistToolbar({
+  // isOwner,
+  // isPlaylistFollower,
+  // toggleFollowPlayist,
+  onQueue,
+  onPlay,
+}) {
   const menuOptions = [
     {
       icon: QueueIcon,
@@ -34,7 +41,17 @@ function PlaylistToolbar({ onQueue, onPlay }) {
         onClick={onPlay}
         className="playlistToolbar__shuffle"
       />
-      <FavoriteIcon className="playlistToolbar__favorite" fontSize="large" />
+
+      {/* <FavoriteIcon className="playlistToolbar__favorite" fontSize="large" /> */}
+
+      {
+        // !isOwner &&
+        <HeartToggle
+        // status={false}
+        // onToggle={() => console.log("toggled!!!!!!!!!!!!!!!!!!!!!")}
+        />
+      }
+
       <MoreHorizIcon className="playlistToolbar__more" onClick={handleClick} />
       <ContextualMenu
         menuId="playlist-toolbar-menu"
