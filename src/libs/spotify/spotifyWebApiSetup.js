@@ -8,14 +8,15 @@ const {
 } = process.env;
 
 const scopes = [
-  "user-read-currently-playing",
-  "user-read-recently-played",
-  "user-read-playback-state",
-  "user-top-read",
-  "user-modify-playback-state",
   "streaming",
+  "user-library-read",
+  "user-modify-playback-state",
+  "user-read-currently-playing",
   "user-read-email",
+  "user-read-playback-state",
   "user-read-private",
+  "user-read-recently-played",
+  "user-top-read",
 ];
 
 const redirectURI = encodeURIComponent(

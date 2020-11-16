@@ -3,19 +3,20 @@ import { debug } from "../utils/constants";
 import { actionTypes } from "./actionTypes";
 
 export const initialState = {
-  user: null,
-  playlist: null,
-  playlists: [],
-  recentTracks: [],
-  topTracks: [],
-  playing: false,
+  currentplaybackState: null, //includes current Playing Track => currentplaybackState.item
+  displayPlaylistToolbar: false,
   displaySearchBar: false,
   isPlaylistPage: false,
-  displayPlaylistToolbar: false,
+  playlist: null,
+  playlists: [],
+  playing: false,
+  savedTracks: [],
   searchResults: [],
   token: "",
   tokenExpiry: 0,
-  currentplaybackState: null, //includes current Playing Track => currentplaybackState.item
+  topTracks: [],
+  recentTracks: [],
+  user: null,
 };
 
 const reducer = (state, action) => {
@@ -42,7 +43,7 @@ const reducer = (state, action) => {
         tokenExpiry: action.payload,
       };
 
-    case actionTypes.SET_PLAYLISTS:
+    case actionTypes.SET_MY_PLAYLISTS:
       return {
         ...state,
         playlists: action.payload,
@@ -54,16 +55,22 @@ const reducer = (state, action) => {
         playlist: action.payload,
       };
 
-    case actionTypes.SET_RECENT_TRACKS:
+    case actionTypes.SET_MY_RECENT_TRACKS:
       return {
         ...state,
         recentTracks: action.payload,
       };
 
-    case actionTypes.SET_TOP_TRACKS:
+    case actionTypes.SET_MY_TOP_TRACKS:
       return {
         ...state,
         topTracks: action.payload,
+      };
+
+    case actionTypes.SET_MY_SAVED_TRACKS:
+      return {
+        ...state,
+        savedTracks: action.payload,
       };
 
     case actionTypes.SET_SEARCH_BAR_DISPLAY:

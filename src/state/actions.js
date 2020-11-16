@@ -34,7 +34,7 @@ export function getMeAsync(dispatch) {
 }
 
 export const setRecentTracks = (tracks) => ({
-  type: actionTypes.SET_RECENT_TRACKS,
+  type: actionTypes.SET_MY_RECENT_TRACKS,
   payload: tracks,
 });
 
@@ -51,7 +51,7 @@ export function getMyRecentTracksAsync(dispatch) {
 }
 
 export const setTopTracks = (tracks) => ({
-  type: actionTypes.SET_TOP_TRACKS,
+  type: actionTypes.SET_MY_TOP_TRACKS,
   payload: tracks,
 });
 
@@ -64,13 +64,30 @@ export function getMyTopTracksAsync(dispatch) {
     });
 }
 
+export const setMySavedTracks = (tracks) => ({
+  type: actionTypes.SET_MY_SAVED_TRACKS,
+  payload: tracks,
+});
+
+export function getMySavedTracksAsync(dispatch) {
+  spotifyAPI
+    .getMySavedTracks({ limit: 5 })
+    .then((data) => {
+      return data.items.map((item) => item.track);
+    })
+    .then((tracks) => dispatch(setMySavedTracks(tracks)))
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
 /**
  *
  * USER PLAYLISTS ACTION CREATORS
  */
 
 export const setPlaylists = (playlists) => ({
-  type: actionTypes.SET_PLAYLISTS,
+  type: actionTypes.SET_MY_PLAYLISTS,
   payload: playlists,
 });
 

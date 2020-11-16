@@ -5,6 +5,7 @@ import {
   getMyRecentTracksAsync,
   getPlaylistsAync,
   playTrack,
+  getMySavedTracksAsync,
 } from "../../state/actions";
 import { useDataLayerValue } from "../../state/DataLayer";
 import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
@@ -12,10 +13,11 @@ import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
 function Home() {
   const pageTitle = "Home";
   const { state, dispatch } = useDataLayerValue();
-  const { topTracks, recentTracks, token } = state;
+  const { savedTracks, topTracks, recentTracks, token } = state;
 
   useEffect(() => {
     getPlaylistsAync(dispatch);
+    getMySavedTracksAsync(dispatch);
     getMyTopTracksAsync(dispatch);
     getMyRecentTracksAsync(dispatch);
   }, [dispatch, token]);
@@ -23,8 +25,12 @@ function Home() {
   return (
     <MainLayoutPageWrapper title={pageTitle}>
       <div className="homePage">
+        <h1>Saved Tracks</h1>
+        {<TrackList items={savedTracks} onPlay={(id) => playTrack(id)} />}
+
         <h1>Your Top Tracks</h1>
         {<TrackList items={topTracks} onPlay={(id) => playTrack(id)} />}
+
         <h1>Recently Played</h1>
         <TrackList items={recentTracks} onPlay={(id) => playTrack(id)} />
       </div>
