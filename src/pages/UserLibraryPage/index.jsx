@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+
+import { useDataLayerValue } from "../../state/DataLayer";
+import { getPlaylistsAync } from "../../state/actions";
 
 import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
-import { useDataLayerValue } from "../../state/DataLayer";
 import PlaylistsGrid from "../../components/PlaylistsGrid";
 
 import "./UserLibraryPage.css";
 
 function UserLibraryPage() {
-  const { state } = useDataLayerValue();
-  const { playlists } = state;
+  const { state, dispatch } = useDataLayerValue();
+  const { playlists, token } = state;
   const { items } = playlists;
+
+  useEffect(() => {
+    getPlaylistsAync(dispatch);
+  }, [dispatch, token]);
 
   return (
     <MainLayoutPageWrapper title="Your Library">

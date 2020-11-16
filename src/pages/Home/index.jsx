@@ -12,13 +12,13 @@ import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
 function Home() {
   const pageTitle = "Home";
   const { state, dispatch } = useDataLayerValue();
-  const { topTracks, recentTracks } = state;
+  const { topTracks, recentTracks, token } = state;
 
   useEffect(() => {
     getPlaylistsAync(dispatch);
     getMyTopTracksAsync(dispatch);
     getMyRecentTracksAsync(dispatch);
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   return (
     <MainLayoutPageWrapper title={pageTitle}>

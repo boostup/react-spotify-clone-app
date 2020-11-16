@@ -20,7 +20,7 @@ function PlaylistPage({
     params: { id },
   },
 }) {
-  const { state, dispatch } = useDataLayerValue();
+  const { state, dispatch, token } = useDataLayerValue();
   const { playlist } = state;
 
   const pageTitle = playlist?.name;
@@ -36,7 +36,7 @@ function PlaylistPage({
       dispatch(toggleDisplayPlaylistToolbar(false));
       dispatch(toggleIsPlaylistPage(false));
     };
-  }, [dispatch, id]);
+  }, [dispatch, id, token]);
 
   return (
     <MainLayoutPageWrapper title={pageTitle}>
