@@ -7,6 +7,7 @@ import {
   playTrack,
   toggleIsPlaylistPage,
   toggleDisplayPlaylistToolbar,
+  addToQueue,
 } from "../../state/actions";
 
 import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
@@ -41,7 +42,10 @@ function PlaylistPage({
     <MainLayoutPageWrapper title={pageTitle}>
       <div className="playlistPage">
         <PlaylistBanner />
-        <PlaylistToolbar onPlay={() => playPlaylist(playlist.id)} />
+        <PlaylistToolbar
+          onQueue={() => addToQueue(tracks[0].uri)}
+          onPlay={() => playPlaylist(playlist.id)}
+        />
         <TrackList
           firstLarge={false}
           items={tracks}

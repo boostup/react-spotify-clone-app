@@ -3,23 +3,18 @@ import React, { useState } from "react";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilledTwoTone";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import QueueIcon from "@material-ui/icons/Queue";
+
 import ContextualMenu from "../ContextualMenu";
 
 import "./PlaylistToolbar.css";
 
-function PlaylistToolbar({ onPlay }) {
+function PlaylistToolbar({ onQueue, onPlay }) {
   const menuOptions = [
     {
-      title: "add to queue (in construction 👷)",
-      fn: () => {},
-    },
-    {
-      title: "modify (in construction 🚧)",
-      fn: () => {},
-    },
-    {
-      title: "delete (in construction 🏗)",
-      fn: () => {},
+      icon: QueueIcon,
+      title: "add first song to queue",
+      fn: () => onQueue(),
     },
   ];
 
@@ -42,7 +37,7 @@ function PlaylistToolbar({ onPlay }) {
       <FavoriteIcon className="playlistToolbar__favorite" fontSize="large" />
       <MoreHorizIcon className="playlistToolbar__more" onClick={handleClick} />
       <ContextualMenu
-        menuId="avatar-menu"
+        menuId="playlist-toolbar-menu"
         menuOptions={menuOptions}
         anchorEl={anchorEl}
         onClose={handleClose}

@@ -16,6 +16,7 @@ export const initialState = {
   tokenExpiry: 0,
   topTracks: [],
   recentTracks: [],
+  recommendedTracks: [],
   user: null,
 };
 
@@ -71,6 +72,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         savedTracks: action.payload,
+      };
+
+    case actionTypes.SET_MY_RECOMMENDED_TRACKS:
+      return {
+        ...state,
+        recommendedTracks: action.payload,
       };
 
     case actionTypes.SET_SEARCH_BAR_DISPLAY:

@@ -81,6 +81,31 @@ export function getMySavedTracksAsync(dispatch) {
     });
 }
 
+export function addToMySavedTracks(trackId) {
+  spotifyAPI.addToMySavedTracks({ ids: [trackId] });
+}
+
+export function addToQueue(trackURI) {
+  spotifyAPI.queue(trackURI);
+}
+
+export const setMyRecommendedTracks = (tracks) => ({
+  type: actionTypes.SET_MY_RECOMMENDED_TRACKS,
+  payload: tracks,
+});
+
+export function getRecommendationsAsync(trackId, dispatch) {
+  spotifyAPI
+    .getRecommendations({
+      seed_tracks: trackId,
+      limit: 20,
+    })
+    .then((data) => dispatch(setMyRecommendedTracks(data.tracks)))
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
 /**
  *
  * USER PLAYLISTS ACTION CREATORS
