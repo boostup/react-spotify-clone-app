@@ -11,7 +11,11 @@ function ArtistsGrid({ items }) {
   return (
     <div className="artistsGrid">
       {items?.map((item) => (
-        <ArtistCover key={item.id} item={item} />
+        <ArtistCover
+          key={item.id}
+          item={item}
+          href={item.external_urls.spotify}
+        />
       ))}
     </div>
   );

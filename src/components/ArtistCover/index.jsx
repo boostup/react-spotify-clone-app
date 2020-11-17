@@ -5,18 +5,20 @@ import ImageFader from "../ImageFader";
 
 import "./ArtistCover.css";
 
-function ArtistCover({ item, onClick }) {
+function ArtistCover({ item, href }) {
   const { images, name } = item;
 
   const image = images ? images[0]?.url : "";
 
   return (
-    <div className="artistCover" onClick={onClick}>
-      {image ? (
-        <ImageFader src={image} alt={name} />
-      ) : (
-        <ArtistPlaceholderImage title={name} />
-      )}
+    <div className="artistCover">
+      <a href={href} target="_blank" rel="noreferrer">
+        {image ? (
+          <ImageFader src={image} alt={name} />
+        ) : (
+          <ArtistPlaceholderImage title={name} />
+        )}
+      </a>
 
       <div className="artistCover__name">{name}</div>
     </div>

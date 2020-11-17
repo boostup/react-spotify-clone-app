@@ -4,13 +4,21 @@ import Artists from "../Artists";
 
 import "./ItemCover.css";
 
-function ItemCover({ item, onClick }) {
+function ItemCover({ item, onGoTo, onPlay }) {
   const { images, name, owner, artists } = item;
 
   return (
-    <div className="itemCover" onClick={onClick}>
+    <div className="itemCover" onClick={onGoTo}>
       <div className="itemCover__cover">
-        <PlayIcon className="itemCover__play" />
+        <button
+          className="itemCover__play"
+          onClick={(event) => {
+            onPlay();
+            event.stopPropagation();
+          }}
+        >
+          <PlayIcon />
+        </button>
         <img src={images[0]?.url} alt="spotify playlist cover" />
       </div>
       <div className="itemCover__name">{name}</div>

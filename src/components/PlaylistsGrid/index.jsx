@@ -1,6 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
+import { playPlaylist } from "../../state/actions";
+
 import ItemCover from "../ItemCover";
 
 import "./PlaylistsGrid.css";
@@ -14,7 +16,8 @@ function PlaylistsGrid({ items }) {
         <ItemCover
           key={playlist.id}
           item={playlist}
-          onClick={() => history.push(`/playlist/${playlist.id}`)}
+          onGoTo={() => history.push(`/playlist/${playlist.id}`)}
+          onPlay={() => playPlaylist(playlist.id)}
         />
       ))}
     </div>
