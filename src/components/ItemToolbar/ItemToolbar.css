@@ -1,21 +1,21 @@
-.playlistToolbar {
+.itemToolbar {
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgba(var(--main-theme-color), 0.5);
   padding: 2rem;
 }
 
-.playlistToolbar > .MuiSvgIcon-root {
+.itemToolbar > .MuiSvgIcon-root {
   margin-right: 2rem;
   cursor: pointer;
 }
 
-.playlistToolbar > .MuiSvgIcon-root:hover {
+.itemToolbar > .MuiSvgIcon-root:hover {
   transition: 100ms transform cubic-bezier(0.165, 0.84, 0.44, 1);
   transform: scale(1.1);
 }
 
-.playlistToolbar__shuffle {
+.itemToolbar__shuffle {
   font-size: 7rem !important;
   color: var(--main-theme-color-secondary);
   margin-left: 1rem;
@@ -23,14 +23,14 @@
   margin-bottom: 0.8rem;
 }
 
-.playlistToolbar__favorite {
+.itemToolbar__favorite {
   color: var(--main-theme-favorite-color);
 }
 
-.playlistToolbar__favorite:hover {
+.itemToolbar__favorite:hover {
   color: var(--main-theme-favorite-color-hover);
 }
 
-.playlistToolbar__more {
+.itemToolbar__more {
   font-size: 3rem !important;
 }

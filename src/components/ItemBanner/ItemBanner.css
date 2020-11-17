@@ -1,0 +1,37 @@
+.itemBanner__info {
+  display: flex;
+  align-items: flex-end;
+  padding: 0;
+}
+
+.itemBanner__info img {
+  height: 232px;
+  width: 232px;
+  margin: 0 1.2rem 0 0;
+  box-shadow: 0 4px 60px rgba(var(--main-theme-color), 0.5);
+}
+
+.itemBanner__infoText {
+  flex: 1;
+}
+
+.itemBanner__infoText > strong {
+  text-transform: uppercase;
+}
+
+.itemBanner__infoText > h2 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.itemBanner__infoText > p {
+  margin: 0.6rem 0;
+}
+
+.itemBanner__infoText--tracks {
+  color: var(--main-interactive-text-color);
+}
+
+.itemBanner__infoText--description {
+  font-size: 1.6rem;
+}

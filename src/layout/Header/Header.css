@@ -5,17 +5,28 @@
 }
 .header__left {
   flex: 0.5;
-  transition: transform 300ms cubic-bezier(1, 0, 0, 1);
 }
 
-.header__left.show {
+.header__left.showSearchbar .searchField {
   opacity: 1;
-  transform: scaleY(1);
+  display: inline-flex;
+  width: -webkit-fill-available;
 }
 
-.header__left.hide {
+.header__left.hideSearchbar .searchField {
   opacity: 0.3;
   transform: scaleY(0);
   pointer-events: none;
   user-select: none;
+  transition: transform 300ms cubic-bezier(1, 0, 0, 1);
+}
+
+.header__left.showItemToolbar .itemHeaderToolbar {
+  width: -webkit-fill-available;
+}
+
+.header__left.hideItemToolbar .itemHeaderToolbar {
+  pointer-events: none;
+  user-select: none;
+  display: none;
 }

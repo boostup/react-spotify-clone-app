@@ -33,31 +33,145 @@ export function getMeAsync(dispatch) {
   });
 }
 
-/**
- *
- * USER PLAYLISTS ACTION CREATORS
- */
+export const setRecentTracks = (tracks) => ({
+  type: actionTypes.SET_MY_RECENT_TRACKS,
+  payload: tracks,
+});
 
-export const setPlaylists = (playlists) => ({
-  type: actionTypes.SET_PLAYLISTS,
+export function getMyRecentTracksAsync(dispatch) {
+  spotifyAPI
+    .getMyRecentlyPlayedTracks({ limit: 5 })
+    .then((data) => {
+      return data.items.map((item) => item.track);
+    })
+    .then((tracks) => dispatch(setRecentTracks(tracks)))
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
+export const setTopTracks = (tracks) => ({
+  type: actionTypes.SET_MY_TOP_TRACKS,
+  payload: tracks,
+});
+
+export function getMyTopTracksAsync(dispatch) {
+  spotifyAPI
+    .getMyTopTracks({ limit: 5 })
+    .then((data) => dispatch(setTopTracks(data.items)))
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
+export const setMySavedTracks = (tracks) => ({
+  type: actionTypes.SET_MY_SAVED_TRACKS,
+  payload: tracks,
+});
+
+export function getMySavedTracksAsync(dispatch) {
+  spotifyAPI
+    .getMySavedTracks({ limit: 5 })
+    .then((data) => {
+      return data.items.map((item) => item.track);
+    })
+    .then((tracks) => dispatch(setMySavedTracks(tracks)))
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
+export function addToMySavedTracks(trackId) {
+  spotifyAPI.addToMySavedTracks({ ids: [trackId] });
+}
+
+export function addToQueue(trackURI) {
+  spotifyAPI.queue(trackURI);
+}
+
+export const setMyRecommendedTracks = (tracks) => ({
+  type: actionTypes.SET_MY_RECOMMENDED_TRACKS,
+  payload: tracks,
+});
+
+export function getRecommendationsAsync(trackId, dispatch) {
+  spotifyAPI
+    .getRecommendations({
+      seed_tracks: trackId,
+      limit: 20,
+    })
+    .then((data) => dispatch(setMyRecommendedTracks(data.tracks)))
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
+export const setMyPlaylistsFeatured = (playlists) => ({
+  type: actionTypes.SET_MY_PLAYLISTS_FEATURED,
   payload: playlists,
 });
 
-export const setPlaylist = (playlist) => ({
-  type: actionTypes.SET_PLAYLIST,
-  payload: playlist,
-});
+export function getMyPlaylistsFeaturedAsync(dispatch) {
+  spotifyAPI
+    .getFeaturedPlaylists({ limit: 5, locale: navigator.language || "en-US" })
+    .then((data) => {
+      return dispatch(setMyPlaylistsFeatured(data));
+    })
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
 
 /**
  *
- * USER PLAYLISTS ASYNC ACTIONS
+ * USER PLAYLISTS ACTION CREATORS & ASYNC ACTIONS
  */
+
+export const setPlaylists = (playlists) => ({
+  type: actionTypes.SET_MY_PLAYLISTS,
+  payload: playlists,
+});
+
+export const setItem = (item) => ({
+  type: actionTypes.SET_ITEM,
+  payload: item,
+});
 
 export function getPlaylistAsync(id, dispatch) {
   spotifyAPI
-    .getPlaylist(id || "37i9dQZEVXcDGlrEgKnU30")
+    .getPlaylist(id)
     //
-    .then((playlist) => dispatch(setPlaylist(playlist)))
+    .then((playlist) => {
+      dispatch(setItem(playlist));
+    })
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
+export function getAlbumAsync(id, dispatch) {
+  spotifyAPI
+    .getAlbum(id)
+    //
+    .then((album) => {
+      dispatch(setItem(album));
+    })
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
+export const setIsPlaylistFollower = (value) => ({
+  type: actionTypes.SET_PLAYLIST_IS_FOLLOWER,
+  payload: value,
+});
+
+export function isPlaylistFollowedByUser({ playlistId, userId }, dispatch) {
+  spotifyAPI
+    .areFollowingPlaylist(playlistId, [userId])
+    .then((data) => {
+      return dispatch(setIsPlaylistFollower(data[0]));
+    })
     .catch((error) => {
       hydrateSpotifyApi(error, dispatch);
     });
@@ -74,25 +188,58 @@ export function getPlaylistsAync(dispatch) {
     });
 }
 
+export function togglefollowPlaylist({ id, follow }) {
+  follow
+    ? //
+      spotifyAPI.areFollowingPlaylist.followPlaylist(id)
+    : spotifyAPI.unfollowPlaylist(id);
+}
+
 /**
  *
- * SEARCH ACTION CREATORS
+ * HEADER ACTION CREATORS
  */
+
+export const toggleHeaderScrolled = (value) => ({
+  type: actionTypes.SET_HEADER_SCROLLED,
+  payload: value,
+});
 
 export const toggleDisplaySearchBar = (displayToggle) => ({
   type: actionTypes.SET_SEARCH_BAR_DISPLAY,
   payload: displayToggle,
 });
 
+export const toggleDisplayItemToolbar = (displayToggle) => ({
+  type: actionTypes.SET_ITEM_TOOLBAR_DISPLAY,
+  payload: displayToggle,
+});
+
+export const toggleIsItemPage = (displayToggle) => ({
+  type: actionTypes.SET_IS_ITEM_PAGE,
+  payload: displayToggle,
+});
+
+/**
+ *
+ * SEARCH ACTION CREATORS && ASYNC ACTIONS
+ */
+
 export const setSearchResults = (results) => ({
   type: actionTypes.SET_SEARCH_RESULTS,
   payload: results,
 });
 
-export const setSearchFilter = (searchFilter) => ({
-  type: actionTypes.SET_SEARCH_FILTER,
-  payload: searchFilter,
-});
+export function searchSpotifyAsync(searchString, dispatch) {
+  spotifyAPI
+    .search(searchString, ["artist", "album", "playlist"])
+    .then((results) => {
+      dispatch(setSearchResults(results));
+    })
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
 
 /**
  *
@@ -127,15 +274,24 @@ export function getMyCurrentPlaybackStateAsync(dispatch) {
  *
  */
 
-export function playPlaylist(id) {
+/**
+ * Plays albums and playlists
+ *
+ * @param {sting} uri
+ */
+export function playItem(uri) {
   spotifyAPI.play({
-    context_uri: `spotify:playlist:${id}`,
+    context_uri: uri,
   });
 }
 
-export function playTrack(id) {
+/**
+ * Only plays tracks
+ * @param {string} uri
+ */
+export function playTrack(uri) {
   spotifyAPI.play({
-    uris: [`spotify:track:${id}`],
+    uris: [uri],
   });
 }
 

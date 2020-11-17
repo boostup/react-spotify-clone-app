@@ -3,16 +3,22 @@ import { debug } from "../utils/constants";
 import { actionTypes } from "./actionTypes";
 
 export const initialState = {
-  user: null,
-  playlist: null,
-  playlists: [],
-  playing: false,
+  currentplaybackState: null, //includes current Playing Track => currentplaybackState.item
+  displayItemToolbar: false,
   displaySearchBar: false,
-  searchFilter: "",
+  isItemPage: false,
+  item: null, //an object that holds either an album or playlist information, used in the `ItemPage`
+  playlists: [],
+  playlistsFeatured: [],
+  playing: false,
+  savedTracks: [],
   searchResults: [],
   token: "",
   tokenExpiry: 0,
-  currentplaybackState: null, //includes current Playing Track => currentplaybackState.item
+  topTracks: [],
+  recentTracks: [],
+  recommendedTracks: [],
+  user: null,
 };
 
 const reducer = (state, action) => {
@@ -39,16 +45,55 @@ const reducer = (state, action) => {
         tokenExpiry: action.payload,
       };
 
-    case actionTypes.SET_PLAYLISTS:
+    case actionTypes.SET_MY_PLAYLISTS:
       return {
         ...state,
         playlists: action.payload,
       };
 
-    case actionTypes.SET_PLAYLIST:
+    case actionTypes.SET_MY_PLAYLISTS_FEATURED:
       return {
         ...state,
-        playlist: action.payload,
+        playlistsFeatured: action.payload,
+      };
+
+    case actionTypes.SET_ITEM:
+      return {
+        ...state,
+        item: action.payload,
+      };
+
+    case actionTypes.SET_PLAYLIST_IS_FOLLOWER:
+      return {
+        ...state,
+        playlist: {
+          ...state.playlist,
+          isFollower: action.payload,
+        },
+      };
+
+    case actionTypes.SET_MY_RECENT_TRACKS:
+      return {
+        ...state,
+        recentTracks: action.payload,
+      };
+
+    case actionTypes.SET_MY_TOP_TRACKS:
+      return {
+        ...state,
+        topTracks: action.payload,
+      };
+
+    case actionTypes.SET_MY_SAVED_TRACKS:
+      return {
+        ...state,
+        savedTracks: action.payload,
+      };
+
+    case actionTypes.SET_MY_RECOMMENDED_TRACKS:
+      return {
+        ...state,
+        recommendedTracks: action.payload,
       };
 
     case actionTypes.SET_SEARCH_BAR_DISPLAY:
@@ -57,10 +102,22 @@ const reducer = (state, action) => {
         displaySearchBar: action.payload,
       };
 
-    case actionTypes.SET_SEARCH_FILTER:
+    case actionTypes.SET_ITEM_TOOLBAR_DISPLAY:
       return {
         ...state,
-        searchFilter: action.payload,
+        displayItemToolbar: action.payload,
+      };
+
+    case actionTypes.SET_IS_ITEM_PAGE:
+      return {
+        ...state,
+        isItemPage: action.payload,
+      };
+
+    case actionTypes.SET_HEADER_SCROLLED:
+      return {
+        ...state,
+        headerScrolled: action.payload,
       };
 
     case actionTypes.SET_SEARCH_RESULTS:

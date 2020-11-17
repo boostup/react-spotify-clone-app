@@ -1,4 +1,5 @@
 import React from "react";
+import Artists from "../../Artists";
 
 function TrackPanel({ shouldDisplay, image, title, artists, album }) {
   return (
@@ -13,7 +14,7 @@ function TrackPanel({ shouldDisplay, image, title, artists, album }) {
           />
           <div className="spotifyAudioPlayer__songInfo">
             <h4>{title}</h4>
-            <p>{artists}</p>
+            <Artists items={artists} />
           </div>
         </>
       ) : null}

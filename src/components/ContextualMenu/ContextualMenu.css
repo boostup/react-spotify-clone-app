@@ -1,16 +1,26 @@
-/* add menuId to customize for different menus in the app, for example:
+/**** 
+
+add menuId to customize for different menus in the app, for example:
 
 #avatar-menu .MuiMenuItem-root {
   font-size: 1.4rem !important;
 }
+
 */
 
-.MuiList-root {
+.MuiList-root,
+.MuiList-root .MuiListItemIcon-root,
+.MuiList-root .MuiListItemText-primary {
   color: var(--main-font-color) !important;
   background-color: var(--chrome-main-color) !important;
 }
 
-.MuiMenuItem-root {
+.MuiList-root .MuiListItemIcon-root {
+  min-width: 26px !important;
+}
+
+.MuiMenuItem-root,
+.MuiListItemText-root .MuiTypography-root.MuiListItemText-primary {
   font-size: 1.4rem !important;
 }
 

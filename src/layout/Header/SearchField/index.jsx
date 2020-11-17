@@ -1,19 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { spotifyAPI, hydrateSpotifyApi } from "../../../libs/spotify";
-
 import SearchIcon from "@material-ui/icons/Search";
 
-import "./SearchField.css";
 import useDebounce from "../../../hooks/useDebounce";
 import { useDataLayerValue } from "../../../state/DataLayer";
-import { setSearchFilter, setSearchResults } from "../../../state/actions";
+import { searchSpotifyAsync } from "../../../state/actions";
 
-const filters = {
-  ARTIST: "artist",
-  ALBUM: "album",
-  PLAYLIST: "playlist",
-};
+import "./SearchField.css";
 
 function SearchField() {
   const searchInputRef = useRef(null);
@@ -28,24 +21,11 @@ function SearchField() {
   const handleChange = (e) => setSearchTerm(e.target.value);
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
 
-  const [searchFilter] = useState(filters.ARTIST);
-
   useEffect(
     () => {
-      debouncedSearchTerm &&
-        spotifyAPI
-          //
-          .search(debouncedSearchTerm, ["artist"])
-          .catch((error) => {
-            console.log(error);
-            hydrateSpotifyApi(error, dispatch);
-          })
-          .then((results) => {
-            dispatch(setSearchResults(results));
-            dispatch(setSearchFilter(searchFilter));
-          });
+      debouncedSearchTerm && searchSpotifyAsync(debouncedSearchTerm, dispatch);
     },
-    [dispatch, searchFilter, debouncedSearchTerm] // Only call effect if debounced search term changes
+    [dispatch, debouncedSearchTerm] // Only call effect if debounced search term changes
   );
 
   return (

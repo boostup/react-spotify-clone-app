@@ -5,6 +5,6 @@ export const avatarMenuOptions = [
 ];
 
 export const debug = {
-  ROUTING: true,
+  ROUTING: false,
   REDUCERS: true,
 };

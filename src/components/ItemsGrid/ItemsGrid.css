@@ -1,8 +1,7 @@
-.searchResultsGrid {
-  width: 100%;
+.itemsGrid {
+  width: 95%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
   padding: 1rem;
 }
