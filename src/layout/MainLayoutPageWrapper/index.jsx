@@ -48,7 +48,7 @@ function MainLayoutPageWrapper({ title, dispatch, useSelector, children }) {
 
   useEffect(() => {
     getSidebarPlaylistsAync(dispatch);
-  }, []);
+  }, [dispatch]);
 
   const handleScroll = (e) => {
     const shouldDisplayHeaderBackground =

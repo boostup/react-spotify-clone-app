@@ -1,7 +1,5 @@
 import React from "react";
 
-import { selectAuthUser } from "../../redux/auth/selectors";
-import { selectHeader } from "../../redux/header/selectors";
 import { playItem } from "../../redux/footer/async-actions";
 
 import SearchField from "./SearchField";

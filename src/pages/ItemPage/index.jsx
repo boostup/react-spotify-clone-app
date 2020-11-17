@@ -38,7 +38,10 @@ function ItemPage({
   },
 }) {
   const dispatch = useDispatch();
-  const { user, token } = useSelector(selectAuth);
+  const {
+    // user,
+    token,
+  } = useSelector(selectAuth);
 
   const { item } = useSelector(selectItemPage);
 
