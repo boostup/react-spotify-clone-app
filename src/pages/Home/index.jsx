@@ -3,7 +3,6 @@ import {
   getMyTopTracksAsync,
   getMyRecentTracksAsync,
   getPlaylistsAync,
-  playTrack,
   getMySavedTracksAsync,
 } from "../../state/actions";
 import { useDataLayerValue } from "../../state/DataLayer";
@@ -33,24 +32,24 @@ function Home() {
   return (
     <MainLayoutPageWrapper title={pageTitle}>
       <div className="homePage">
+        {recentTracks && (
+          <>
+            <SectionHeading icon={RecentTracksIcon} title="Recently Played" />
+            <TrackList items={recentTracks} />
+          </>
+        )}
+
         {savedTracks && (
           <>
             <SectionHeading icon={SavedTracksIcon} title="Saved Tracks" />
-            <TrackList items={savedTracks} onPlay={(id) => playTrack(id)} />
+            <TrackList items={savedTracks} />
           </>
         )}
 
         {topTracks && (
           <>
             <SectionHeading icon={TopTracksIcon} title="Your Top Tracks" />
-            <TrackList items={topTracks} onPlay={(id) => playTrack(id)} />
-          </>
-        )}
-
-        {recentTracks && (
-          <>
-            <SectionHeading icon={RecentTracksIcon} title="Recently Played" />
-            <TrackList items={recentTracks} onPlay={(id) => playTrack(id)} />
+            <TrackList items={topTracks} />
           </>
         )}
       </div>

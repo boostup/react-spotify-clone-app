@@ -13,7 +13,7 @@ import Footer from "../../layout/Footer";
 import "./MainLayoutPageWrapper.css";
 import { useHistory } from "react-router-dom";
 import {
-  toggleDisplayPlaylistToolbar,
+  toggleDisplayItemToolbar,
   toggleHeaderScrolled,
 } from "../../state/actions";
 
@@ -28,7 +28,7 @@ function MainLayoutPageWrapper({ title, children }) {
   }
 
   const { state, dispatch } = useDataLayerValue();
-  const { headerScrolled, isPlaylistPage, displayPlaylistToolbar } = state;
+  const { headerScrolled, isItemPage, displayItemToolbar } = state;
 
   const handleScroll = (e) => {
     const shouldDisplayHeaderBackground =
@@ -36,17 +36,17 @@ function MainLayoutPageWrapper({ title, children }) {
     if (headerScrolled !== shouldDisplayHeaderBackground)
       dispatch(toggleHeaderScrolled(shouldDisplayHeaderBackground));
 
-    //PlaylistBanner component height + PlaylistToolbar component height = 473px
+    //ItemBanner component height + ItemToolbar component height = 473px
     const candDisplayPlaylistToolbar =
-      isPlaylistPage && e.target.scrollTop >= 473 ? true : false;
-    if (displayPlaylistToolbar !== candDisplayPlaylistToolbar) {
+      isItemPage && e.target.scrollTop >= 473 ? true : false;
+    if (displayItemToolbar !== candDisplayPlaylistToolbar) {
       console.log(
-        "displayPlaylistToolbar",
-        displayPlaylistToolbar,
+        "displayItemToolbar",
+        displayItemToolbar,
         "candDisplayPlaylistToolbar",
         candDisplayPlaylistToolbar
       );
-      dispatch(toggleDisplayPlaylistToolbar(candDisplayPlaylistToolbar));
+      dispatch(toggleDisplayItemToolbar(candDisplayPlaylistToolbar));
     }
   };
 

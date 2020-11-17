@@ -10,6 +10,7 @@ const {
 const scopes = [
   "streaming",
   "user-library-read",
+  "user-library-modify",
   "user-modify-playback-state",
   "user-read-currently-playing",
   "user-read-email",

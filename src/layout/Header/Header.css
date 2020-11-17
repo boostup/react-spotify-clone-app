@@ -21,11 +21,11 @@
   transition: transform 300ms cubic-bezier(1, 0, 0, 1);
 }
 
-.header__left.showPlToolbar .miniPlaylistToolbar {
+.header__left.showItemToolbar .itemHeaderToolbar {
   width: -webkit-fill-available;
 }
 
-.header__left.hidePlToolbar .miniPlaylistToolbar {
+.header__left.hideItemToolbar .itemHeaderToolbar {
   pointer-events: none;
   user-select: none;
   display: none;

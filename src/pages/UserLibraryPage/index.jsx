@@ -4,9 +4,9 @@ import { useDataLayerValue } from "../../state/DataLayer";
 import { getPlaylistsAync } from "../../state/actions";
 
 import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
-import PlaylistsGrid from "../../components/PlaylistsGrid";
 import PlaylistIcon from "@material-ui/icons/QueueMusic";
 import SectionHeading from "../../components/SectionHeading";
+import ItemsGrid from "../../components/ItemsGrid";
 
 import "./UserLibraryPage.css";
 
@@ -23,7 +23,7 @@ function UserLibraryPage() {
     <MainLayoutPageWrapper title="Your Library">
       <div className="yourLibrary">
         <SectionHeading icon={PlaylistIcon} title="Your Playlists" />
-        <PlaylistsGrid items={items} />
+        <ItemsGrid variant="playlist" items={items} />
       </div>
     </MainLayoutPageWrapper>
   );

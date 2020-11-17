@@ -81,9 +81,50 @@ export function getMySavedTracksAsync(dispatch) {
     });
 }
 
+export function addToMySavedTracks(trackId) {
+  spotifyAPI.addToMySavedTracks({ ids: [trackId] });
+}
+
+export function addToQueue(trackURI) {
+  spotifyAPI.queue(trackURI);
+}
+
+export const setMyRecommendedTracks = (tracks) => ({
+  type: actionTypes.SET_MY_RECOMMENDED_TRACKS,
+  payload: tracks,
+});
+
+export function getRecommendationsAsync(trackId, dispatch) {
+  spotifyAPI
+    .getRecommendations({
+      seed_tracks: trackId,
+      limit: 20,
+    })
+    .then((data) => dispatch(setMyRecommendedTracks(data.tracks)))
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
+export const setMyPlaylistsFeatured = (playlists) => ({
+  type: actionTypes.SET_MY_PLAYLISTS_FEATURED,
+  payload: playlists,
+});
+
+export function getMyPlaylistsFeaturedAsync(dispatch) {
+  spotifyAPI
+    .getFeaturedPlaylists({ limit: 5, locale: navigator.language || "en-US" })
+    .then((data) => {
+      return dispatch(setMyPlaylistsFeatured(data));
+    })
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
 /**
  *
- * USER PLAYLISTS ACTION CREATORS
+ * USER PLAYLISTS ACTION CREATORS & ASYNC ACTIONS
  */
 
 export const setPlaylists = (playlists) => ({
@@ -91,21 +132,46 @@ export const setPlaylists = (playlists) => ({
   payload: playlists,
 });
 
-export const setPlaylist = (playlist) => ({
-  type: actionTypes.SET_PLAYLIST,
-  payload: playlist,
+export const setItem = (item) => ({
+  type: actionTypes.SET_ITEM,
+  payload: item,
 });
-
-/**
- *
- * USER PLAYLISTS ASYNC ACTIONS
- */
 
 export function getPlaylistAsync(id, dispatch) {
   spotifyAPI
     .getPlaylist(id)
     //
-    .then((playlist) => dispatch(setPlaylist(playlist)))
+    .then((playlist) => {
+      dispatch(setItem(playlist));
+    })
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
+export function getAlbumAsync(id, dispatch) {
+  spotifyAPI
+    .getAlbum(id)
+    //
+    .then((album) => {
+      dispatch(setItem(album));
+    })
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
+export const setIsPlaylistFollower = (value) => ({
+  type: actionTypes.SET_PLAYLIST_IS_FOLLOWER,
+  payload: value,
+});
+
+export function isPlaylistFollowedByUser({ playlistId, userId }, dispatch) {
+  spotifyAPI
+    .areFollowingPlaylist(playlistId, [userId])
+    .then((data) => {
+      return dispatch(setIsPlaylistFollower(data[0]));
+    })
     .catch((error) => {
       hydrateSpotifyApi(error, dispatch);
     });
@@ -129,10 +195,6 @@ export function togglefollowPlaylist({ id, follow }) {
     : spotifyAPI.unfollowPlaylist(id);
 }
 
-export function isPlaylistFollowedByUser({ playlistId, userId }) {
-  spotifyAPI.areFollowingPlaylist(playlistId, [userId]);
-}
-
 /**
  *
  * HEADER ACTION CREATORS
@@ -148,25 +210,36 @@ export const toggleDisplaySearchBar = (displayToggle) => ({
   payload: displayToggle,
 });
 
-export const toggleDisplayPlaylistToolbar = (displayToggle) => ({
-  type: actionTypes.SET_PLAYLIST_TOOLBAR_DISPLAY,
+export const toggleDisplayItemToolbar = (displayToggle) => ({
+  type: actionTypes.SET_ITEM_TOOLBAR_DISPLAY,
   payload: displayToggle,
 });
 
-export const toggleIsPlaylistPage = (displayToggle) => ({
-  type: actionTypes.SET_IS_PLAYLIST_PAGE,
+export const toggleIsItemPage = (displayToggle) => ({
+  type: actionTypes.SET_IS_ITEM_PAGE,
   payload: displayToggle,
 });
 
 /**
  *
- * SEARCH ACTION CREATORS
+ * SEARCH ACTION CREATORS && ASYNC ACTIONS
  */
 
 export const setSearchResults = (results) => ({
   type: actionTypes.SET_SEARCH_RESULTS,
   payload: results,
 });
+
+export function searchSpotifyAsync(searchString, dispatch) {
+  spotifyAPI
+    .search(searchString, ["artist", "album", "playlist"])
+    .then((results) => {
+      dispatch(setSearchResults(results));
+    })
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
 
 /**
  *
@@ -201,15 +274,24 @@ export function getMyCurrentPlaybackStateAsync(dispatch) {
  *
  */
 
-export function playPlaylist(id) {
+/**
+ * Plays albums and playlists
+ *
+ * @param {sting} uri
+ */
+export function playItem(uri) {
   spotifyAPI.play({
-    context_uri: `spotify:playlist:${id}`,
+    context_uri: uri,
   });
 }
 
-export function playTrack(id) {
+/**
+ * Only plays tracks
+ * @param {string} uri
+ */
+export function playTrack(uri) {
   spotifyAPI.play({
-    uris: [`spotify:track:${id}`],
+    uris: [uri],
   });
 }
 

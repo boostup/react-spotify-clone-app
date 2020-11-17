@@ -1,0 +1,12 @@
+.heartToggle svg {
+  font-size: 2rem !important;
+  cursor: pointer;
+}
+
+.heartToggle__toggled {
+  color: var(--main-theme-favorite-color-hover);
+}
+
+.heartToggle__untoggled {
+  color: var(--main-theme-color-secondary);
+}
