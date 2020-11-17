@@ -1,16 +1,15 @@
-import { actionTypes } from "../../state/actionTypes";
+import { sidebarActionTypes as actionTypes } from "./types.js";
 
 const initialState = {
-  displaySearchBar: false,
-  headerScrolled: false,
+  sidebarPlaylists: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SET_HEADER_SCROLLED:
+    case actionTypes.SET_SIDEBAR_PLAYLISTS:
       return {
         ...state,
-        headerScrolled: action.payload,
+        sidebarPlaylists: action.payload,
       };
 
     default:

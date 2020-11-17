@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { spotifyAPI } from "../../libs/spotify";
 
 import { getUser, getToken, getTokenExpiry } from "../../utils/localStorage";
-import { useDataLayerValue } from "../../state/DataLayer";
 
 import LoginPage from "../../pages/LoginPage";
 import { setToken, setTokenExpiry, setUser } from "../../state/actions";
 
 const LoggedInOrNot = () => {
-  const { state, dispatch } = useDataLayerValue();
+  const dispatch = useDispatch();
+
   const lsUser = getUser();
 
   useEffect(() => {

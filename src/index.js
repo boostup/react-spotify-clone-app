@@ -3,8 +3,6 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
-// import { DataLayer } from "./state/DataLayer";
-// import reducer, { initialState } from "./state/reducers";
 
 import AppRouter from "./router/AppRouter";
 
@@ -12,11 +10,9 @@ import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <DataLayer initialState={initialState} reducer={reducer}> */}
     <Provider store={store}>
       <AppRouter />
     </Provider>
-    {/* </DataLayer> */}
   </React.StrictMode>,
   document.getElementById("root")
 );
