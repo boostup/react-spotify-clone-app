@@ -1,7 +1,7 @@
 import { sidebarActionTypes as actionTypes } from "./types.js";
 
 const initialState = {
-  sidebarPlaylists: [],
+  sidebarPlaylists: null,
 };
 
 const reducer = (state = initialState, action) => {

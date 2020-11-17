@@ -47,7 +47,7 @@ function MainLayoutPageWrapper({ title, dispatch, useSelector, children }) {
   const itemURI = item?.uri;
 
   useEffect(() => {
-    getSidebarPlaylistsAync(dispatch);
+    !sidebarPlaylists && getSidebarPlaylistsAync(dispatch);
   }, [dispatch]);
 
   const handleScroll = (e) => {
