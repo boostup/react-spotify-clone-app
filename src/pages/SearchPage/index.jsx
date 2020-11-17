@@ -1,19 +1,21 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
-import { useDataLayerValue } from "../../state/DataLayer";
+import { toggleDisplaySearchBar } from "../../redux/header/actions";
+import { selectSearchPageSearchResults } from "../../redux/search-page/selectors";
 
-import "./SearchPage.css";
-import { toggleDisplaySearchBar } from "../../state/actions";
+import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
 import SectionHeading from "../../components/SectionHeading";
 import PlaylistIcon from "@material-ui/icons/QueueMusic";
 import ArtistIcon from "@material-ui/icons/RecordVoiceOver";
 import AlbumIcon from "@material-ui/icons/Album";
 import ItemsGrid from "../../components/ItemsGrid";
 
+import "./SearchPage.css";
+
 function SearchPage() {
-  const { state, dispatch } = useDataLayerValue();
-  const { searchResults } = state;
+  const dispatch = useDispatch();
+  const searchResults = useSelector(selectSearchPageSearchResults);
   const artists = searchResults?.artists?.items;
   const albums = searchResults?.albums?.items;
   const playlists = searchResults?.playlists?.items;
@@ -29,7 +31,11 @@ function SearchPage() {
   }, [dispatch]);
 
   return (
-    <MainLayoutPageWrapper title="Your Library">
+    <MainLayoutPageWrapper
+      //
+      title="Your Library"
+      {...{ dispatch, useSelector }}
+    >
       <div className="searchPage">
         {!searchResults && <h1>Search millions of tracks...</h1>}
 

@@ -1,5 +1,5 @@
 import React from "react";
-import Artists from "../../Artists";
+import Artists from "../../../../components/Artists";
 
 function TrackPanel({ shouldDisplay, image, title, artists, album }) {
   return (
@@ -7,12 +7,12 @@ function TrackPanel({ shouldDisplay, image, title, artists, album }) {
       {shouldDisplay ? (
         <>
           <img
-            className="spotifyAudioPlayer__albumLogo"
+            className="spotifyRemoteControl__albumLogo"
             src={image}
             alt={`${title} - ${album}`}
             title={`${title} - ${album}`}
           />
-          <div className="spotifyAudioPlayer__songInfo">
+          <div className="spotifyRemoteControl__songInfo">
             <h4>{title}</h4>
             <Artists items={artists} />
           </div>

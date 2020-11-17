@@ -1,21 +1,24 @@
 import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { spotifyAPI } from "../../libs/spotify";
 
 import { getUser, getToken, getTokenExpiry } from "../../utils/localStorage";
-import { useDataLayerValue } from "../../state/DataLayer";
 
 import LoginPage from "../../pages/LoginPage";
-import { setToken, setTokenExpiry, setUser } from "../../state/actions";
+
+import { selectAuth } from "../../redux/auth/selectors";
+import { setToken, setTokenExpiry, setUser } from "../../redux/auth/actions";
 
 const LoggedInOrNot = () => {
-  const { state, dispatch } = useDataLayerValue();
+  const dispatch = useDispatch();
+  const auth = useSelector(selectAuth);
   const lsUser = getUser();
 
   useEffect(() => {
     const lsToken = getToken();
-    const { token } = state;
-    const { user } = state;
+    const { user, token } = auth;
 
     //This is to avoid unnecessary value changes
     if (user && token) return;
@@ -27,7 +30,7 @@ const LoggedInOrNot = () => {
     }
 
     lsUser && dispatch(setUser(lsUser));
-  }, [lsUser, state, dispatch]);
+  }, [lsUser, auth, dispatch]);
 
   return lsUser ? (
     //

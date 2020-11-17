@@ -2,16 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 
 import SearchIcon from "@material-ui/icons/Search";
 
-import useDebounce from "../../../hooks/useDebounce";
-import { useDataLayerValue } from "../../../state/DataLayer";
-import { searchSpotifyAsync } from "../../../state/actions";
+import useDebounce from "../../../utils/useDebounce";
+
+import { searchSpotifyAsync } from "../../../redux/search-page/async-actions";
 
 import "./SearchField.css";
 
-function SearchField() {
+function SearchField({ dispatch, displaySearchBar }) {
   const searchInputRef = useRef(null);
-  const { state, dispatch } = useDataLayerValue();
-  const { displaySearchBar } = state;
 
   useEffect(() => {
     if (displaySearchBar) searchInputRef.current.focus();

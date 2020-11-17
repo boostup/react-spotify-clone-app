@@ -64,32 +64,32 @@ function CentralPanel({
     <>
       <Shuffle
         onClick={_onShuffleClicked}
-        className={`spotifyAudioPlayer__icon ${
-          _shuffle ? "spotifyAudioPlayer__green" : null
+        className={`spotifyRemoteControl__icon ${
+          _shuffle ? "spotifyRemoteControl__green" : null
         }`}
       />
       <SkipPrevious
         onClick={onSkipPrevious}
-        className="spotifyAudioPlayer__icon"
+        className="spotifyRemoteControl__icon"
       />
 
       {_isPlaying ? (
         <PauseCircleOutlineOutlined
           onClick={_onPlayPauseClicked}
-          className="spotifyAudioPlayer__icon large"
+          className="spotifyRemoteControl__icon large"
         />
       ) : (
         <PlayCircleOutline
           onClick={_onPlayPauseClicked}
-          className="spotifyAudioPlayer__icon large"
+          className="spotifyRemoteControl__icon large"
         />
       )}
 
-      <SkipNext onClick={onSkipNext} className="spotifyAudioPlayer__icon" />
+      <SkipNext onClick={onSkipNext} className="spotifyRemoteControl__icon" />
       <Repeat
         onClick={_onRepeatClicked}
-        className={`spotifyAudioPlayer__icon ${
-          _repeat === REPEAT_STATUS.track ? "spotifyAudioPlayer__green" : null
+        className={`spotifyRemoteControl__icon ${
+          _repeat === REPEAT_STATUS.track ? "spotifyRemoteControl__green" : null
         }`}
       />
     </>

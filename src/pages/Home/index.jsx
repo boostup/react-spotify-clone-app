@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   getMyTopTracksAsync,
   getMyRecentTracksAsync,
-  getPlaylistsAync,
   getMySavedTracksAsync,
-} from "../../state/actions";
-import { useDataLayerValue } from "../../state/DataLayer";
+} from "../../redux/home-page/async-actions";
 
-import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
+import { selectHomePage } from "../../redux/home-page/selectors";
+import { selectAuthToken } from "../../redux/auth/selectors";
+
+import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
 import TrackList from "../../components/TrackList";
 import SectionHeading from "../../components/SectionHeading";
 
@@ -18,19 +21,23 @@ import RecentTracksIcon from "@material-ui/icons/TrendingUp";
 import "./Home.css";
 
 function Home() {
-  const pageTitle = "Home";
-  const { state, dispatch } = useDataLayerValue();
-  const { savedTracks, topTracks, recentTracks, token } = state;
+  const dispatch = useDispatch();
+  const homePageState = useSelector(selectHomePage);
+  const token = useSelector(selectAuthToken);
+  const { savedTracks, topTracks, recentTracks } = homePageState;
 
   useEffect(() => {
-    getPlaylistsAync(dispatch);
     getMySavedTracksAsync(dispatch);
     getMyTopTracksAsync(dispatch);
     getMyRecentTracksAsync(dispatch);
   }, [dispatch, token]);
 
   return (
-    <MainLayoutPageWrapper title={pageTitle}>
+    <MainLayoutPageWrapper
+      //
+      title="Home"
+      {...{ dispatch, useSelector }}
+    >
       <div className="homePage">
         {recentTracks && (
           <>

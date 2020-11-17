@@ -1,23 +1,23 @@
-.spotifyAudioPlayer {
+.spotifyRemoteControl {
   display: flex;
   justify-content: space-between;
 }
 
-.spotifyAudioPlayer__left {
+.spotifyRemoteControl__left {
   flex: 0.3;
   display: flex;
   align-items: center;
   max-width: 300px;
 }
 
-.spotifyAudioPlayer__albumLogo {
+.spotifyRemoteControl__albumLogo {
   height: 60px;
   width: 60px;
   margin-right: 1rem;
   object-fit: contain;
 }
 
-.spotifyAudioPlayer__center {
+.spotifyRemoteControl__center {
   flex: 0.4;
   padding: 0 100px;
   display: flex;
@@ -26,25 +26,25 @@
   max-width: 620px;
 }
 
-.spotifyAudioPlayer__icon.MuiSvgIcon-root {
+.spotifyRemoteControl__icon.MuiSvgIcon-root {
   font-size: 3rem;
   cursor: pointer;
 }
 
-.spotifyAudioPlayer__icon.large {
+.spotifyRemoteControl__icon.large {
   font-size: 6rem;
 }
 
-.spotifyAudioPlayer__green {
+.spotifyRemoteControl__green {
   color: var(--main-theme-color-secondary);
 }
 
-.spotifyAudioPlayer__songInfo > h4 {
+.spotifyRemoteControl__songInfo > h4 {
   margin-bottom: 0.5rem;
 }
 
-.spotifyAudioPlayer__icon:hover,
-.spotifyAudioPlayer__green:hover {
+.spotifyRemoteControl__icon:hover,
+.spotifyRemoteControl__green:hover {
   color: var(--main-theme-color-secondary-hover);
   transition: all 0.4s ease-in-out;
   transition-property: transform, color;
@@ -55,8 +55,8 @@
 * On touch device, these icons would stay on their hover state after being touched, which ends up confusing from a UX standpoint, so unsetting everthing to make sure this does not happen.
 */
 @media (hover: none) {
-  .spotifyAudioPlayer__icon:hover,
-  .spotifyAudioPlayer__green:hover {
+  .spotifyRemoteControl__icon:hover,
+  .spotifyRemoteControl__green:hover {
     color: unset;
     transition: unset;
     transition-property: unset;
@@ -64,19 +64,19 @@
   }
 }
 
-.spotifyAudioPlayer__right {
+.spotifyRemoteControl__right {
   flex: 0.3;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.MuiSlider-root.spotifyAudioPlayer__slider.spotifyAudioPlayer__enabled {
+.MuiSlider-root.spotifyRemoteControl__slider.spotifyRemoteControl__enabled {
   color: var(--main-theme-color-secondary);
   width: 70%;
 }
 
-.MuiSlider-root.spotifyAudioPlayer__slider.spotifyAudioPlayer__disabled {
+.MuiSlider-root.spotifyRemoteControl__slider.spotifyRemoteControl__disabled {
   color: var(--main-interactive-text-color);
   width: 70%;
 }

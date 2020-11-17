@@ -1,17 +1,24 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useDataLayerValue } from "../../state/DataLayer";
+import { selectAuth } from "../../redux/auth/selectors";
+import { selectItemPage } from "../../redux/item-page/selectors";
+
+import {
+  toggleDisplayItemToolbar,
+  // isPlaylistFollowedByUser,
+} from "../../redux/header/actions";
+
+import { toggleIsItemPage } from "../../redux/item-page/actions";
+
 import {
   getAlbumAsync,
   getPlaylistAsync,
-  playItem,
-  toggleIsItemPage,
-  toggleDisplayItemToolbar,
-  addToQueue,
-  // isPlaylistFollowedByUser,
-} from "../../state/actions";
+} from "../../redux/item-page/async-actions";
 
-import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
+import { addToQueue, playItem } from "../../redux/footer/async-actions";
+
+import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
 import ItemBanner from "../../components/ItemBanner";
 import ItemToolbar from "../../components/ItemToolbar";
 import TrackList from "../../components/TrackList";
@@ -30,12 +37,13 @@ function ItemPage({
     params: { id, variant },
   },
 }) {
-  const { state, dispatch } = useDataLayerValue();
+  const dispatch = useDispatch();
   const {
     // user,
     token,
-    item,
-  } = state;
+  } = useSelector(selectAuth);
+
+  const { item } = useSelector(selectItemPage);
 
   const pageTitle = item?.name;
 
@@ -66,7 +74,11 @@ function ItemPage({
   }, [id, variant, dispatch, token]);
 
   return (
-    <MainLayoutPageWrapper title={pageTitle}>
+    <MainLayoutPageWrapper
+      //
+      title={pageTitle}
+      {...{ dispatch, useSelector }}
+    >
       <div className="itemPage">
         <ItemBanner item={item} variant={variant} tracks={tracks} />
 

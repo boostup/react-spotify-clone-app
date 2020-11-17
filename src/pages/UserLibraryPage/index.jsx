@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { useDataLayerValue } from "../../state/DataLayer";
-import { getPlaylistsAync } from "../../state/actions";
+import { selectAuthToken } from "../../redux/auth/selectors";
+import { selectUserLibraryPagePlaylists } from "../../redux/user-library-page/selectors";
+import { getMyPlaylistsAync } from "../../redux/user-library-page/async-actions";
 
-import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
+import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
 import PlaylistIcon from "@material-ui/icons/QueueMusic";
 import SectionHeading from "../../components/SectionHeading";
 import ItemsGrid from "../../components/ItemsGrid";
@@ -11,16 +13,23 @@ import ItemsGrid from "../../components/ItemsGrid";
 import "./UserLibraryPage.css";
 
 function UserLibraryPage() {
-  const { state, dispatch } = useDataLayerValue();
-  const { playlists, token } = state;
+  const dispatch = useDispatch();
+
+  const { token } = useSelector(selectAuthToken);
+  const playlists = useSelector(selectUserLibraryPagePlaylists);
+
   const { items } = playlists;
 
   useEffect(() => {
-    getPlaylistsAync(dispatch);
+    getMyPlaylistsAync(dispatch);
   }, [dispatch, token]);
 
   return (
-    <MainLayoutPageWrapper title="Your Library">
+    <MainLayoutPageWrapper
+      //
+      title="Your Library"
+      {...{ dispatch, useSelector }}
+    >
       <div className="yourLibrary">
         <SectionHeading icon={PlaylistIcon} title="Your Playlists" />
         <ItemsGrid variant="playlist" items={items} />

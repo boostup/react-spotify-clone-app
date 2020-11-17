@@ -1,20 +1,19 @@
 import React from "react";
 
-import { DEVICE_NAME, useSpotifyWebPlaybackSDK } from "../../libs/spotify";
-import { getToken } from "../../utils/localStorage";
+import { DEVICE_NAME, useSpotifyWebPlaybackSDK } from "../../../libs/spotify";
+import { getToken } from "../../../utils/localStorage";
 
-import { useDataLayerValue } from "../../state/DataLayer";
-import * as actions from "../../state/actions";
+import { selectFooterCurrentPlaybackState } from "../../../redux/footer/selectors";
+import * as actions from "../../../redux/footer/async-actions";
 
-import "./SpotifyAudioPlayer.css";
+import "./SpotifyRemoteControl.css";
 
 import TrackPanel from "./TrackPanel";
 import CentralPanel from "./CentralPanel";
 import RightPanel from "./RightPanel";
 
-function SpotifyAudioPlayer() {
-  const { state, dispatch } = useDataLayerValue();
-  const { currentplaybackState } = state;
+function SpotifyAudioPlayer({ dispatch, useSelector }) {
+  const currentplaybackState = useSelector(selectFooterCurrentPlaybackState);
 
   useSpotifyWebPlaybackSDK({
     deviceName: DEVICE_NAME,
@@ -31,8 +30,8 @@ function SpotifyAudioPlayer() {
   const artists = currentplaybackState?.item.artists;
 
   return (
-    <div className="spotifyAudioPlayer">
-      <div className="spotifyAudioPlayer__left">
+    <div className="spotifyRemoteControl">
+      <div className="spotifyRemoteControl__left">
         <TrackPanel
           shouldDisplay={currentplaybackState?.item}
           image={albumImage}
@@ -42,7 +41,7 @@ function SpotifyAudioPlayer() {
         />
       </div>
 
-      <div className="spotifyAudioPlayer__center">
+      <div className="spotifyRemoteControl__center">
         <CentralPanel
           isPlaying={currentplaybackState?.is_playing}
           shuffle={currentplaybackState?.shuffle_state}
@@ -61,7 +60,7 @@ function SpotifyAudioPlayer() {
         />
       </div>
 
-      <div className="spotifyAudioPlayer__right">
+      <div className="spotifyRemoteControl__right">
         <RightPanel
           isPlaying={currentplaybackState?.is_playing}
           onMuteChange={(_value) => actions.setVolume(_value)}

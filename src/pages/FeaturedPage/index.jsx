@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import RadioIcon from "@material-ui/icons/Radio";
 
+import { selectAuthToken } from "../../redux/auth/selectors";
+import { selectFeaturedPage } from "../../redux/featured-page/selectors";
 import {
   getMyPlaylistsFeaturedAsync,
   getRecommendationsAsync,
-} from "../../state/actions";
-import { useDataLayerValue } from "../../state/DataLayer";
+} from "../../redux/featured-page/async-actions";
 
 import SectionHeading from "../../components/SectionHeading";
-import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
+import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
 import TrackList from "../../components/TrackList";
 import ItemsGrid from "../../components/ItemsGrid";
 
@@ -18,8 +20,12 @@ function FeaturedPage({
     params: { trackId, trackName },
   },
 }) {
-  const { state, dispatch } = useDataLayerValue();
-  const { token, recommendedTracks, playlistsFeatured } = state;
+  const dispatch = useDispatch();
+
+  const { token } = useSelector(selectAuthToken);
+  const { recommendedTracks, playlistsFeatured } = useSelector(
+    selectFeaturedPage
+  );
 
   useEffect(() => {
     // 1) get seed track title based on match.params.id
@@ -30,7 +36,11 @@ function FeaturedPage({
   }, [dispatch, trackId, token]);
 
   return (
-    <MainLayoutPageWrapper title="Radio + Featured Playlists">
+    <MainLayoutPageWrapper
+      //
+      title="Radio + Featured Playlists"
+      {...{ dispatch, useSelector }}
+    >
       <div className="featuredPage">
         {recommendedTracks && (
           <>
