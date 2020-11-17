@@ -1,4 +1,4 @@
-import { userLibraryActionTypes as actionTypes } from "./types.js";
+import { userLibraryPageActionTypes as actionTypes } from "./types.js";
 
 const initialState = {
   myPlaylists: [],

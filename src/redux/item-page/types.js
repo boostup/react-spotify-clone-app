@@ -1,4 +1,4 @@
-export const itemActionTypes = {
+export const itemPageActionTypes = {
   /**
    * ITEM PAGE
    */

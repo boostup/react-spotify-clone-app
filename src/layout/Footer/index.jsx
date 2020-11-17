@@ -1,12 +1,12 @@
 import React from "react";
 
 import "./Footer.css";
-import SpotifyAudioPlayer from "../../components/SpotifyAudioPlayer";
+import SpotifyRemoteControl from "./SpotifyRemoteControl";
 
-function Footer(props) {
+function Footer({ className, dispatch, useSelector }) {
   return (
-    <div {...props}>
-      <SpotifyAudioPlayer />
+    <div className={className}>
+      <SpotifyRemoteControl {...{ dispatch, useSelector }} />
     </div>
   );
 }

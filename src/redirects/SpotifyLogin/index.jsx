@@ -1,15 +1,16 @@
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import { getHashFromResponse } from "../../utils/http";
 import { spotifyAPI } from "../../libs/spotify";
 import * as ls from "../../utils/localStorage";
 import { addMsToNow } from "../../utils/time";
 
-import { useDataLayerValue } from "../../state/DataLayer";
-import * as actions from "../../state/actions";
+import * as actions from "../../redux/auth/actions";
+import { getMeAsync } from "../../redux/auth/async-actions";
 
 const SpotifyLogin = ({ history }) => {
-  const { dispatch } = useDataLayerValue();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const hash = getHashFromResponse(window.location.hash);
@@ -30,7 +31,7 @@ const SpotifyLogin = ({ history }) => {
       dispatch(actions.setTokenExpiry(expiryTime));
       ls.setTokenExpiry(expiryTime);
 
-      actions.getMeAsync(dispatch).then((user) => {
+      getMeAsync(dispatch).then((user) => {
         ls.setUser(user);
         history.push("/");
       });

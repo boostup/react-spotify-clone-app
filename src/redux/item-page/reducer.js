@@ -1,11 +1,11 @@
-import { itemActionTypes as actionTypes } from "./types";
+import { itemPageActionTypes as actionTypes } from "./types";
 
 export const initialState = {
   isItemPage: false,
   item: null, //an object that holds either an album or playlist information, used in the `ItemPage` as variant objects
 };
 
-const reducer = (state, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_IS_ITEM_PAGE:
       return {

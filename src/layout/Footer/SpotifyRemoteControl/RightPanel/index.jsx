@@ -42,26 +42,26 @@ function RightArea({ isPlaying, volume, onMuteChange, onVolumeChange }) {
       {_muteButtonStatus === MUTE_STATUS.loud ? (
         <VolumeUp
           onClick={_onMuteClicked}
-          className="spotifyAudioPlayer__icon"
+          className="spotifyRemoteControl__icon"
         />
       ) : null}
       {_muteButtonStatus === MUTE_STATUS.standard ? (
         <VolumeDown
           onClick={_onMuteClicked}
-          className="spotifyAudioPlayer__icon"
+          className="spotifyRemoteControl__icon"
         />
       ) : null}
       {_muteButtonStatus === MUTE_STATUS.off ? (
         <VolumeMute
           onClick={_onMuteClicked}
-          className="spotifyAudioPlayer__icon"
+          className="spotifyRemoteControl__icon"
         />
       ) : null}
       <Slider
-        className={`spotifyAudioPlayer__slider ${
+        className={`spotifyRemoteControl__slider ${
           isPlaying
-            ? "spotifyAudioPlayer__enabled"
-            : "spotifyAudioPlayer__disabled"
+            ? "spotifyRemoteControl__enabled"
+            : "spotifyRemoteControl__disabled"
         }`}
         onChange={_onVolumeSliderChange}
         min={0}

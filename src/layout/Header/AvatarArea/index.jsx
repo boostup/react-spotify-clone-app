@@ -6,7 +6,7 @@ import ContextualMenu from "../../../components/ContextualMenu";
 
 import "./AvatarArea.css";
 
-function AvatarArea({ user }) {
+function AvatarArea({ userAvatar, userName }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -20,8 +20,8 @@ function AvatarArea({ user }) {
   return (
     <div className="avatarArea">
       <div className="avatarArea__clicker" onClick={handleClick}>
-        <Avatar src={user?.images[0]?.url} alt={user?.display_name} />
-        <h4>{user?.display_name}</h4>
+        <Avatar src={userAvatar} alt={userName} />
+        <h4>{userName}</h4>
       </div>
       <ContextualMenu
         menuId="avatar-menu"

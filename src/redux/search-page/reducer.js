@@ -1,7 +1,7 @@
 import { searchPageActionTypes as actionTypes } from "./types.js";
 
 const initialState = {
-  searchResults: [],
+  searchResults: null,
 };
 
 const reducer = (state = initialState, action) => {

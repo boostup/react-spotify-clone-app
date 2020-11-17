@@ -1,6 +1,6 @@
 /**
  * USER LIBRARY PAGE
  */
-export const userLibraryActionTypes = {
+export const userLibraryPageActionTypes = {
   SET_MY_PLAYLISTS: "SET_MY_PLAYLISTS",
 };

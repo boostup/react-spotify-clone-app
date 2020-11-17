@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import * as ls from "../../utils/localStorage";
-import { useDataLayerValue } from "../../state/DataLayer";
-import * as actions from "../../state/actions";
+import * as actions from "../../redux/auth/actions";
 
 function SpotifyLogout({ history }) {
   const { state } = useLocation();
-  const { dispatch } = useDataLayerValue();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(actions.setToken(null));
