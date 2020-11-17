@@ -8,6 +8,7 @@ import QueueIcon from "@material-ui/icons/Queue";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import RadioIcon from "@material-ui/icons/Radio";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import ShareIcon from "@material-ui/icons/Share";
 
 import Artists from "../Artists";
 import Duration from "../Duration";
@@ -37,22 +38,27 @@ function TrackRow({ order, track, large = true, onPlay }) {
       onClick={() => onPlay(track.uri)}
     >
       <span className="trackRow__order">{order}</span>
-      <ImageFader
-        containerClass="trackRow__album"
-        src={track?.album.images[large ? 0 : 1].url}
-      />
+
+      {track?.album && (
+        <ImageFader
+          containerClass="trackRow__album"
+          src={track?.album.images[large ? 0 : 1].url}
+        />
+      )}
+
       <div className="trackRow__info">
         <span className="trackRow__info__duration">
-          <Duration ms={track.duration_ms} />
+          <Duration ms={track?.duration_ms} />
         </span>{" "}
-        <h1>{track.name}</h1>
+        <h1>{track?.name}</h1>
         <p>
           {track.explicit && (
             <span title="Explicit" className="trackRow__explicit">
               e
             </span>
           )}
-          <Artists items={track.artists} /> • {track.album.name}
+          {track?.artists && <Artists items={track.artists} />}
+          {track?.album && <> • {track.album.name}</>}
         </p>
       </div>
 
@@ -75,6 +81,11 @@ function TrackRow({ order, track, large = true, onPlay }) {
             fn: () => addToMySavedTracks(track.id),
           },
           {
+            icon: PlaylistAddIcon,
+            title: "add to playlist... (in construction)",
+            fn: () => {},
+          },
+          {
             icon: QueueIcon,
             title: "add to queue",
             fn: () => addToQueue(track.uri),
@@ -88,8 +99,8 @@ function TrackRow({ order, track, large = true, onPlay }) {
               ),
           },
           {
-            icon: PlaylistAddIcon,
-            title: "add to playlist... (in construction)",
+            icon: ShareIcon,
+            title: "copy link (in construction)",
             fn: () => {},
           },
         ]}

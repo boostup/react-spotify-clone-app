@@ -132,16 +132,30 @@ export const setPlaylists = (playlists) => ({
   payload: playlists,
 });
 
-export const setPlaylist = (playlist) => ({
-  type: actionTypes.SET_PLAYLIST,
-  payload: playlist,
+export const setItem = (item) => ({
+  type: actionTypes.SET_ITEM,
+  payload: item,
 });
 
 export function getPlaylistAsync(id, dispatch) {
   spotifyAPI
     .getPlaylist(id)
     //
-    .then((playlist) => dispatch(setPlaylist(playlist)))
+    .then((playlist) => {
+      dispatch(setItem(playlist));
+    })
+    .catch((error) => {
+      hydrateSpotifyApi(error, dispatch);
+    });
+}
+
+export function getAlbumAsync(id, dispatch) {
+  spotifyAPI
+    .getAlbum(id)
+    //
+    .then((album) => {
+      dispatch(setItem(album));
+    })
     .catch((error) => {
       hydrateSpotifyApi(error, dispatch);
     });
@@ -196,13 +210,13 @@ export const toggleDisplaySearchBar = (displayToggle) => ({
   payload: displayToggle,
 });
 
-export const toggleDisplayPlaylistToolbar = (displayToggle) => ({
-  type: actionTypes.SET_PLAYLIST_TOOLBAR_DISPLAY,
+export const toggleDisplayItemToolbar = (displayToggle) => ({
+  type: actionTypes.SET_ITEM_TOOLBAR_DISPLAY,
   payload: displayToggle,
 });
 
-export const toggleIsPlaylistPage = (displayToggle) => ({
-  type: actionTypes.SET_IS_PLAYLIST_PAGE,
+export const toggleIsItemPage = (displayToggle) => ({
+  type: actionTypes.SET_IS_ITEM_PAGE,
   payload: displayToggle,
 });
 

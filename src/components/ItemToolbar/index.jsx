@@ -8,12 +8,12 @@ import QueueIcon from "@material-ui/icons/Queue";
 import ContextualMenu from "../ContextualMenu";
 import HeartToggle from "../HeartToggle";
 
-import "./PlaylistToolbar.css";
+import "./ItemToolbar.css";
 
-function PlaylistToolbar({
+function ItemToolbar({
   // isOwner,
   // isPlaylistFollower,
-  // toggleFollowPlayist,
+  // toggleFollowPlaylist,
   onQueue,
   onPlay,
 }) {
@@ -36,13 +36,10 @@ function PlaylistToolbar({
   };
 
   return (
-    <div className="playlistToolbar">
-      <PlayCircleFilledIcon
-        onClick={onPlay}
-        className="playlistToolbar__shuffle"
-      />
+    <div className="itemToolbar">
+      <PlayCircleFilledIcon onClick={onPlay} className="itemToolbar__shuffle" />
 
-      {/* <FavoriteIcon className="playlistToolbar__favorite" fontSize="large" /> */}
+      {/* <FavoriteIcon className="itemToolbar__favorite" fontSize="large" /> */}
 
       {
         // !isOwner &&
@@ -52,9 +49,9 @@ function PlaylistToolbar({
         />
       }
 
-      <MoreHorizIcon className="playlistToolbar__more" onClick={handleClick} />
+      <MoreHorizIcon className="itemToolbar__more" onClick={handleClick} />
       <ContextualMenu
-        menuId="playlist-toolbar-menu"
+        menuId="item-toolbar-menu"
         menuOptions={menuOptions}
         anchorEl={anchorEl}
         onClose={handleClose}
@@ -63,4 +60,4 @@ function PlaylistToolbar({
   );
 }
 
-export default PlaylistToolbar;
+export default ItemToolbar;

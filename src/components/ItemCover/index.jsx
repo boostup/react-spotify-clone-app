@@ -7,6 +7,15 @@ import { ReactComponent as ArtistPlaceholderImage } from "../../assets/artist.pl
 
 import "./ItemCover.css";
 
+/**
+ * Is understood by Item :
+ *  Album, Artist or Playlist
+ *
+ * The values for `variant` are :
+ *   "album", "artist", "playlist"
+ *
+ * Same applies for ItemsGrid, ItemBanner, TrackList
+ */
 function ItemCover({ item, displayPlayButton, onGoTo, onPlay }) {
   const { images, name, owner, artists } = item;
 
@@ -30,9 +39,7 @@ function ItemCover({ item, displayPlayButton, onGoTo, onPlay }) {
         {image ? (
           <ImageFader src={image} alt={name} />
         ) : (
-          // Artists are the only items for which no image is guaranteed
-          // so it is safe not to check that the item is indeed an artist
-          // if `image` is `null`
+          // Artists are the only items for which no image is guaranteed => if `image` is `null`, it is an artist
           <ArtistPlaceholderImage title={name} />
         )}
       </div>

@@ -6,6 +6,13 @@ import ItemCover from "../ItemCover";
 
 import "./ItemsGrid.css";
 
+/**
+ *
+ * This grid can display an array of one of the following  items (called variants) :
+ *
+ * Artist, Album, or Playlists
+ *
+ */
 function ItemsGrid({ items, variant }) {
   const history = useHistory();
 
