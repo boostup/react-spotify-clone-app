@@ -1,7 +1,7 @@
 h1.sectionHeading {
   display: flex;
   align-items: center;
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 .sectionHeading .sectionHeading__icon {

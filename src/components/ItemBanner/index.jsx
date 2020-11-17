@@ -8,7 +8,7 @@ import "./ItemBanner.css";
 function ItemBanner({ item, variant, tracks }) {
   const trackCount = tracks.length;
   const totalPlayTime = tracks.reduce(
-    (total, track) => total + track.duration_ms,
+    (total, track) => total + track?.duration_ms,
     0
   );
 
