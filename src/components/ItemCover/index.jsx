@@ -1,25 +1,40 @@
 import React from "react";
 import PlayIcon from "@material-ui/icons/PlayCircleFilledSharp";
+
 import Artists from "../Artists";
+import ImageFader from "../ImageFader";
+import { ReactComponent as ArtistPlaceholderImage } from "../../assets/artist.placeholder.svg";
 
 import "./ItemCover.css";
 
-function ItemCover({ item, onGoTo, onPlay }) {
+function ItemCover({ item, displayPlayButton, onGoTo, onPlay }) {
   const { images, name, owner, artists } = item;
+
+  const image = images ? images[0]?.url : "";
 
   return (
     <div className="itemCover" onClick={onGoTo}>
       <div className="itemCover__cover">
-        <button
-          className="itemCover__play"
-          onClick={(event) => {
-            onPlay();
-            event.stopPropagation();
-          }}
-        >
-          <PlayIcon />
-        </button>
-        <img src={images[0]?.url} alt="spotify playlist cover" />
+        {displayPlayButton && (
+          <button
+            className="itemCover__play"
+            onClick={(event) => {
+              onPlay();
+              event.stopPropagation();
+            }}
+          >
+            <PlayIcon />
+          </button>
+        )}
+
+        {image ? (
+          <ImageFader src={image} alt={name} />
+        ) : (
+          // Artists are the only items for which no image is guaranteed
+          // so it is safe not to check that the item is indeed an artist
+          // if `image` is `null`
+          <ArtistPlaceholderImage title={name} />
+        )}
       </div>
       <div className="itemCover__name">{name}</div>
 

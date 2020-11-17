@@ -3,8 +3,7 @@ import React, { useEffect } from "react";
 import { useDataLayerValue } from "../../state/DataLayer";
 import {
   getPlaylistAsync,
-  playPlaylist,
-  playTrack,
+  playItem,
   toggleIsPlaylistPage,
   toggleDisplayPlaylistToolbar,
   addToQueue,
@@ -63,13 +62,9 @@ function PlaylistPage({
           // isPlaylistFollower={}
           // toggleFollowPlayist={}
           onQueue={() => addToQueue(tracks[0].uri)}
-          onPlay={() => playPlaylist(playlist.id)}
+          onPlay={() => playItem(playlist.uri)}
         />
-        <TrackList
-          firstLarge={false}
-          items={tracks}
-          onPlay={(id) => playTrack(id)}
-        />
+        <TrackList firstLarge={false} items={tracks} />
       </div>
     </MainLayoutPageWrapper>
   );

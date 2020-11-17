@@ -1,6 +1,8 @@
 import React, { memo } from "react";
 import uuid from "uuid";
 
+import { playTrack } from "../../state/actions";
+
 import TrackRow from "../TrackRow";
 
 import "./TrackList.css";
@@ -14,7 +16,9 @@ function TrackList({ items, onPlay, firstLarge = true }) {
           <TrackRow
             large={firstLarge && i === 0 ? true : false}
             //
-            onPlay={onPlay}
+            onPlay={(uri) => {
+              playTrack(uri);
+            }}
             order={i + 1}
             key={uuid()}
             track={track}

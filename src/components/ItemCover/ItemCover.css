@@ -25,6 +25,17 @@
   width: 100%;
 }
 
+.artist .itemCover img {
+  height: 130px;
+  width: 130px;
+  border-radius: 100%;
+}
+
+.artist .itemCover svg {
+  height: 150px;
+  width: 150px;
+}
+
 .itemCover__play {
   position: absolute;
   opacity: 0;

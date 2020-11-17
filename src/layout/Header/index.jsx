@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useDataLayerValue } from "../../state/DataLayer";
-import { playPlaylist } from "../../state/actions";
+import { playItem } from "../../state/actions";
 
 import SearchField from "./SearchField";
 import MiniPlaylistToolBar from "./MiniPlaylistToolBar";
@@ -36,7 +36,7 @@ function Header(props) {
         <SearchField />
         <MiniPlaylistToolBar
           title={playlist?.name}
-          onPlay={() => playPlaylist(playlist?.id)}
+          onPlay={() => playItem(playlist?.uri)}
         />
       </div>
       <div className="header__right">

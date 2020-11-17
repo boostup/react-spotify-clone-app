@@ -34,7 +34,7 @@ function TrackRow({ order, track, large = true, onPlay }) {
   return (
     <div
       className={`trackRow ${large ? "large" : ""}`}
-      onClick={() => onPlay(track.id)}
+      onClick={() => onPlay(track.uri)}
     >
       <span className="trackRow__order">{order}</span>
       <ImageFader

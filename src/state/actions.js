@@ -260,15 +260,24 @@ export function getMyCurrentPlaybackStateAsync(dispatch) {
  *
  */
 
-export function playPlaylist(id) {
+/**
+ * Plays albums and playlists
+ *
+ * @param {sting} uri
+ */
+export function playItem(uri) {
   spotifyAPI.play({
-    context_uri: `spotify:playlist:${id}`,
+    context_uri: uri,
   });
 }
 
-export function playTrack(id) {
+/**
+ * Only plays tracks
+ * @param {string} uri
+ */
+export function playTrack(uri) {
   spotifyAPI.play({
-    uris: [`spotify:track:${id}`],
+    uris: [uri],
   });
 }
 

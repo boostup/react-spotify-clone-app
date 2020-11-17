@@ -5,14 +5,13 @@ import RadioIcon from "@material-ui/icons/Radio";
 import {
   getMyPlaylistsFeaturedAsync,
   getRecommendationsAsync,
-  playTrack,
 } from "../../state/actions";
 import { useDataLayerValue } from "../../state/DataLayer";
 
 import SectionHeading from "../../components/SectionHeading";
 import MainLayoutPageWrapper from "../MainLayoutPageWrapper";
 import TrackList from "../../components/TrackList";
-import PlaylistsGrid from "../../components/PlaylistsGrid";
+import ItemsGrid from "../../components/ItemsGrid";
 
 function FeaturedPage({
   match: {
@@ -39,11 +38,7 @@ function FeaturedPage({
               icon={RadioIcon}
               title={`Radio based on '${trackName}'`}
             />
-            <TrackList
-              firstLarge={true}
-              items={recommendedTracks}
-              onPlay={(id) => playTrack(id)}
-            />
+            <TrackList firstLarge={true} items={recommendedTracks} />
           </>
         )}
 
@@ -53,7 +48,10 @@ function FeaturedPage({
               icon={RadioIcon}
               title={playlistsFeatured.message}
             />
-            <PlaylistsGrid items={playlistsFeatured?.playlists?.items} />
+            <ItemsGrid
+              variant="playlist"
+              items={playlistsFeatured?.playlists?.items}
+            />
           </>
         )}
       </div>
