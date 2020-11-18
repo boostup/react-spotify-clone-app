@@ -12,7 +12,7 @@ import TrackPanel from "./TrackPanel";
 import CentralPanel from "./CentralPanel";
 import RightPanel from "./RightPanel";
 
-function SpotifyAudioPlayer({ dispatch, useSelector }) {
+function SpotifyRemoteControl({ dispatch, useSelector }) {
   const currentplaybackState = useSelector(selectFooterCurrentPlaybackState);
 
   useSpotifyWebPlaybackSDK({
@@ -72,4 +72,4 @@ function SpotifyAudioPlayer({ dispatch, useSelector }) {
   );
 }
 
-export default SpotifyAudioPlayer;
+export default SpotifyRemoteControl;

@@ -1,13 +1,11 @@
 import { authActionTypes as actionTypes } from "./types";
 
-export const setToken = (token) => ({
-  type: actionTypes.SET_TOKEN,
-  payload: token,
+export const startAuth = () => ({
+  type: actionTypes.AUTH_START,
 });
 
-export const setTokenExpiry = (tokenExpiry) => ({
-  type: actionTypes.SET_TOKEN_EXPIRY,
-  payload: tokenExpiry,
+export const startSpotifyAuth = () => ({
+  type: actionTypes.SPOTIFY_AUTH_START,
 });
 
 export const setUser = (user) => ({

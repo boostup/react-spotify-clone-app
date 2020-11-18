@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import { getTokenExpiry } from "../../utils/localStorage";
-import { isPast } from "../../utils/time";
-
-import { selectAuthUser } from "../../redux/auth/selectors";
+import { selectAuth, selectAuthUser } from "../../redux/auth/selectors";
 import { selectHeader } from "../../redux/header/selectors";
 import {
   toggleDisplayItemToolbar,
@@ -21,16 +18,39 @@ import Body from "../Body";
 import Footer from "../Footer";
 
 import "./MainLayoutPageWrapper.css";
+import { startAuth } from "../../redux/auth/actions";
 
-function MainLayoutPageWrapper({ title, dispatch, useSelector, children }) {
+function MainLayoutPageWrapper({
+  title,
+  dispatch,
+  useSelector,
+  onDataRequest = () => {},
+  children,
+}) {
+  const authState = useSelector(selectAuth);
   const history = useHistory();
 
-  if (isPast(getTokenExpiry())) {
-    history.push({
-      pathname: "/logout",
-      state: { error: "Session Expired! Please login." },
-    });
-  }
+  useEffect(() => {
+    /**
+     * STARTING AUTOMATIC AUTHORIZATION PROCESS HERE
+     */
+    dispatch(startAuth());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (authState.success === false) {
+      history.replace({
+        pathname: "/login",
+        state: { error: authState.error },
+      });
+    }
+    if (authState.success === true) {
+      //Get data for layout components (ie Header, sidebar, footer, etc)
+
+      //Get data specific to this page
+      onDataRequest();
+    }
+  }, [history, authState.error, authState.success]);
 
   const user = useSelector(selectAuthUser);
   const userAvatar = user?.images[0].url;

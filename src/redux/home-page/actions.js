@@ -1,5 +1,9 @@
 import { homePageActionTypes as actionTypes } from "./types";
 
+export const requestHomePageData = () => ({
+  type: actionTypes.REQUEST_HOME_DATA,
+});
+
 export const setMySavedTracks = (tracks) => ({
   type: actionTypes.SET_MY_SAVED_TRACKS,
   payload: tracks,

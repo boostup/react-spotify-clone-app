@@ -1,14 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  getMyTopTracksAsync,
-  getMyRecentTracksAsync,
-  getMySavedTracksAsync,
-} from "../../redux/home-page/async-actions";
-
 import { selectHomePage } from "../../redux/home-page/selectors";
-import { selectAuthToken } from "../../redux/auth/selectors";
+
+import { requestHomePageData } from "../../redux/home-page/actions";
 
 import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
 import TrackList from "../../components/TrackList";
@@ -23,19 +18,13 @@ import "./Home.css";
 function Home() {
   const dispatch = useDispatch();
   const homePageState = useSelector(selectHomePage);
-  const token = useSelector(selectAuthToken);
   const { savedTracks, topTracks, recentTracks } = homePageState;
-
-  useEffect(() => {
-    getMySavedTracksAsync(dispatch);
-    getMyTopTracksAsync(dispatch);
-    getMyRecentTracksAsync(dispatch);
-  }, [dispatch, token]);
 
   return (
     <MainLayoutPageWrapper
       //
       title="Home"
+      onDataRequest={requestHomePageData}
       {...{ dispatch, useSelector }}
     >
       <div className="homePage">

@@ -4,20 +4,24 @@ const initialState = {
   token: "",
   tokenExpiry: 0,
   user: null,
+  error: null,
+  success: null,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SET_TOKEN:
+    case actionTypes.AUTH_ERROR:
       return {
-        ...state,
-        token: action.payload,
+        ...initialState,
+        error: action.payload,
+        success: false,
       };
 
-    case actionTypes.SET_TOKEN_EXPIRY:
+    case actionTypes.AUTH_SUCCESS:
       return {
         ...state,
-        tokenExpiry: action.payload,
+        success: true,
+        error: false,
       };
 
     case actionTypes.SET_USER:

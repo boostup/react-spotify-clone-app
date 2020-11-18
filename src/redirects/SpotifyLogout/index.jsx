@@ -1,28 +1,20 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
 
-import * as ls from "../../utils/localStorage";
-import * as actions from "../../redux/auth/actions";
+import { empty } from "../../utils/localStorage";
 
-function SpotifyLogout({ history }) {
+function SpotifyLogout() {
   const { state } = useLocation();
-  const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
-    dispatch(actions.setToken(null));
-    ls.setToken(null);
-    dispatch(actions.setTokenExpiry(null));
-    ls.setTokenExpiry(null);
-    dispatch(actions.setUser(null));
-    ls.setUser(null);
-
+    empty();
     history.push({
-      pathname: "/",
+      pathname: "/login",
       //passing `location.state` (state) because there could be an error message to be displayed on the login page for instance (such as a "session expired" error message for example)
       state,
     });
-  }, [dispatch, history, state]);
+  }, [history, state]);
 
   return null;
 }
