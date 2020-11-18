@@ -1,7 +1,7 @@
 import { homePageActionTypes as actionTypes } from "./types";
 
-export const requestHomePageData = () => ({
-  type: actionTypes.REQUEST_HOME_DATA,
+export const fetchHomePageDataStart = () => ({
+  type: actionTypes.FETCH_HOME_PAGE_DATA_START,
 });
 
 export const setMySavedTracks = (tracks) => ({

@@ -1,39 +1,79 @@
-import { spotifyAPI, hydrateSpotifyApi } from "../../libs/spotify";
+import { all, takeLatest, call, put, delay } from "redux-saga/effects";
+import { homePageActionTypes as actionTypes } from "./types";
+import { spotifyAPI } from "../../libs/spotify";
 import { setMySavedTracks, setRecentTracks, setTopTracks } from "./actions";
 
-export function getMyTopTracksAsync(dispatch) {
-  spotifyAPI
-    .getMyTopTracks({ limit: 5 })
-    .then((data) => dispatch(setTopTracks(data.items)))
-    .catch((error) => {
-      hydrateSpotifyApi(error, dispatch);
-    });
+function* getMyTopTracksAsync() {
+  try {
+    const data = yield spotifyAPI.getMyTopTracks({ limit: 5 });
+    const tracks = data.items;
+    yield put(setTopTracks(tracks));
+    return tracks;
+  } catch (error) {
+    throw error;
+  }
 }
 
-export function getMySavedTracksAsync(dispatch) {
-  spotifyAPI
-    .getMySavedTracks({ limit: 5 })
-    .then((data) => {
-      return data.items.map((item) => item.track);
-    })
-    .then((tracks) => dispatch(setMySavedTracks(tracks)))
-    .catch((error) => {
-      hydrateSpotifyApi(error, dispatch);
-    });
+function* getMySavedTracksAsync() {
+  try {
+    const data = yield spotifyAPI.getMySavedTracks({ limit: 5 });
+    const tracks = data.items.map((item) => item.track);
+    yield put(setMySavedTracks(tracks));
+    return tracks;
+  } catch (error) {
+    throw error;
+  }
 }
 
+function* getMyRecentTracksAsync() {
+  try {
+    const data = yield spotifyAPI.getMyRecentlyPlayedTracks({ limit: 5 });
+    const tracks = data.items.map((item) => item.track);
+    yield put(setRecentTracks(tracks));
+    return tracks;
+  } catch (error) {
+    throw error;
+  }
+}
+
+//Latest 5 Saved Tracks are displayed in the home page, this is why I placed this function here ;)
 export function addToMySavedTracks(trackId) {
   spotifyAPI.addToMySavedTracks({ ids: [trackId] });
 }
 
-export function getMyRecentTracksAsync(dispatch) {
-  spotifyAPI
-    .getMyRecentlyPlayedTracks({ limit: 5 })
-    .then((data) => {
-      return data.items.map((item) => item.track);
-    })
-    .then((tracks) => dispatch(setRecentTracks(tracks)))
-    .catch((error) => {
-      hydrateSpotifyApi(error, dispatch);
+function* fetchHomePageDataStartAsync() {
+  console.log("REQUESTING HOME DATA FROM SAGA");
+
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+  try {
+    yield all([
+      //
+      call(getMySavedTracksAsync),
+      call(getMyTopTracksAsync),
+      call(getMyRecentTracksAsync),
+    ]);
+
+    yield call(delay, 3000);
+
+    yield put({
+      type: actionTypes.FETCH_HOME_PAGE_DATA_SUCCESS,
     });
+  } catch (error) {
+    yield put({ type: actionTypes.FETCH_HOME_PAGE_DATA_ERROR, payload: error });
+  }
+}
+
+export function* watchCanGetHomeData() {
+  yield takeLatest(
+    actionTypes.FETCH_HOME_PAGE_DATA_START,
+    fetchHomePageDataStartAsync
+  );
+}
+
+export function* homePageSagas() {
+  yield all([
+    //
+    call(watchCanGetHomeData),
+  ]);
 }

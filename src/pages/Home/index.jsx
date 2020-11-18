@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { selectHomePage } from "../../redux/home-page/selectors";
 
-import { requestHomePageData } from "../../redux/home-page/actions";
+import { fetchHomePageDataStart } from "../../redux/home-page/actions";
 
 import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
 import TrackList from "../../components/TrackList";
@@ -24,7 +24,8 @@ function Home() {
     <MainLayoutPageWrapper
       //
       title="Home"
-      onDataRequest={requestHomePageData}
+      isLoading={homePageState.isFetching}
+      onDataRequest={fetchHomePageDataStart}
       {...{ dispatch, useSelector }}
     >
       <div className="homePage">

@@ -3,11 +3,12 @@ import { useHistory } from "react-router-dom";
 
 import { selectAuth, selectAuthUser } from "../../redux/auth/selectors";
 import { selectHeader } from "../../redux/header/selectors";
+import { selectSidebarPlaylists } from "../../redux/sidebar/selectors";
 import {
   toggleDisplayItemToolbar,
   toggleHeaderScrolled,
 } from "../../redux/header/actions";
-import { selectSidebarPlaylists } from "../../redux/sidebar/selectors";
+import { startAuth } from "../../redux/auth/actions";
 import { getSidebarPlaylistsAync } from "../../redux/sidebar/async-actions";
 import { selectItemPage } from "../../redux/item-page/selectors";
 
@@ -16,15 +17,16 @@ import Sidebar from "../Sidebar";
 import Header from "../Header";
 import Body from "../Body";
 import Footer from "../Footer";
+import Loading from "../../components/Loading";
 
 import "./MainLayoutPageWrapper.css";
-import { startAuth } from "../../redux/auth/actions";
 
 function MainLayoutPageWrapper({
   title,
   dispatch,
   useSelector,
-  onDataRequest = () => {},
+  isLoading = false,
+  onDataRequest = () => ({ type: null }),
   children,
 }) {
   const authState = useSelector(selectAuth);
@@ -44,13 +46,16 @@ function MainLayoutPageWrapper({
         state: { error: authState.error },
       });
     }
+  }, [history, authState]);
+
+  useEffect(() => {
     if (authState.success === true) {
       //Get data for layout components (ie Header, sidebar, footer, etc)
 
       //Get data specific to this page
-      onDataRequest();
+      dispatch(onDataRequest());
     }
-  }, [history, authState.error, authState.success]);
+  }, [dispatch, onDataRequest, authState.success]);
 
   const user = useSelector(selectAuthUser);
   const userAvatar = user?.images[0].url;
@@ -111,7 +116,7 @@ function MainLayoutPageWrapper({
         }}
       />
       <Body onScroll={handleScroll} className="mainLayout__body body">
-        {children}
+        {isLoading ? <Loading /> : children}
       </Body>
       <Footer
         {...{ dispatch, useSelector }}
