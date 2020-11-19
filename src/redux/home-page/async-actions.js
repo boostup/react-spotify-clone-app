@@ -1,7 +1,12 @@
-import { all, takeLatest, call, put, delay } from "redux-saga/effects";
+import { all, takeLatest, call, put } from "redux-saga/effects";
 import { homePageActionTypes as actionTypes } from "./types";
 import { spotifyAPI } from "../../libs/spotify";
 import { setMySavedTracks, setRecentTracks, setTopTracks } from "./actions";
+import { delay } from "../../utils/time";
+
+/**
+ * WORKER SAGAS
+ */
 
 function* getMyTopTracksAsync() {
   try {
@@ -42,10 +47,6 @@ export function addToMySavedTracks(trackId) {
 }
 
 function* fetchHomePageDataStartAsync() {
-  console.log("REQUESTING HOME DATA FROM SAGA");
-
-  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
   try {
     yield all([
       //
@@ -64,7 +65,11 @@ function* fetchHomePageDataStartAsync() {
   }
 }
 
-export function* watchCanGetHomeData() {
+/**
+ * WATCHER SAGAS
+ */
+
+export function* watchCanGetHomePageData() {
   yield takeLatest(
     actionTypes.FETCH_HOME_PAGE_DATA_START,
     fetchHomePageDataStartAsync
@@ -74,6 +79,6 @@ export function* watchCanGetHomeData() {
 export function* homePageSagas() {
   yield all([
     //
-    call(watchCanGetHomeData),
+    call(watchCanGetHomePageData),
   ]);
 }

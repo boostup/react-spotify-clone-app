@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { DEVICE_NAME, useSpotifyWebPlaybackSDK } from "../../../libs/spotify";
 import { getToken } from "../../../utils/localStorage";
@@ -12,7 +13,8 @@ import TrackPanel from "./TrackPanel";
 import CentralPanel from "./CentralPanel";
 import RightPanel from "./RightPanel";
 
-function SpotifyRemoteControl({ dispatch, useSelector }) {
+function SpotifyRemoteControl() {
+  const dispatch = useDispatch();
   const currentplaybackState = useSelector(selectFooterCurrentPlaybackState);
 
   useSpotifyWebPlaybackSDK({

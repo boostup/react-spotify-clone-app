@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { selectHomePage } from "../../redux/home-page/selectors";
@@ -17,16 +17,18 @@ import "./Home.css";
 
 function Home() {
   const dispatch = useDispatch();
-  const homePageState = useSelector(selectHomePage);
-  const { savedTracks, topTracks, recentTracks } = homePageState;
+  const pageState = useSelector(selectHomePage);
+  const { savedTracks, topTracks, recentTracks } = pageState;
+
+  useEffect(() => {
+    dispatch(fetchHomePageDataStart());
+  }, [dispatch]);
 
   return (
     <MainLayoutPageWrapper
       //
       title="Home"
-      isLoading={homePageState.isFetching}
-      onDataRequest={fetchHomePageDataStart}
-      {...{ dispatch, useSelector }}
+      isLoading={pageState.isFetching}
     >
       <div className="homePage">
         {recentTracks && (

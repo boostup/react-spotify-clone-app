@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { toggleDisplaySearchBar } from "../../redux/header/actions";
-import { selectSearchPageSearchResults } from "../../redux/search-page/selectors";
+import {
+  selectSearchPage,
+  selectSearchPageSearchResults,
+} from "../../redux/search-page/selectors";
 
 import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
 import SectionHeading from "../../components/SectionHeading";
@@ -15,6 +18,7 @@ import "./SearchPage.css";
 
 function SearchPage() {
   const dispatch = useDispatch();
+  const pageState = useSelector(selectSearchPage);
   const searchResults = useSelector(selectSearchPageSearchResults);
   const artists = searchResults?.artists?.items;
   const albums = searchResults?.albums?.items;
@@ -32,9 +36,9 @@ function SearchPage() {
 
   return (
     <MainLayoutPageWrapper
+      isLoading={pageState.isFetching}
       //
-      title="Your Library"
-      {...{ dispatch, useSelector }}
+      title="Search for Albums, Artists and Playlists"
     >
       <div className="searchPage">
         {!searchResults && <h1>Search millions of tracks...</h1>}

@@ -1,6 +1,6 @@
-import { setToken } from "../../state/actions";
-import { getToken } from "../../utils/localStorage";
-import { spotifyAPI } from "./index";
+// import { setToken } from "../../state/actions";
+// import { getToken } from "../../utils/localStorage";
+// import { spotifyAPI } from "./index";
 
 /**
  * * Note on usage
@@ -13,9 +13,10 @@ import { spotifyAPI } from "./index";
  */
 export function hydrateSpotifyApi(error, dispatch) {
   if (error?.status >= 400) {
-    const token = getToken();
-    spotifyAPI.setAccessToken(token);
-    dispatch(setToken(token));
+    console.log("EXCEPTION CAUGHT");
+    // const token = getToken();
+    // spotifyAPI.setAccessToken(token);
+    // dispatch(setToken(token));
   }
 }
 

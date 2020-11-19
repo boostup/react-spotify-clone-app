@@ -1,7 +1,7 @@
 import { spotifyAPI, hydrateSpotifyApi } from "../../libs/spotify";
 import { setSidebarPlaylists } from "./actions";
 
-export function getSidebarPlaylistsAync(dispatch) {
+export function getSidebarPlaylistsAsync(dispatch) {
   spotifyAPI
     .getUserPlaylists()
     .then((playlists) => {

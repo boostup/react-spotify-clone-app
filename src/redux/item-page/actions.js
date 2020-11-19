@@ -1,5 +1,10 @@
 import { itemPageActionTypes as actionTypes } from "./types";
 
+export const fetchItemPageDataStart = ({ id, variant }) => ({
+  type: actionTypes.FETCH_ITEM_PAGE_DATA_START,
+  payload: { id, variant },
+});
+
 export const setItem = (item) => ({
   type: actionTypes.SET_ITEM,
   payload: item,
