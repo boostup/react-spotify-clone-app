@@ -12,7 +12,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.FETCH_FEATURED_PAGE_DATA_START:
       return {
-        ...initialState,
+        ...state,
         isFetching: true,
       };
 
