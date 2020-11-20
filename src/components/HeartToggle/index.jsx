@@ -9,6 +9,7 @@ function HeartToggle({ status = false, onToggle = () => {} }) {
   const handleClick = (event) => {
     event.stopPropagation();
     onToggle();
+    status = !status;
   };
 
   return (

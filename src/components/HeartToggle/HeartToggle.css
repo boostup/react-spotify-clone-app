@@ -1,10 +1,16 @@
+.heartToggle {
+  padding-right: 2rem;
+}
+
 .heartToggle svg {
+  transition: font-size 300ms cubic-bezier(1, 0, 0, 1);
   font-size: 2rem !important;
   cursor: pointer;
 }
 
-.heartToggle__toggled {
+.heartToggle svg.heartToggle__toggled {
   color: var(--main-theme-favorite-color-hover);
+  font-size: 4rem !important;
 }
 
 .heartToggle__untoggled {
