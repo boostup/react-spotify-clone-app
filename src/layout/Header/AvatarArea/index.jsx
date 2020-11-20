@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Avatar } from "@material-ui/core";
 
-import { avatarMenuOptions } from "../../../utils/constants";
-import ContextualMenu from "../../../components/ContextualMenu";
+import { avatarMenuOptions } from "utils/constants";
+import ContextualMenu from "components/ContextualMenu";
 
 import "./AvatarArea.css";
 

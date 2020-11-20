@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectAuth } from "../../redux/auth/selectors";
-import { selectSidebarPlaylists } from "../../redux/sidebar/selectors";
-import { getSidebarPlaylistsAsync } from "../../redux/sidebar/async-actions";
+import { selectAuth } from "redux/auth/selectors";
+import { selectSidebarPlaylists } from "redux/sidebar/selectors";
+import { getSidebarPlaylistsAsync } from "redux/sidebar/async-actions";
 
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
@@ -14,7 +14,7 @@ import SidebarOption from "./SidebarOption";
 import "./Sidebar.css";
 import SidebarPlaylistsList from "./SidebarPlaylistsList";
 
-import { ReactComponent as Logo } from "../../assets/spotifLylogo.svg";
+import { ReactComponent as Logo } from "assets/spotifLylogo.svg";
 
 function Sidebar({ className }) {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
 import { authActionTypes as actionTypes } from "./types";
-import { spotifyAPI } from "../../libs/spotify";
+import { spotifyAPI } from "libs/spotify";
 import { setUser } from "./actions";
 import {
   empty,
@@ -10,9 +10,9 @@ import {
   getToken,
   getTokenExpiry,
   getUser,
-} from "../../utils/localStorage";
-import { getHashFromResponse } from "../../utils/http";
-import { addMsToNow, isPast } from "../../utils/time";
+} from "utils/localStorage";
+import { getHashFromResponse } from "utils/http";
+import { addMsToNow, isPast } from "utils/time";
 
 /**
  * WORKER SAGAS

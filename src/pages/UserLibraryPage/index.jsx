@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectUserLibraryPage } from "../../redux/user-library-page/selectors";
-import { fetchUserLibraryPageDataStart } from "../../redux/user-library-page/actions";
+import { selectUserLibraryPage } from "redux/user-library-page/selectors";
+import { fetchUserLibraryPageDataStart } from "redux/user-library-page/actions";
 
-import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
+import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
 import PlaylistIcon from "@material-ui/icons/QueueMusic";
-import SectionHeading from "../../components/SectionHeading";
-import ItemsGrid from "../../components/ItemsGrid";
+import SectionHeading from "components/SectionHeading";
+import ItemsGrid from "components/ItemsGrid";
 
 import "./UserLibraryPage.css";
 

@@ -1,25 +1,25 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// import { selectAuth } from "../../redux/auth/selectors";
-import { selectItemPage } from "../../redux/item-page/selectors";
+// import { selectAuth } from ".redux/auth/selectors";
+import { selectItemPage } from "redux/item-page/selectors";
 
 import {
   toggleDisplayItemToolbar,
   // isPlaylistFollowedByUser,
-} from "../../redux/header/actions";
+} from "redux/header/actions";
 
 import {
   fetchItemPageDataStart,
   toggleIsItemPage,
-} from "../../redux/item-page/actions";
+} from "redux/item-page/actions";
 
-import { addToQueue, playItem } from "../../redux/footer/async-actions";
+import { addToQueue, playItem } from "redux/footer/async-actions";
 
-import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
-import ItemBanner from "../../components/ItemBanner";
-import ItemToolbar from "../../components/ItemToolbar";
-import TrackList from "../../components/TrackList";
+import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
+import ItemBanner from "components/ItemBanner";
+import ItemToolbar from "components/ItemToolbar";
+import TrackList from "components/TrackList";
 
 /**
  * Is understood by Item :

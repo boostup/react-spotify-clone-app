@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { DEVICE_NAME, useSpotifyWebPlaybackSDK } from "../../../libs/spotify";
-import { getToken } from "../../../utils/localStorage";
+import { DEVICE_NAME, useSpotifyWebPlaybackSDK } from "libs/spotify";
+import { getToken } from "utils/localStorage";
 
-import { selectFooterCurrentPlaybackState } from "../../../redux/footer/selectors";
-import * as actions from "../../../redux/footer/async-actions";
+import { selectFooterCurrentPlaybackState } from "redux/footer/selectors";
+import * as actions from "redux/footer/async-actions";
 
 import "./SpotifyRemoteControl.css";
 

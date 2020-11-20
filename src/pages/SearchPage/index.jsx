@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { toggleDisplaySearchBar } from "../../redux/header/actions";
+import { toggleDisplaySearchBar } from "redux/header/actions";
 import {
   selectSearchPage,
   selectSearchPageSearchResults,
-} from "../../redux/search-page/selectors";
+} from "redux/search-page/selectors";
 
-import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
-import SectionHeading from "../../components/SectionHeading";
+import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
+import SectionHeading from "components/SectionHeading";
 import PlaylistIcon from "@material-ui/icons/QueueMusic";
 import ArtistIcon from "@material-ui/icons/RecordVoiceOver";
 import AlbumIcon from "@material-ui/icons/Album";
-import ItemsGrid from "../../components/ItemsGrid";
+import ItemsGrid from "components/ItemsGrid";
 
 import "./SearchPage.css";
 

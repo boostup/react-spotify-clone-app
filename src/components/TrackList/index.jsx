@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import uuid from "uuid";
 
-import { playTrack } from "../../redux/footer/async-actions";
+import { playTrack } from "redux/footer/async-actions";
 
 import TrackRow from "../TrackRow";
 

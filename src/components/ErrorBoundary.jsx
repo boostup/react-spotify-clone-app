@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import NotFoundPage from "../pages/NotFoundPage";
+import NotFoundPage from "pages/NotFoundPage";
 
 export default class ErrorBoundary extends Component {
   constructor(props) {

@@ -1,5 +1,5 @@
 import React from "react";
-import Artists from "../../../../components/Artists";
+import Artists from "components/Artists";
 
 function TrackPanel({ shouldDisplay, image, title, artists, album }) {
   return (

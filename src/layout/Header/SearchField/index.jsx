@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 
 import SearchIcon from "@material-ui/icons/Search";
 
-import useDebounce from "../../../utils/useDebounce";
+import useDebounce from "utils/useDebounce";
 
-import { fetchSearchPageDataStart } from "../../../redux/search-page/actions";
+import { fetchSearchPageDataStart } from "redux/search-page/actions";
 
 import "./SearchField.css";
 

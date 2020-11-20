@@ -1,4 +1,4 @@
-import { spotifyAPI, hydrateSpotifyApi } from "../../libs/spotify";
+import { spotifyAPI, hydrateSpotifyApi } from "libs/spotify";
 import { setCurrentPlaybackState } from "./actions";
 
 export function getMyCurrentPlaybackStateAsync(dispatch) {

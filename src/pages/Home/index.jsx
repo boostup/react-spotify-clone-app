@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectHomePage } from "../../redux/home-page/selectors";
+import { selectHomePage } from "redux/home-page/selectors";
 
-import { fetchHomePageDataStart } from "../../redux/home-page/actions";
+import { fetchHomePageDataStart } from "redux/home-page/actions";
 
-import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
-import TrackList from "../../components/TrackList";
-import SectionHeading from "../../components/SectionHeading";
+import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
+import TrackList from "components/TrackList";
+import SectionHeading from "components/SectionHeading";
 
 import SavedTracksIcon from "@material-ui/icons/Favorite";
 import TopTracksIcon from "@material-ui/icons/Whatshot";

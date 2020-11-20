@@ -1,6 +1,6 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
 import { itemPageActionTypes as actionTypes } from "./types";
-import { spotifyAPI } from "../../libs/spotify";
+import { spotifyAPI } from "libs/spotify";
 import { setItem } from "./actions";
 
 /**

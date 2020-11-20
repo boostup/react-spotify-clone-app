@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import RadioIcon from "@material-ui/icons/Radio";
 
-import { selectFeaturedPage } from "../../redux/featured-page/selectors";
-import { fetchFeaturedPageDataStart } from "../../redux/featured-page/actions";
+import { selectFeaturedPage } from "redux/featured-page/selectors";
+import { fetchFeaturedPageDataStart } from "redux/featured-page/actions";
 
-import SectionHeading from "../../components/SectionHeading";
-import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
-import TrackList from "../../components/TrackList";
-import ItemsGrid from "../../components/ItemsGrid";
+import SectionHeading from "components/SectionHeading";
+import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
+import TrackList from "components/TrackList";
+import ItemsGrid from "components/ItemsGrid";
 
 function FeaturedPage({
   match: {

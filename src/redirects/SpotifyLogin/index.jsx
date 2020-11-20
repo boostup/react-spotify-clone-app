@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { startSpotifyAuth } from "../../redux/auth/actions";
-import { selectAuth } from "../../redux/auth/selectors";
+import { startSpotifyAuth } from "redux/auth/actions";
+import { selectAuth } from "redux/auth/selectors";
 
 const SpotifyLogin = () => {
   const authState = useSelector(selectAuth);

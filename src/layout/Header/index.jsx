@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectAuthUser } from "../../redux/auth/selectors";
-import { selectHeader } from "../../redux/header/selectors";
-import { playItem } from "../../redux/footer/async-actions";
-import { selectItemPage } from "../../redux/item-page/selectors";
+import { selectAuthUser } from "redux/auth/selectors";
+import { selectHeader } from "redux/header/selectors";
+import { playItem } from "redux/footer/async-actions";
+import { selectItemPage } from "redux/item-page/selectors";
 import {
   toggleDisplayItemToolbar,
   // isPlaylistFollowedByUser,
-} from "../../redux/header/actions";
+} from "redux/header/actions";
 
 import SearchField from "./SearchField";
 import ItemHeaderToolbar from "./ItemHeaderToolbar";

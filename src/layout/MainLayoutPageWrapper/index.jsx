@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectAuth } from "../../redux/auth/selectors";
-import { startAuth } from "../../redux/auth/actions";
+import { selectAuth } from "redux/auth/selectors";
+import { startAuth } from "redux/auth/actions";
 
 import HtmlHeadTitle from "../HtmlHeadTitle";
 import Sidebar from "../Sidebar";
 import Header from "../Header";
 import Body from "../Body";
 import Footer from "../Footer";
-import Loading from "../../components/Loading";
+import Loading from "components/Loading";
 
 import "./MainLayoutPageWrapper.css";
 

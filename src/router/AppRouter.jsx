@@ -9,18 +9,18 @@ import {
 
 import RouteDebugging from "./RouteDebugging";
 
-import { selectAuthUser } from "../redux/auth/selectors";
-import SpotifyLogin from "../redirects/SpotifyLogin";
-import SpotifyLogout from "../redirects/SpotifyLogout";
+import { selectAuthUser } from "redux/auth/selectors";
+import SpotifyLogin from "redirects/SpotifyLogin";
+import SpotifyLogout from "redirects/SpotifyLogout";
 
-import LoginPage from "../pages/LoginPage";
-import Home from "../pages/Home";
-import NotFoundPage from "../pages/NotFoundPage";
-import SearchPage from "../pages/SearchPage";
-import UserLibraryPage from "../pages/UserLibraryPage";
-import ItemPage from "../pages/ItemPage";
-import FeaturedPage from "../pages/FeaturedPage";
-import ErrorBoundary from "../components/ErrorBoundary";
+import LoginPage from "pages/LoginPage";
+import Home from "pages/Home";
+import NotFoundPage from "pages/NotFoundPage";
+import SearchPage from "pages/SearchPage";
+import UserLibraryPage from "pages/UserLibraryPage";
+import ItemPage from "pages/ItemPage";
+import FeaturedPage from "pages/FeaturedPage";
+import ErrorBoundary from "components/ErrorBoundary";
 
 const AppRouter = () => {
   const user = useSelector(selectAuthUser);

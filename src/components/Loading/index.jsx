@@ -1,6 +1,6 @@
 import React from "react";
 
-import { ReactComponent as LoadingSVG } from "../../assets/loading.svg";
+import { ReactComponent as LoadingSVG } from "assets/loading.svg";
 
 import "./Loading.css";
 

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
-import { empty } from "../../utils/localStorage";
+import { empty } from "utils/localStorage";
 
 function SpotifyLogout() {
   const { state } = useLocation();

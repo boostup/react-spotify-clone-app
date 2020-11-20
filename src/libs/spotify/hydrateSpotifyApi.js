@@ -1,5 +1,5 @@
 // import { setToken } from "../../state/actions";
-// import { getToken } from "../../utils/localStorage";
+// import { getToken } from "utils/localStorage";
 // import { spotifyAPI } from "./index";
 
 /**
