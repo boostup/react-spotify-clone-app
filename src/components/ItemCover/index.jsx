@@ -3,7 +3,7 @@ import PlayIcon from "@material-ui/icons/PlayCircleFilledSharp";
 
 import Artists from "../Artists";
 import ImageFader from "../ImageFader";
-import { ReactComponent as ArtistPlaceholderImage } from "../../assets/artist.placeholder.svg";
+import { ReactComponent as ArtistPlaceholderImage } from "assets/artist.placeholder.svg";
 
 import "./ItemCover.css";
 

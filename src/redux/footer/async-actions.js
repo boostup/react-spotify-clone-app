@@ -1,17 +1,35 @@
-import { spotifyAPI, hydrateSpotifyApi } from "../../libs/spotify";
+import { all, takeLatest, call, put } from "redux-saga/effects";
+import { footerActionTypes as actionTypes } from "./types";
+import { spotifyAPI } from "libs/spotify";
 import { setCurrentPlaybackState } from "./actions";
 
-export function getMyCurrentPlaybackStateAsync(dispatch) {
-  spotifyAPI
-    .getMyCurrentPlaybackState()
-    .then((res) => {
-      if (res === "") return; //No tracks currently playing
-      dispatch(setCurrentPlaybackState(res));
-    })
-    .catch((error) => {
-      console.log(error);
-      hydrateSpotifyApi(error, dispatch);
-    });
+export function* fetchMyCurrentPlaybackStateAsync() {
+  try {
+    const res = yield spotifyAPI.getMyCurrentPlaybackState();
+    if (res === "") return; //No tracks currently playing
+    yield put(setCurrentPlaybackState(res));
+    return res;
+  } catch (error) {
+    throw error;
+  }
+}
+
+/**
+ * WATCHER SAGAS
+ */
+
+export function* watchCanGetFooterData() {
+  yield takeLatest(
+    actionTypes.FETCH_CURRENT_PLAYBACK_STATE,
+    fetchMyCurrentPlaybackStateAsync
+  );
+}
+
+export function* footerSagas() {
+  yield all([
+    //
+    call(watchCanGetFooterData),
+  ]);
 }
 
 export function addToQueue(trackURI) {
@@ -25,8 +43,8 @@ export function addToQueue(trackURI) {
  * All remote control actions send data to the `Cloud Player` through the Spotify Playback SDK.
  * By doing so, the playback state is therefore changed.
  * Hence, to make sure that the app is synchronized at all times, the app registers a listener to get notified of any such changes.
- * This is done in ` useSpotifyWebPlaybackSDK` => `player.addListener("player_state_changed"...`
- * This listener is registered with the `getMyCurrentPlaybackStateAsync` function above.
+ * This is done in `libs/spotify/useSpotifyWebPlaybackSDK.js` file => `player.addListener("player_state_changed"...`
+ * This listener is registered with the `fetchMyCurrentPlaybackState` action creator function in the `./actions.js` file
  *
  */
 

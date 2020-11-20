@@ -1,34 +1,31 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectAuthToken } from "../../redux/auth/selectors";
-import { selectUserLibraryPagePlaylists } from "../../redux/user-library-page/selectors";
-import { getMyPlaylistsAync } from "../../redux/user-library-page/async-actions";
+import { selectUserLibraryPage } from "redux/user-library-page/selectors";
+import { fetchUserLibraryPageDataStart } from "redux/user-library-page/actions";
 
-import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
+import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
 import PlaylistIcon from "@material-ui/icons/QueueMusic";
-import SectionHeading from "../../components/SectionHeading";
-import ItemsGrid from "../../components/ItemsGrid";
+import SectionHeading from "components/SectionHeading";
+import ItemsGrid from "components/ItemsGrid";
 
 import "./UserLibraryPage.css";
 
 function UserLibraryPage() {
   const dispatch = useDispatch();
-
-  const { token } = useSelector(selectAuthToken);
-  const playlists = useSelector(selectUserLibraryPagePlaylists);
-
-  const { items } = playlists;
+  const pageState = useSelector(selectUserLibraryPage);
+  const { myPlaylists } = pageState;
+  const { items } = myPlaylists;
 
   useEffect(() => {
-    getMyPlaylistsAync(dispatch);
-  }, [dispatch, token]);
+    dispatch(fetchUserLibraryPageDataStart());
+  }, [dispatch]);
 
   return (
     <MainLayoutPageWrapper
       //
       title="Your Library"
-      {...{ dispatch, useSelector }}
+      sLoading={pageState.isFetching}
     >
       <div className="yourLibrary">
         <SectionHeading icon={PlaylistIcon} title="Your Playlists" />

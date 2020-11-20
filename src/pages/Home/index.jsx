@@ -1,18 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  getMyTopTracksAsync,
-  getMyRecentTracksAsync,
-  getMySavedTracksAsync,
-} from "../../redux/home-page/async-actions";
+import { selectHomePage } from "redux/home-page/selectors";
 
-import { selectHomePage } from "../../redux/home-page/selectors";
-import { selectAuthToken } from "../../redux/auth/selectors";
+import { fetchHomePageDataStart } from "redux/home-page/actions";
 
-import MainLayoutPageWrapper from "../../layout/MainLayoutPageWrapper";
-import TrackList from "../../components/TrackList";
-import SectionHeading from "../../components/SectionHeading";
+import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
+import TrackList from "components/TrackList";
+import SectionHeading from "components/SectionHeading";
 
 import SavedTracksIcon from "@material-ui/icons/Favorite";
 import TopTracksIcon from "@material-ui/icons/Whatshot";
@@ -22,21 +17,18 @@ import "./Home.css";
 
 function Home() {
   const dispatch = useDispatch();
-  const homePageState = useSelector(selectHomePage);
-  const token = useSelector(selectAuthToken);
-  const { savedTracks, topTracks, recentTracks } = homePageState;
+  const pageState = useSelector(selectHomePage);
+  const { savedTracks, topTracks, recentTracks } = pageState;
 
   useEffect(() => {
-    getMySavedTracksAsync(dispatch);
-    getMyTopTracksAsync(dispatch);
-    getMyRecentTracksAsync(dispatch);
-  }, [dispatch, token]);
+    dispatch(fetchHomePageDataStart());
+  }, [dispatch]);
 
   return (
     <MainLayoutPageWrapper
       //
       title="Home"
-      {...{ dispatch, useSelector }}
+      isLoading={pageState.isFetching}
     >
       <div className="homePage">
         {recentTracks && (

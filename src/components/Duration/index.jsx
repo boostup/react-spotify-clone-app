@@ -1,5 +1,5 @@
 import React from "react";
-import { convertMiliseconds } from "../../utils/time";
+import { convertMiliseconds } from "utils/time";
 
 function Duration({ ms, variant }) {
   const duration = convertMiliseconds(ms);

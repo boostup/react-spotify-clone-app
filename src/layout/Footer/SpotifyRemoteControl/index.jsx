@@ -1,10 +1,12 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { DEVICE_NAME, useSpotifyWebPlaybackSDK } from "../../../libs/spotify";
-import { getToken } from "../../../utils/localStorage";
+import { DEVICE_NAME, useSpotifyWebPlaybackSDK } from "libs/spotify";
+import { getToken } from "utils/localStorage";
 
-import { selectFooterCurrentPlaybackState } from "../../../redux/footer/selectors";
-import * as actions from "../../../redux/footer/async-actions";
+import { selectFooterCurrentPlaybackState } from "redux/footer/selectors";
+import { fetchMyCurrentPlaybackState } from "redux/footer/actions";
+import * as actions from "redux/footer/async-actions";
 
 import "./SpotifyRemoteControl.css";
 
@@ -12,7 +14,8 @@ import TrackPanel from "./TrackPanel";
 import CentralPanel from "./CentralPanel";
 import RightPanel from "./RightPanel";
 
-function SpotifyAudioPlayer({ dispatch, useSelector }) {
+function SpotifyRemoteControl() {
+  const dispatch = useDispatch();
   const currentplaybackState = useSelector(selectFooterCurrentPlaybackState);
 
   useSpotifyWebPlaybackSDK({
@@ -20,7 +23,7 @@ function SpotifyAudioPlayer({ dispatch, useSelector }) {
     token: getToken(),
     onPlayerStateChanged: (playbackState) => {
       //Normally, i would use the values of the `playbackState` object returned here, however, the Spotify Playback SDK is in BETA at this very moment, and the data is not consistent with the data provided through the Spotify Web API.  Therefore, I make here yet another request, just to get consistent data object types
-      actions.getMyCurrentPlaybackStateAsync(dispatch);
+      dispatch(fetchMyCurrentPlaybackState());
     },
   });
 
@@ -72,4 +75,4 @@ function SpotifyAudioPlayer({ dispatch, useSelector }) {
   );
 }
 
-export default SpotifyAudioPlayer;
+export default SpotifyRemoteControl;

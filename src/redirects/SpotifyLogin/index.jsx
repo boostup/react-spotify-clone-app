@@ -1,42 +1,34 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { startSpotifyAuth } from "redux/auth/actions";
+import { selectAuth } from "redux/auth/selectors";
 
-import { getHashFromResponse } from "../../utils/http";
-import { spotifyAPI } from "../../libs/spotify";
-import * as ls from "../../utils/localStorage";
-import { addMsToNow } from "../../utils/time";
-
-import * as actions from "../../redux/auth/actions";
-import { getMeAsync } from "../../redux/auth/async-actions";
-
-const SpotifyLogin = ({ history }) => {
+const SpotifyLogin = () => {
+  const authState = useSelector(selectAuth);
+  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const hash = getHashFromResponse(window.location.hash);
-
     /**
-     * this one ("/access_token") has a "/", why ? Because of HashRouter.
-     * why HashRouter instead of typical BrowserRouter ?
-     *
-     * => https://github.com/boostup/react-spotify-clone-app/pull/2
+     * STARTING MANUAL AUTHORIZATION PROCESS HERE
      */
-    const _token = hash["/access_token"];
+    dispatch(startSpotifyAuth());
+  }, [dispatch]);
 
-    if (_token) {
-      dispatch(actions.setToken(_token));
-      ls.setToken(_token);
-      spotifyAPI.setAccessToken(_token);
-      const expiryTime = addMsToNow(hash["expires_in"]);
-      dispatch(actions.setTokenExpiry(expiryTime));
-      ls.setTokenExpiry(expiryTime);
-
-      getMeAsync(dispatch).then((user) => {
-        ls.setUser(user);
-        history.push("/");
+  useEffect(() => {
+    if (authState.success === false) {
+      history.replace({
+        pathname: "/login",
+        state: { error: authState.error },
       });
     }
-  }, [dispatch, history]);
+    if (authState.success === true) {
+      history.replace({
+        pathname: "/",
+      });
+    }
+  }, [history, authState.error, authState.success]);
 
   return null;
 };

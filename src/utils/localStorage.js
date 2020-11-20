@@ -1,14 +1,22 @@
 const { REACT_APP_LOCAL_STORAGE_KEY } = process.env;
 
 function get() {
-  return JSON.parse(localStorage.getItem(REACT_APP_LOCAL_STORAGE_KEY)) || {};
+  try {
+    return JSON.parse(localStorage.getItem(REACT_APP_LOCAL_STORAGE_KEY));
+  } catch (error) {
+    return {};
+  }
 }
 
 function set(toStore) {
   localStorage.setItem(REACT_APP_LOCAL_STORAGE_KEY, JSON.stringify(toStore));
 }
 
-export function setUser(_user) {
+export function empty() {
+  localStorage.setItem(REACT_APP_LOCAL_STORAGE_KEY, null);
+}
+
+export function storeUser(_user) {
   const stored = get();
   set({
     ...stored,
@@ -21,7 +29,7 @@ export function getUser() {
   return stored && stored.user ? stored.user : false;
 }
 
-export function setToken(_token) {
+export function storeToken(_token) {
   const stored = get();
   set({
     ...stored,
@@ -34,7 +42,7 @@ export function getToken() {
   return stored && stored.token ? stored.token : false;
 }
 
-export function setTokenExpiry(_tokenExpiry) {
+export function storeTokenExpiry(_tokenExpiry) {
   const stored = get();
   set({
     ...stored,

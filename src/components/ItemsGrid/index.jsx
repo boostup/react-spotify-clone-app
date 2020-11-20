@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { playItem } from "../../state/actions";
+import { playItem } from "redux/footer/async-actions";
 import ItemCover from "../ItemCover";
 
 import "./ItemsGrid.css";

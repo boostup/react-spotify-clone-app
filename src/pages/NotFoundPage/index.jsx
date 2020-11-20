@@ -1,14 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import HtmlHeadTitle from "../../layout/HtmlHeadTitle";
-import { ReactComponent as Logo } from "../../assets/spotifLylogo.svg";
+import HtmlHeadTitle from "layout/HtmlHeadTitle";
+import { ReactComponent as Logo } from "assets/spotifLylogo.svg";
 
 import "./NotFoundPage.css";
 
-const vinylTopLayerPath = require("../../assets/vinyl-top-layer.svg").default;
-const vinylTopBottomPath = require("../../assets/vinyl-bottom-layer.svg")
-  .default;
+const vinylTopLayerPath = require("assets/vinyl-top-layer.svg").default;
+const vinylTopBottomPath = require("assets/vinyl-bottom-layer.svg").default;
 
 const NotFoundPage = ({ message }) => {
   const _message = message ? message : "Sorry, couldn't find that page.";

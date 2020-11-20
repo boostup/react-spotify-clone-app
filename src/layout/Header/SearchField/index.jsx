@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 
 import SearchIcon from "@material-ui/icons/Search";
 
-import useDebounce from "../../../utils/useDebounce";
+import useDebounce from "utils/useDebounce";
 
-import { searchSpotifyAsync } from "../../../redux/search-page/async-actions";
+import { fetchSearchPageDataStart } from "redux/search-page/actions";
 
 import "./SearchField.css";
 
-function SearchField({ dispatch, displaySearchBar }) {
+function SearchField({ dispatch, useSelector, displaySearchBar }) {
   const searchInputRef = useRef(null);
 
   useEffect(() => {
@@ -21,7 +21,8 @@ function SearchField({ dispatch, displaySearchBar }) {
 
   useEffect(
     () => {
-      debouncedSearchTerm && searchSpotifyAsync(debouncedSearchTerm, dispatch);
+      debouncedSearchTerm &&
+        dispatch(fetchSearchPageDataStart(debouncedSearchTerm));
     },
     [dispatch, debouncedSearchTerm] // Only call effect if debounced search term changes
   );

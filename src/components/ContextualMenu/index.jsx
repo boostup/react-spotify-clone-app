@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useHistory } from "react-router-dom";
-import { isExternalResource } from "../../utils/http";
+import { isExternalResource } from "utils/http";
 
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";

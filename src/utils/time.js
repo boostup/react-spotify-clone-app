@@ -52,3 +52,10 @@ export function convertMiliseconds(miliseconds, format) {
  */
 export const isPast = (timeInMiliseconds) =>
   timeInMiliseconds < new Date().getTime();
+
+/**
+ *
+ * @param {int} timeInMiliseconds
+ */
+
+export const delay = (ms) => new Promise((res) => setTimeout(res, ms));
