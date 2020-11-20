@@ -41,9 +41,6 @@ function* getAlbumAsync(id) {
 //     .then((data) => {
 //       return dispatch(setIsPlaylistFollower(data[0]));
 //     })
-//     .catch((error) => {
-//       hydrateSpotifyApi(error, dispatch);
-//     });
 // }
 
 // export function togglefollowPlaylist({ id, follow }) {

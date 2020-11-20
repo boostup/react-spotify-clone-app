@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { selectAuth } from "redux/auth/selectors";
 import { selectSidebarPlaylists } from "redux/sidebar/selectors";
-import { getSidebarPlaylistsAsync } from "redux/sidebar/async-actions";
+import { fetchSidebarDataStart } from "redux/sidebar/actions";
 
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
@@ -23,9 +23,9 @@ function Sidebar({ className }) {
 
   useEffect(() => {
     if (authState.success === true) {
-      !playlists && getSidebarPlaylistsAsync(dispatch);
+      dispatch(fetchSidebarDataStart());
     }
-  }, [dispatch, authState.success, playlists]);
+  }, [dispatch, authState.success]);
 
   return (
     <div className={className}>
