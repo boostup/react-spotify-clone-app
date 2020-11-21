@@ -14,7 +14,7 @@ import {
   toggleIsItemPage,
 } from "redux/item-page/actions";
 
-import { addToQueue, playItem } from "redux/footer/async-actions";
+import { playItem } from "redux/footer/async-actions";
 
 import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
 import ItemBanner from "components/ItemBanner";
@@ -67,8 +67,7 @@ function ItemPage({
 
         <ItemToolbar
           displayHeart={isItemOwner}
-          onQueue={() => addToQueue(tracks[0]?.uri)}
-          onPlay={() => playItem(item?.uri)}
+          onPlay={() => playItem(item?.uri, dispatch)}
         />
         <TrackList firstLarge={false} items={tracks} />
       </div>

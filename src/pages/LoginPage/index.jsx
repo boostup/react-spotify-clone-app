@@ -18,7 +18,9 @@ function LoginPage() {
   return (
     <div className="login">
       <Logo />
-      <button onClick={handleLogin}>Login with Spotify</button>
+      <button className="spotifyButton" onClick={handleLogin}>
+        Login with Spotify
+      </button>
       {error && (
         <div>
           <p>{error}</p>

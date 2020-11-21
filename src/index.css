@@ -107,6 +107,23 @@ button {
   background-color: rgba(40, 40, 40, 0.95);
 }
 
+.spotifyButton {
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1;
+  text-transform: uppercase;
+  background-color: var(--main-theme-color-secondary);
+  padding: 1.6rem 4.8rem 1.8rem;
+  border-radius: 70px;
+  min-width: 250px;
+  transition: 0.3s background-color;
+  margin: 1rem;
+}
+
+.spotifyButton:hover {
+  background-color: var(--main-theme-color-secondary-hover);
+}
+
 /**
 * Animations
 */

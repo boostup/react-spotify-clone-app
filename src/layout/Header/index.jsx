@@ -65,7 +65,10 @@ function Header({ className, bodyComponentScrollValue }) {
         className={`header__left ${searchBarClassName()} ${itemToolbarClassName()} `}
       >
         <SearchField {...{ dispatch, useSelector, displaySearchBar }} />
-        <ItemHeaderToolbar title={itemName} onPlay={() => playItem(itemURI)} />
+        <ItemHeaderToolbar
+          title={itemName}
+          onPlay={() => playItem(itemURI, dispatch)}
+        />
       </div>
       <div className="header__right">
         <AvatarArea {...{ userAvatar, userName }} />

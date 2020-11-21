@@ -1,7 +1,10 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
 import { footerActionTypes as actionTypes } from "./types";
 import { spotifyAPI } from "libs/spotify";
-import { setCurrentPlaybackState } from "./actions";
+import {
+  caughtRemoteControlApiError,
+  setCurrentPlaybackState,
+} from "./actions";
 
 export function* fetchMyCurrentPlaybackStateAsync() {
   try {
@@ -20,7 +23,7 @@ export function* fetchMyCurrentPlaybackStateAsync() {
 
 export function* watchCanGetFooterData() {
   yield takeLatest(
-    actionTypes.FETCH_CURRENT_PLAYBACK_STATE,
+    actionTypes.FETCH_CURRENT_PLAYBACK_STATE_START,
     fetchMyCurrentPlaybackStateAsync
   );
 }
@@ -30,10 +33,6 @@ export function* footerSagas() {
     //
     call(watchCanGetFooterData),
   ]);
-}
-
-export function addToQueue(trackURI) {
-  spotifyAPI.queue(trackURI);
 }
 
 /**
@@ -53,10 +52,14 @@ export function addToQueue(trackURI) {
  *
  * @param {sting} uri
  */
-export function playItem(uri) {
-  spotifyAPI.play({
-    context_uri: uri,
-  });
+export async function playItem(uri, dispatch) {
+  try {
+    await spotifyAPI.play({
+      context_uri: uri,
+    });
+  } catch (_error) {
+    await createApiError(_error, dispatch);
+  }
 }
 
 /**
@@ -64,33 +67,75 @@ export function playItem(uri) {
  * @param {string} uri
  */
 
-export function playTrack(uri) {
-  spotifyAPI.play({
-    uris: [uri],
-  });
+export async function playTrack(uri, dispatch) {
+  try {
+    await spotifyAPI.play({
+      uris: [uri],
+    });
+  } catch (_error) {
+    await createApiError(_error, dispatch);
+  }
 }
 
-export function toggleRepeat(value) {
-  spotifyAPI.setRepeat(value);
+export async function toggleRepeat(value, dispatch) {
+  try {
+    await spotifyAPI.setRepeat(value);
+  } catch (_error) {
+    await createApiError(_error, dispatch);
+  }
 }
 
-export function toggleShuffle(value) {
-  spotifyAPI.setShuffle(value);
+export async function toggleShuffle(value, dispatch) {
+  try {
+    await spotifyAPI.setShuffle(value);
+  } catch (_error) {
+    await createApiError(_error, dispatch);
+  }
 }
 
-export function skipToPrevious() {
-  spotifyAPI.skipToPrevious();
+export async function skipToPrevious(dispatch) {
+  try {
+    await spotifyAPI.skipToPrevious();
+  } catch (_error) {
+    await createApiError(_error, dispatch);
+  }
 }
 
-export function skipToNext() {
-  spotifyAPI.skipToNext();
+export async function skipToNext(dispatch) {
+  try {
+    await spotifyAPI.skipToNext();
+  } catch (_error) {
+    await createApiError(_error, dispatch);
+  }
 }
 
-export function togglePlayPause(value) {
-  if (value) spotifyAPI.play();
-  else spotifyAPI.pause();
+export async function togglePlayPause(value, dispatch) {
+  try {
+    if (value) await spotifyAPI.play();
+    else await spotifyAPI.pause();
+  } catch (_error) {
+    await createApiError(_error, dispatch);
+  }
 }
 
-export function setVolume(value) {
-  spotifyAPI.setVolume(value);
+export async function setVolume(value, dispatch) {
+  try {
+    await spotifyAPI.setVolume(value);
+  } catch (_error) {
+    await createApiError(_error, dispatch);
+  }
+}
+
+export async function addToQueue(trackURI, dispatch) {
+  try {
+    await spotifyAPI.queue(trackURI);
+  } catch (_error) {
+    await createApiError(_error, dispatch);
+  }
+}
+
+async function createApiError(_error, dispatch) {
+  const { error } = await JSON.parse(_error.response);
+  const { status, message } = error;
+  dispatch(caughtRemoteControlApiError({ status, message }));
 }
