@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { startSpotifyAuth } from "redux/auth/actions";
+import { authWithRedirectionTokenStart } from "redux/auth/actions";
 import { selectAuth } from "redux/auth/selectors";
 
 const SpotifyLogin = () => {
@@ -11,9 +11,9 @@ const SpotifyLogin = () => {
 
   useEffect(() => {
     /**
-     * STARTING MANUAL AUTHORIZATION PROCESS HERE
+     * STARTING AUTHORIZATION WITH TOKEN FROM SPOTIFY REDIRECTION
      */
-    dispatch(startSpotifyAuth());
+    dispatch(authWithRedirectionTokenStart());
   }, [dispatch]);
 
   useEffect(() => {

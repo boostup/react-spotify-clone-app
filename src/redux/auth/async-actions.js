@@ -1,7 +1,7 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
 import { authActionTypes as actionTypes } from "./types";
 import { spotifyAPI } from "libs/spotify";
-import { setUser } from "./actions";
+import { authWithStoredTokenStart, setUser } from "./actions";
 import {
   empty,
   storeUser,
@@ -66,7 +66,7 @@ function* getTokenFromBrowserLocation() {
   return { token: hash["/access_token"], expiry: hash["expires_in"] };
 }
 
-function* initAuth() {
+function* authWithRedirectionToken() {
   const authObj = yield call(getTokenFromBrowserLocation);
   yield call(rehydrateSpotifyAccessToken, authObj.token);
   const user = yield call(getMeAsync);
@@ -76,20 +76,23 @@ function* initAuth() {
   }
 
   yield call(storeAuthInLocalStorage, authObj, user);
-  yield put({ type: actionTypes.AUTH_START });
+  yield put({ type: actionTypes.AUTH_START_WITH_STORED_TOKEN });
 }
 
 /**
  * WATCHER SAGAS
  */
 
-export function* spotifyAuthFlow() {
-  yield takeLatest(actionTypes.SPOTIFY_AUTH_START, initAuth);
+export function* authWithRedirectionTokenFlow() {
+  yield takeLatest(
+    actionTypes.AUTH_START_WITH_TOKEN_FROM_REDIRECTION,
+    authWithRedirectionToken
+  );
 }
 
-export function* authFlow() {
+export function* authWithStoredTokenFlow() {
   yield takeLatest(
-    actionTypes.AUTH_START,
+    actionTypes.AUTH_START_WITH_STORED_TOKEN,
 
     function* () {
       const isAllowed = yield call(isTokenValid);
@@ -107,10 +110,18 @@ export function* authFlow() {
   );
 }
 
+export function* logoutFlow() {
+  yield takeLatest(actionTypes.AUTH_LOGOUT_START, function* () {
+    yield call(emptyLocalStorage);
+    yield put(authWithStoredTokenStart());
+  });
+}
+
 export function* authSagas() {
   yield all([
     //
-    call(spotifyAuthFlow),
-    call(authFlow),
+    call(authWithRedirectionTokenFlow),
+    call(authWithStoredTokenFlow),
+    call(logoutFlow),
   ]);
 }

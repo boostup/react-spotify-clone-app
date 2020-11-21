@@ -14,15 +14,19 @@ import TopTracksIcon from "@material-ui/icons/Whatshot";
 import RecentTracksIcon from "@material-ui/icons/TrendingUp";
 
 import "./Home.css";
+import { selectAuth } from "redux/auth/selectors";
 
 function Home() {
   const dispatch = useDispatch();
+  const authState = useSelector(selectAuth);
   const pageState = useSelector(selectHomePage);
   const { savedTracks, topTracks, recentTracks } = pageState;
 
   useEffect(() => {
-    dispatch(fetchHomePageDataStart());
-  }, [dispatch]);
+    if (authState.success === true) {
+      dispatch(fetchHomePageDataStart());
+    }
+  }, [dispatch, authState.success]);
 
   return (
     <MainLayoutPageWrapper
