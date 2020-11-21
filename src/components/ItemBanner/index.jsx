@@ -1,7 +1,7 @@
 import React from "react";
 
 import Duration from "../Duration";
-import ImageFader from "../ImageFader";
+import ImageFader from "../ImageLoader";
 
 import "./ItemBanner.css";
 
@@ -15,7 +15,7 @@ function ItemBanner({ item, variant, tracks }) {
   return (
     <div className="itemBanner">
       <div className="itemBanner__info">
-        <ImageFader src={item?.images[0].url} type="crossFade" />
+        <ImageFader src={item?.images[0].url} alt={item?.name} />
         <div className="itemBanner__infoText">
           <strong>{variant}</strong>
           <h2>{item?.name}</h2>
