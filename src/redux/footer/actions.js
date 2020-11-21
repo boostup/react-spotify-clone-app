@@ -8,3 +8,8 @@ export const setCurrentPlaybackState = (payload) => ({
   type: actionTypes.SET_CURRENT_PLAYBACK_STATE,
   payload: payload,
 });
+
+export const caughtRemoteControlApiError = (error) => ({
+  type: actionTypes.REMOTE_CONTROL_API_ERROR,
+  payload: error,
+});

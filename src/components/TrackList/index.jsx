@@ -6,8 +6,11 @@ import { playTrack } from "redux/footer/async-actions";
 import TrackRow from "../TrackRow";
 
 import "./TrackList.css";
+import { useDispatch } from "react-redux";
 
 function TrackList({ items, onPlay, firstLarge = true }) {
+  const dispatch = useDispatch();
+
   return (
     <div className={`trackList ${firstLarge ? "large" : ""}`}>
       {items
@@ -17,7 +20,7 @@ function TrackList({ items, onPlay, firstLarge = true }) {
             large={firstLarge && i === 0 ? true : false}
             //
             onPlay={(uri) => {
-              playTrack(uri);
+              playTrack(uri, dispatch);
             }}
             order={i + 1}
             key={uuid()}

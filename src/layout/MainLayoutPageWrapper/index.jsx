@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { selectAuth } from "redux/auth/selectors";
-import { startAuth } from "redux/auth/actions";
+import { authWithStoredTokenStart } from "redux/auth/actions";
 
 import HtmlHeadTitle from "../HtmlHeadTitle";
 import Sidebar from "../Sidebar";
@@ -21,9 +21,12 @@ function MainLayoutPageWrapper({ title, isLoading, children }) {
 
   useEffect(() => {
     /**
-     * STARTING AUTOMATIC AUTHORIZATION PROCESS HERE
+     * STARTING AUTHORIZATION WITH STORED TOKEN
+     * This is useful to
+     * 1) rehydrate Token & User data into the redux store in case the browser `page refresh` functionality was triggered by the user
+     * 2) to check token expiry on every page change.  The `authWithStoredTokenStart` will end up setting `authState.success` to false, which as seen below, will redirect the user the login page.
      */
-    dispatch(startAuth());
+    dispatch(authWithStoredTokenStart());
   }, [dispatch]);
 
   useEffect(() => {

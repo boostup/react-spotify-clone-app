@@ -3,6 +3,20 @@
   justify-content: space-between;
 }
 
+.spotifyRemoteControl__error {
+  position: absolute;
+  z-index: 10;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  font-size: 2rem;
+}
+
 .spotifyRemoteControl__left {
   flex: 0.3;
   display: flex;

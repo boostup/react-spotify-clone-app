@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { playItem } from "redux/footer/async-actions";
@@ -15,6 +16,7 @@ import "./ItemsGrid.css";
  */
 function ItemsGrid({ items, variant }) {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   return (
     <div className={`itemsGrid ${variant}`}>
@@ -28,7 +30,7 @@ function ItemsGrid({ items, variant }) {
               ? window.open(item.external_urls.spotify, "_blank")
               : history.push(`/${variant}/${item.id}`)
           }
-          onPlay={() => playItem(item.uri)}
+          onPlay={() => playItem(item.uri, dispatch)}
         />
       ))}
     </div>

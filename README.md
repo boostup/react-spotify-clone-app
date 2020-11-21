@@ -1,12 +1,14 @@
-[Live Demo](https://jovial-mccarthy-6875cf.netlify.app)
+[App Live Demo](https://jovial-mccarthy-6875cf.netlify.app)
+
+➡ [Project Roadmap](https://github.com/boostup/react-spotify-clone-app/wiki/Roadmap)
+
+➡ [Project Technical Characteristics](https://github.com/boostup/react-spotify-clone-app/wiki/Project-Technical-Characteristics)
+
+➡ [What I've learned](https://github.com/boostup/react-spotify-clone-app/wiki/What-I've-learned)
 
 <a href="https://jovial-mccarthy-6875cf.netlify.app" target="_blank">
     <img src="public/images/react-spotify-clone-app-screenshot.png" />
 </a>
-
----
-
-[Roadmap available here](https://github.com/boostup/react-spotify-clone-app/issues/1)
 
 ---
 

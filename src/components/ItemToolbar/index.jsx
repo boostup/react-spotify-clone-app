@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilledTwoTone";
-// import FavoriteIcon from "@material-ui/icons/Favorite";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import QueueIcon from "@material-ui/icons/Queue";
+import EditIcon from "@material-ui/icons/Edit";
 
 import ContextualMenu from "../ContextualMenu";
 import HeartToggle from "../HeartToggle";
@@ -11,17 +10,16 @@ import HeartToggle from "../HeartToggle";
 import "./ItemToolbar.css";
 
 function ItemToolbar({
-  // isOwner,
+  displayHeart,
   // isPlaylistFollower,
   // toggleFollowPlaylist,
-  onQueue,
   onPlay,
 }) {
   const menuOptions = [
     {
-      icon: QueueIcon,
-      title: "add first song to queue",
-      fn: () => onQueue(),
+      icon: EditIcon,
+      title: "edit playlist (under construction 👷)",
+      fn: () => {},
     },
   ];
 
@@ -39,15 +37,12 @@ function ItemToolbar({
     <div className="itemToolbar">
       <PlayCircleFilledIcon onClick={onPlay} className="itemToolbar__shuffle" />
 
-      {/* <FavoriteIcon className="itemToolbar__favorite" fontSize="large" /> */}
-
-      {
-        // !isOwner &&
+      {!displayHeart && (
         <HeartToggle
-        // status={false}
-        // onToggle={() => console.log("toggled!!!!!!!!!!!!!!!!!!!!!")}
+          // status={false}
+          onToggle={() => console.log("toggled!!!!!!!!!!!!!!!!!!!!!")}
         />
-      }
+      )}
 
       <MoreHorizIcon className="itemToolbar__more" onClick={handleClick} />
       <ContextualMenu

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { addToMySavedTracks } from "redux/home-page/async-actions";
 import { addToQueue } from "redux/footer/async-actions";
@@ -22,6 +23,7 @@ import "./TrackRow.css";
 
 function TrackRow({ order, track, large = true, onPlay }) {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -89,7 +91,7 @@ function TrackRow({ order, track, large = true, onPlay }) {
           {
             icon: QueueIcon,
             title: "add to queue",
-            fn: () => addToQueue(track.uri),
+            fn: () => addToQueue(track.uri, dispatch),
           },
           {
             icon: RadioIcon,

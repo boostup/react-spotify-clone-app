@@ -14,12 +14,13 @@ import {
   toggleIsItemPage,
 } from "redux/item-page/actions";
 
-import { addToQueue, playItem } from "redux/footer/async-actions";
+import { playItem } from "redux/footer/async-actions";
 
 import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
 import ItemBanner from "components/ItemBanner";
 import ItemToolbar from "components/ItemToolbar";
 import TrackList from "components/TrackList";
+import { selectAuthUser } from "redux/auth/selectors";
 
 /**
  * Is understood by Item :
@@ -36,14 +37,13 @@ function ItemPage({
   },
 }) {
   const dispatch = useDispatch();
-  // const {
-  //   // user,
-  // } = useSelector(selectAuth);
-
+  const user = useSelector(selectAuthUser);
   const pageState = useSelector(selectItemPage);
   const { item } = pageState;
   const tracks = item?.items || [];
   const pageTitle = item?.name;
+  const isItemOwner =
+    user?.display_name === item?.owner?.display_name ? true : false;
 
   useEffect(() => {
     dispatch(toggleIsItemPage(true));
@@ -66,8 +66,8 @@ function ItemPage({
         <ItemBanner item={item} variant={variant} tracks={tracks} />
 
         <ItemToolbar
-          onQueue={() => addToQueue(tracks[0]?.uri)}
-          onPlay={() => playItem(item?.uri)}
+          displayHeart={isItemOwner}
+          onPlay={() => playItem(item?.uri, dispatch)}
         />
         <TrackList firstLarge={false} items={tracks} />
       </div>

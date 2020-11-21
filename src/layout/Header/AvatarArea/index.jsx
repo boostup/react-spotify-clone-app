@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Avatar } from "@material-ui/core";
 
-import { avatarMenuOptions } from "utils/constants";
 import ContextualMenu from "components/ContextualMenu";
 
 import "./AvatarArea.css";
 
-function AvatarArea({ userAvatar, userName }) {
+function AvatarArea({ userAvatar, userName, menuOptions }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -25,7 +24,7 @@ function AvatarArea({ userAvatar, userName }) {
       </div>
       <ContextualMenu
         menuId="avatar-menu"
-        menuOptions={avatarMenuOptions}
+        menuOptions={menuOptions}
         anchorEl={anchorEl}
         onClose={handleClose}
       />

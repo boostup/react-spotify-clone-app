@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { selectAuthUser } from "redux/auth/selectors";
+import { logout } from "redux/auth/actions";
 import { selectHeader } from "redux/header/selectors";
-import { playItem } from "redux/footer/async-actions";
-import { selectItemPage } from "redux/item-page/selectors";
 import {
   toggleDisplayItemToolbar,
   // isPlaylistFollowedByUser,
 } from "redux/header/actions";
+import { selectItemPage } from "redux/item-page/selectors";
+import { playItem } from "redux/footer/async-actions";
 
 import SearchField from "./SearchField";
 import ItemHeaderToolbar from "./ItemHeaderToolbar";
@@ -32,6 +33,12 @@ function Header({ className, bodyComponentScrollValue }) {
   const user = useSelector(selectAuthUser);
   const userAvatar = user?.images[0].url;
   const userName = user?.display_name;
+
+  const menuOptions = [
+    { title: "Account", url: process.env.REACT_APP_AVATAR_MENU_ACCOUNT },
+    { title: "Profile", url: process.env.REACT_APP_AVATAR_MENU_PROFILE },
+    { title: "Logout", fn: () => dispatch(logout()) },
+  ];
 
   const searchBarClassName = () =>
     displaySearchBar ? "showSearchbar" : "hideSearchbar";
@@ -65,10 +72,13 @@ function Header({ className, bodyComponentScrollValue }) {
         className={`header__left ${searchBarClassName()} ${itemToolbarClassName()} `}
       >
         <SearchField {...{ dispatch, useSelector, displaySearchBar }} />
-        <ItemHeaderToolbar title={itemName} onPlay={() => playItem(itemURI)} />
+        <ItemHeaderToolbar
+          title={itemName}
+          onPlay={() => playItem(itemURI, dispatch)}
+        />
       </div>
       <div className="header__right">
-        <AvatarArea {...{ userAvatar, userName }} />
+        <AvatarArea {...{ userAvatar, userName, menuOptions }} />
       </div>
     </div>
   );
