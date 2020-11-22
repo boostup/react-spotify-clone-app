@@ -1,8 +1,6 @@
 import React from "react";
 
 function SpotifyAnimatedWrapper({ children, logo, name }) {
-  console.log(logo, name);
-
   let height = 168;
   let width = 559;
   if (logo && !name) {

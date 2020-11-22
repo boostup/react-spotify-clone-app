@@ -29,7 +29,8 @@ function MainLayoutPageWrapper({ title, isLoading, children }) {
      * 2) to check token expiry on every page change.  The `authWithStoredTokenStart` will end up setting `authState.success` to false, which as seen below, will redirect the user the login page.
      */
     dispatch(authWithStoredTokenStart());
-  }, [dispatch]);
+    //`isLoading` is necessary here also as a dependency. Otherwise, the token expiry verification would not trigger when navigating between 2 of the same routes ie `/playlist/someId` and `/playlist/someOtherId`
+  }, [dispatch, isLoading]);
 
   useEffect(() => {
     if (authState.success === false) {
