@@ -10,7 +10,8 @@ import Sidebar from "../Sidebar";
 import Header from "../Header";
 import Body from "../Body";
 import Footer from "../Footer";
-import Loading from "components/Loading";
+import SpotifyAnimated from "components/SpotifyAnimated/";
+import { useSplashScreen } from "components/SpotifyAnimated/useSplashScreen";
 
 import "./MainLayoutPageWrapper.css";
 
@@ -18,6 +19,7 @@ function MainLayoutPageWrapper({ title, isLoading, children }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const authState = useSelector(selectAuth);
+  const displaySplashScreen = useSplashScreen();
 
   useEffect(() => {
     /**
@@ -53,7 +55,10 @@ function MainLayoutPageWrapper({ title, isLoading, children }) {
         {...{ bodyComponentScrollValue }}
       />
       <Body onScroll={handleScroll} className="mainLayout__body body">
-        {isLoading ? <Loading /> : children}
+        <>
+          {displaySplashScreen && <SpotifyAnimated logo name />}
+          {isLoading ? <SpotifyAnimated logo /> : children}
+        </>
       </Body>
       <Footer className="mainLayout__footer footer" />
     </div>
