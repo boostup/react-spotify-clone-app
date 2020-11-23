@@ -3,6 +3,10 @@ import { homePageActionTypes as actionTypes } from "./types";
 import { spotifyAPI } from "libs/spotify";
 import { setMySavedTracks, setRecentTracks, setTopTracks } from "./actions";
 import { delay } from "utils/time";
+import {
+  SPLASH_SCREEN_DURATION,
+  canDisplaySplashScreen,
+} from "components/SpotifyAnimated/useSplashScreen";
 
 /**
  * WORKER SAGAS
@@ -55,7 +59,9 @@ function* fetchHomePageDataStartAsync() {
       call(getMyRecentTracksAsync),
     ]);
 
-    yield call(delay, 3000);
+    if (canDisplaySplashScreen()) {
+      yield call(delay, SPLASH_SCREEN_DURATION);
+    }
 
     yield put({
       type: actionTypes.FETCH_HOME_PAGE_DATA_SUCCESS,

@@ -14,7 +14,7 @@ import ShareIcon from "@material-ui/icons/Share";
 
 import Artists from "../Artists";
 import Duration from "../Duration";
-import ImageFader from "../ImageFader";
+import ImageFader from "../ImageLoader";
 import HeartToggle from "../HeartToggle";
 
 import ContextualMenu from "../ContextualMenu";
@@ -44,8 +44,9 @@ function TrackRow({ order, track, large = true, onPlay }) {
 
       {track?.album && (
         <ImageFader
-          containerClass="trackRow__album"
+          className="trackRow__album"
           src={track?.album.images[large ? 0 : 1].url}
+          alt={track?.name}
         />
       )}
 
