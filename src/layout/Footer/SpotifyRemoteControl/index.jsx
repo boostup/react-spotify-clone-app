@@ -9,7 +9,7 @@ import {
   selectFooterError,
   selectFooterCurrentPlaybackState,
 } from "redux/footer/selectors";
-import { fetchMyCurrentPlaybackState } from "redux/footer/actions";
+import { fetchCurrentPlaybackState } from "redux/footer/actions";
 import * as actions from "redux/footer/async-actions";
 
 import "./SpotifyRemoteControl.css";
@@ -33,7 +33,7 @@ function SpotifyRemoteControl() {
     token: getToken(),
     onPlayerStateChanged: (playbackState) => {
       //Normally, i would use the values of the `playbackState` object returned here, however, the Spotify Playback SDK is in BETA at this very moment, and the data is not consistent with the data provided through the Spotify Web API.  Therefore, I make here yet another request, just to get consistent data object types
-      dispatch(fetchMyCurrentPlaybackState());
+      dispatch(fetchCurrentPlaybackState());
     },
   });
 

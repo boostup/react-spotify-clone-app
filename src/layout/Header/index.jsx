@@ -31,7 +31,7 @@ function Header({ className, bodyComponentScrollValue }) {
   const itemURI = item?.uri;
 
   const user = useSelector(selectAuthUser);
-  const userAvatar = user?.images[0].url;
+  const userAvatar = user?.images[0]?.url;
   const userName = user?.display_name;
 
   const menuOptions = [
