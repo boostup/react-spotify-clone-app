@@ -17,9 +17,11 @@ import "./SpotifyRemoteControl.css";
 import TrackPanel from "./TrackPanel";
 import CentralPanel from "./CentralPanel";
 import RightPanel from "./RightPanel";
+import { selectAuthUser } from "redux/auth/selectors";
 
 function SpotifyRemoteControl() {
   const dispatch = useDispatch();
+  const user = useSelector(selectAuthUser);
   const currentplaybackState = useSelector(selectFooterCurrentPlaybackState);
   const remoteControlError = useSelector(selectFooterError);
   const [displayError, setDisplayError] = useState(remoteControlError !== null);
@@ -45,16 +47,21 @@ function SpotifyRemoteControl() {
   return (
     <div className="spotifyRemoteControl">
       <Grow in={displayError}>
-        <p className="spotifyRemoteControl__error">
-          Remote control failed: No active device. Please start playing music on
-          your spotify account for this remote control to work.
+        <div className="spotifyRemoteControl__error">
+          <p>{remoteControlError?.message}.&nbsp;</p>
+          {user?.product !== "premium" && (
+            <p>
+              Please start playing music on your spotify account for this remote
+              control to work.
+            </p>
+          )}
           <button
             className="spotifyButton"
             onClick={() => setDisplayError(false)}
           >
             dismiss
           </button>
-        </p>
+        </div>
       </Grow>
 
       <div className="spotifyRemoteControl__left">

@@ -14,14 +14,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...initialState,
         error: action.payload,
-        success: false,
       };
 
     case actionTypes.AUTH_SUCCESS:
       return {
         ...state,
         success: true,
-        error: false,
+        error: null,
       };
 
     case actionTypes.SET_USER:

@@ -4,8 +4,8 @@
  * @param {int} miliseconds
  * @return {int} miliseconds
  */
-export const addMsToNow = (miliseconds) =>
-  new Date().getTime() + miliseconds * 1000;
+export const addSecondsToNow = (seconds) =>
+  new Date().getTime() + seconds * 1000;
 
 /**
  *
