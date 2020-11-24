@@ -6,7 +6,7 @@ import { loadMore } from "redux/events/actions";
  * This is useful to detect when the `Body` component is scrolled all the way down, that the action to load more is dispatched.
  *
  */
-export default function useLoadMore(offset = 1000) {
+export default function useLoadMore(offset = 2000) {
   const dispatch = useDispatch();
 
   return function shouldLoadMore(e) {
