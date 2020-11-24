@@ -1,8 +1,8 @@
 import React from "react";
-import useScrollTo from "utils/useScrollTo";
+import useScrollTop from "./useScrollTop";
 
 function Body({ children, className, onScroll }) {
-  const bodyRef = useScrollTo();
+  const bodyRef = useScrollTop();
 
   return (
     <div ref={bodyRef} className={className} onScroll={onScroll}>

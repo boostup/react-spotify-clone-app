@@ -3,6 +3,7 @@ import { headerActionTypes as actionTypes } from "./types.js";
 const initialState = {
   displayItemToolbar: false,
   displaySearchBar: false,
+  clickToggle: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -17,6 +18,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         displaySearchBar: action.payload,
+      };
+
+    case actionTypes.TOGGLE_HEADER_CLICK:
+      return {
+        ...state,
+        clickToggle: !state.clickToggle,
       };
 
     default:

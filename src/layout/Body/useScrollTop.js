@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
+
 import { useSelector } from "react-redux";
+import { selectHeaderClickToggle } from "redux/header/selectors";
 import { selectItemPage } from "redux/item-page/selectors";
 
 /**
@@ -8,13 +10,14 @@ import { selectItemPage } from "redux/item-page/selectors";
  *
  * @param {int} value the amount of pixels to scroll to
  */
-export default function useScrollTo(value = 0) {
+export default function useScrollTop() {
   const itemState = useSelector(selectItemPage);
+  const headerClickToggle = useSelector(selectHeaderClickToggle);
   const HTMLelementRef = useRef();
 
   useEffect(() => {
-    HTMLelementRef.current.scrollTop = value;
-  }, [itemState, value]);
+    HTMLelementRef.current.scrollTop = 0;
+  }, [itemState, headerClickToggle]);
 
   return HTMLelementRef;
 }

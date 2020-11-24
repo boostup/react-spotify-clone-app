@@ -6,6 +6,7 @@ import { logout } from "redux/auth/actions";
 import { selectHeader } from "redux/header/selectors";
 import {
   toggleDisplayItemToolbar,
+  toggleHeaderClick,
   // isPlaylistFollowedByUser,
 } from "redux/header/actions";
 import { selectItemPage } from "redux/item-page/selectors";
@@ -67,7 +68,10 @@ function Header({ className, bodyComponentScrollValue }) {
   }, [dispatch, isItemPage, displayItemToolbar, bodyComponentScrollValue]);
 
   return (
-    <div className={`${className}  ${isHeaderScroll ? "scrolled" : "top"}`}>
+    <div
+      className={`${className}  ${isHeaderScroll ? "scrolled" : "top"}`}
+      onClick={() => dispatch(toggleHeaderClick())}
+    >
       <div
         className={`header__left ${searchBarClassName()} ${itemToolbarClassName()} `}
       >
