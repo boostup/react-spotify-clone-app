@@ -1,9 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-
-import { selectAuth } from "redux/auth/selectors";
-import { authWithStoredTokenStart } from "redux/auth/actions";
+import React, { useState } from "react";
 
 import HtmlHeadTitle from "../HtmlHeadTitle";
 import Sidebar from "../Sidebar";
@@ -16,30 +11,7 @@ import { useSplashScreen } from "components/SpotifyAnimated/useSplashScreen";
 import "./MainLayoutPageWrapper.css";
 
 function MainLayoutPageWrapper({ title, isLoading, children }) {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const authState = useSelector(selectAuth);
   const displaySplashScreen = useSplashScreen();
-
-  useEffect(() => {
-    /**
-     * STARTING AUTHORIZATION WITH STORED TOKEN
-     * This is useful to
-     * 1) rehydrate Token & User data into the redux store in case the browser `page refresh` functionality was triggered by the user
-     * 2) to check token expiry on every page change.  The `authWithStoredTokenStart` will end up setting `authState.success` to false, which as seen below, will redirect the user the login page.
-     */
-    dispatch(authWithStoredTokenStart());
-    //`isLoading` is necessary here also as a dependency. Otherwise, the token expiry verification would not trigger when navigating between 2 of the same routes ie `/playlist/someId` and `/playlist/someOtherId`
-  }, [dispatch, isLoading]);
-
-  useEffect(() => {
-    if (authState.success === false) {
-      history.replace({
-        pathname: "/login",
-        state: { error: authState.error },
-      });
-    }
-  }, [history, authState]);
 
   const [bodyComponentScrollValue, setBodyComponentScrollValue] = useState(0);
 

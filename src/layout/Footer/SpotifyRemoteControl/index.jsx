@@ -9,7 +9,7 @@ import {
   selectFooterError,
   selectFooterCurrentPlaybackState,
 } from "redux/footer/selectors";
-import { fetchMyCurrentPlaybackState } from "redux/footer/actions";
+import { fetchCurrentPlaybackState } from "redux/footer/actions";
 import * as actions from "redux/footer/async-actions";
 
 import "./SpotifyRemoteControl.css";
@@ -17,9 +17,11 @@ import "./SpotifyRemoteControl.css";
 import TrackPanel from "./TrackPanel";
 import CentralPanel from "./CentralPanel";
 import RightPanel from "./RightPanel";
+import { selectAuthUser } from "redux/auth/selectors";
 
 function SpotifyRemoteControl() {
   const dispatch = useDispatch();
+  const user = useSelector(selectAuthUser);
   const currentplaybackState = useSelector(selectFooterCurrentPlaybackState);
   const remoteControlError = useSelector(selectFooterError);
   const [displayError, setDisplayError] = useState(remoteControlError !== null);
@@ -33,7 +35,7 @@ function SpotifyRemoteControl() {
     token: getToken(),
     onPlayerStateChanged: (playbackState) => {
       //Normally, i would use the values of the `playbackState` object returned here, however, the Spotify Playback SDK is in BETA at this very moment, and the data is not consistent with the data provided through the Spotify Web API.  Therefore, I make here yet another request, just to get consistent data object types
-      dispatch(fetchMyCurrentPlaybackState());
+      dispatch(fetchCurrentPlaybackState());
     },
   });
 
@@ -45,16 +47,21 @@ function SpotifyRemoteControl() {
   return (
     <div className="spotifyRemoteControl">
       <Grow in={displayError}>
-        <p className="spotifyRemoteControl__error">
-          Remote control failed: No active device. Please start playing music on
-          your spotify account for this remote control to work.
+        <div className="spotifyRemoteControl__error">
+          <p>{remoteControlError?.message}.&nbsp;</p>
+          {user?.product !== "premium" && (
+            <p>
+              Please start playing music on your spotify account for this remote
+              control to work.
+            </p>
+          )}
           <button
             className="spotifyButton"
             onClick={() => setDisplayError(false)}
           >
             dismiss
           </button>
-        </p>
+        </div>
       </Grow>
 
       <div className="spotifyRemoteControl__left">

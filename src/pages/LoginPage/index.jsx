@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-import { LOGIN_LOCATION } from "libs/spotify";
+import { AUTH_BACKEND_LOCATION } from "libs/spotify";
 
 import { ReactComponent as Logo } from "assets/spotifLylogo.svg";
 
@@ -12,7 +12,7 @@ function LoginPage() {
   const error = location?.state?.error;
 
   const handleLogin = () => {
-    window.location = LOGIN_LOCATION;
+    window.location = AUTH_BACKEND_LOCATION;
   };
 
   return (

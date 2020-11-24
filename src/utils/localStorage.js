@@ -54,3 +54,16 @@ export function getTokenExpiry() {
   const stored = get();
   return stored && stored.tokenExpiry ? stored.tokenExpiry : false;
 }
+
+export function storeRefreshToken(_refreshToken) {
+  const stored = get();
+  set({
+    ...stored,
+    refreshToken: _refreshToken,
+  });
+}
+
+export function getRefreshToken() {
+  const stored = get();
+  return stored && stored.refreshToken ? stored.refreshToken : false;
+}

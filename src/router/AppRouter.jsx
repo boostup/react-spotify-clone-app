@@ -1,18 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import {
-  HashRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
 import RouteDebugging from "./RouteDebugging";
+import PrivateRoute from "./PrivateRoute";
 
-import { selectAuthUser } from "redux/auth/selectors";
 import SpotifyLogin from "redirects/SpotifyLogin";
-import SpotifyLogout from "redirects/SpotifyLogout";
-
 import LoginPage from "pages/LoginPage";
 import Home from "pages/Home";
 import NotFoundPage from "pages/NotFoundPage";
@@ -23,35 +15,33 @@ import FeaturedPage from "pages/FeaturedPage";
 import ErrorBoundary from "components/ErrorBoundary";
 
 const AppRouter = () => {
-  const user = useSelector(selectAuthUser);
   return (
     <Router>
       <RouteDebugging>
         <ErrorBoundary>
           <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/:variant/:id" component={ItemPage} />
-            <Route
-              exact
+            <PrivateRoute
+              path="/:variant(playlist|album)/:id"
+              component={ItemPage}
+            />
+            <PrivateRoute
               path="/featured/:trackId/:trackName"
               component={FeaturedPage}
             />
-            <Route exact path="/search">
+            <PrivateRoute path="/search">
               <SearchPage />
-            </Route>
-            <Route exact path="/library">
+            </PrivateRoute>
+            <PrivateRoute path="/library">
               <UserLibraryPage />
-            </Route>
-            <Route exact path="/access_token=:params">
+            </PrivateRoute>
+            <PrivateRoute exact path="/">
+              <Home />
+            </PrivateRoute>
+            <Route path="/spotify_redirect">
               <SpotifyLogin />
             </Route>
-            <Route exact path="/login">
-              {user ? <Redirect to="/" /> : <LoginPage />}
-            </Route>
-            <Route path="/logout">
-              <SpotifyLogout />
+            <Route path="/login">
+              <LoginPage />
             </Route>
             <Route>
               <NotFoundPage />

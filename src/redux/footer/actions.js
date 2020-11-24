@@ -1,7 +1,7 @@
 import { footerActionTypes as actionTypes } from "./types";
 
-export const fetchMyCurrentPlaybackState = () => ({
-  type: actionTypes.FETCH_CURRENT_PLAYBACK_STATE,
+export const fetchCurrentPlaybackState = () => ({
+  type: actionTypes.FETCH_CURRENT_PLAYBACK_STATE_START,
 });
 
 export const setCurrentPlaybackState = (payload) => ({

@@ -6,6 +6,7 @@ import { logout } from "redux/auth/actions";
 import { selectHeader } from "redux/header/selectors";
 import {
   toggleDisplayItemToolbar,
+  toggleHeaderClick,
   // isPlaylistFollowedByUser,
 } from "redux/header/actions";
 import { selectItemPage } from "redux/item-page/selectors";
@@ -31,7 +32,7 @@ function Header({ className, bodyComponentScrollValue }) {
   const itemURI = item?.uri;
 
   const user = useSelector(selectAuthUser);
-  const userAvatar = user?.images[0].url;
+  const userAvatar = user?.images[0]?.url;
   const userName = user?.display_name;
 
   const menuOptions = [
@@ -67,7 +68,10 @@ function Header({ className, bodyComponentScrollValue }) {
   }, [dispatch, isItemPage, displayItemToolbar, bodyComponentScrollValue]);
 
   return (
-    <div className={`${className}  ${isHeaderScroll ? "scrolled" : "top"}`}>
+    <div
+      className={`${className}  ${isHeaderScroll ? "scrolled" : "top"}`}
+      onClick={() => dispatch(toggleHeaderClick())}
+    >
       <div
         className={`header__left ${searchBarClassName()} ${itemToolbarClassName()} `}
       >

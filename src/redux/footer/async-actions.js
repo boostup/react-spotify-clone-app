@@ -6,14 +6,16 @@ import {
   setCurrentPlaybackState,
 } from "./actions";
 
-export function* fetchMyCurrentPlaybackStateAsync() {
+export function* fetchCurrentPlaybackStateAsync() {
   try {
     const res = yield spotifyAPI.getMyCurrentPlaybackState();
     if (res === "") return; //No tracks currently playing
     yield put(setCurrentPlaybackState(res));
     return res;
-  } catch (error) {
-    throw error;
+  } catch (_error) {
+    const { error } = yield JSON.parse(_error.response);
+    const { status, message } = error;
+    put(caughtRemoteControlApiError({ status, message }));
   }
 }
 
@@ -24,7 +26,7 @@ export function* fetchMyCurrentPlaybackStateAsync() {
 export function* watchCanGetFooterData() {
   yield takeLatest(
     actionTypes.FETCH_CURRENT_PLAYBACK_STATE_START,
-    fetchMyCurrentPlaybackStateAsync
+    fetchCurrentPlaybackStateAsync
   );
 }
 
