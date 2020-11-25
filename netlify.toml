@@ -1,5 +1,5 @@
 [build]
-    functions = "functions"
+    functions = "backend"
 [[redirects]]
     from = "/api/*"
     to= "/.netlify/functions/:splat"
