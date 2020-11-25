@@ -1,67 +1,74 @@
-import { all, takeLatest, call, put } from "redux-saga/effects";
+import { all, takeLatest, call, put, select, spawn } from "redux-saga/effects";
 import { itemPageActionTypes as actionTypes } from "./types";
+import { eventsActionTypes } from "redux/events/types";
 import { spotifyAPI } from "libs/spotify";
 import { setItem } from "./actions";
+import { selectItem, selectIsItemPage, selectItemTracks } from "./selectors";
+import { addTracks, getFnName, normalizePlaylistTracks } from "./utils";
 
 /**
  * WORKER SAGAS
  */
 
-function* getPlaylistAsync(id) {
+function* getMoreTracksAsync(_item, variant, _options) {
   try {
-    const data = yield spotifyAPI.getPlaylist(id);
-    const playlistItem = {
-      ...data,
-      items: data.tracks.items.map((i) => i.track),
+    const APIfnName = getFnName(variant, "Tracks");
+    const data = yield spotifyAPI[APIfnName](_item.id, _options);
+    const prevTracksObj = yield select(selectItemTracks);
+    const prevTracks = yield prevTracksObj?.items || [];
+    const newItem = {
+      ..._item,
+      tracks: {
+        ...data,
+        items: addTracks(variant, prevTracks, data.items),
+      },
     };
-    yield put(setItem(playlistItem));
-    return playlistItem;
+    yield put(setItem(newItem));
+    return newItem;
   } catch (error) {
     throw error;
   }
 }
 
-function* getAlbumAsync(id) {
+function* fetchMoreTracksStartAsync() {
+  const isItemPage = yield select(selectIsItemPage);
+  if (!isItemPage) return;
+  const tracks = yield select(selectItemTracks);
+  if (!tracks.next) return;
+  const nextOffset = yield tracks.offset + tracks.limit;
+  const item = yield select(selectItem);
+  yield spawn(getMoreTracksAsync, item, item.type, {
+    offset: nextOffset,
+    limit: 100,
+  });
+}
+
+function* getItemAsync(id, variant) {
+  const APIfnName = getFnName(variant, "");
   try {
-    const data = yield spotifyAPI.getAlbum(id);
-    const albumItem = {
+    const data = yield spotifyAPI[APIfnName](id);
+    const item = {
       ...data,
-      items: data.tracks.items.map((i) => i),
+      tracks: {
+        ...data.tracks,
+        items:
+          variant === "playlist"
+            ? normalizePlaylistTracks(data.tracks.items)
+            : data.tracks.items,
+      },
     };
-    yield put(setItem(albumItem));
-    return albumItem;
+    yield put(setItem(item));
+    return item;
   } catch (error) {
     throw error;
   }
 }
-
-// export function isPlaylistFollowedByUser({ playlistId, userId }, dispatch) {
-//   spotifyAPI
-//     .areFollowingPlaylist(playlistId, [userId])
-//     .then((data) => {
-//       return dispatch(setIsPlaylistFollower(data[0]));
-//     })
-// }
-
-// export function togglefollowPlaylist({ id, follow }) {
-//   follow
-//     ? //
-//       spotifyAPI.areFollowingPlaylist.followPlaylist(id)
-//     : spotifyAPI.unfollowPlaylist(id);
-// }
 
 function* fetchItemPageDataStartAsync({ payload }) {
-  const fetchItem = yield (type) => {
-    const get = {
-      album: getAlbumAsync,
-      playlist: getPlaylistAsync,
-    };
-    return get[type];
-  };
-
   try {
     const { id, variant } = payload;
-    yield fetchItem(variant)(id);
+
+    yield getItemAsync(id, variant);
     yield put({
       type: actionTypes.FETCH_ITEM_PAGE_DATA_SUCCESS,
     });
@@ -76,8 +83,17 @@ function* fetchItemPageDataStartAsync({ payload }) {
 
 export function* watchCanGetItemPageData() {
   yield takeLatest(
+    //
     actionTypes.FETCH_ITEM_PAGE_DATA_START,
     fetchItemPageDataStartAsync
+  );
+}
+
+export function* watchLoadMore() {
+  yield takeLatest(
+    //
+    eventsActionTypes.LOAD_MORE,
+    fetchMoreTracksStartAsync
   );
 }
 
@@ -85,5 +101,6 @@ export function* itemPageSagas() {
   yield all([
     //
     call(watchCanGetItemPageData),
+    call(watchLoadMore),
   ]);
 }

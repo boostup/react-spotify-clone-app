@@ -43,6 +43,13 @@ function SearchPage() {
       <div className="searchPage">
         {!searchResults && <h1>Search millions of tracks...</h1>}
 
+        {albums && (
+          <>
+            <SectionHeading icon={AlbumIcon} title="Albums" />
+            <ItemsGrid variant="album" items={albums} />
+          </>
+        )}
+
         {artists && (
           <>
             <SectionHeading icon={ArtistIcon} title="Artists" />
@@ -54,13 +61,6 @@ function SearchPage() {
           <>
             <SectionHeading icon={PlaylistIcon} title="Playlists" />
             <ItemsGrid variant="playlist" items={playlists} />
-          </>
-        )}
-
-        {albums && (
-          <>
-            <SectionHeading icon={AlbumIcon} title="Albums" />
-            <ItemsGrid variant="album" items={albums} />
           </>
         )}
       </div>

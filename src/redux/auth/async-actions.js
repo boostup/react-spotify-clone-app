@@ -1,6 +1,9 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
 import { authActionTypes as actionTypes } from "./types";
-import { spotifyAPI } from "libs/spotify";
+import {
+  spotifyAPI,
+  REFRESH_ACCESS_TOKEN_BACKEND_LOCATION,
+} from "libs/spotify";
 import {
   authWithRedirectionTokenStart,
   authWithStoredTokenStart,
@@ -96,19 +99,14 @@ function* authWithRedirectionToken() {
  */
 
 export function* authFlow() {
-  /* 
-              
-    is there a token in LocalStorage ? 
-        authWithStoredToken
-            if token valid => 
-            if not => refreshToken
-    if not => login => authWithBrowserLocation
-
-  /**
-   * STARTING AUTHORIZATION WITH STORED TOKEN
-   * This is useful to
-   * 1) rehydrate Token & User data into the redux store in case the browser `page refresh` functionality was triggered by the user
-   * 2) to check token expiry on every page change.  The `authWithStoredTokenStart` will end up setting `authState.success` to false, which as seen below, will redirect the user the login page.
+  /*
+   *  Overview of the Auth flow
+   *  is there a token in LocalStorage ?
+   *    => attempt auth'ing user automagically with the stored token => authWithStoredToken
+   *      if token valid => allow user to the app private routes
+   *      if not => refreshToken through the SpotifLy backend
+   *  if no token is found in LocalStorage => user manual login required => authWithBrowserLocation
+   *
    */
 
   yield takeLatest(actionTypes.AUTH_START, function* () {
@@ -132,9 +130,9 @@ export function* authWithStoredTokenFlow() {
     actionTypes.AUTH_START_WITH_STORED_TOKEN,
 
     function* () {
-      const isAllowed = yield call(isTokenValid);
+      const isValid = yield call(isTokenValid);
       const token = yield call(getToken);
-      if (isAllowed) {
+      if (isValid) {
         yield call(rehydrateSpotifyAccessToken, token);
         yield call(rehydrateUser);
         yield put({ type: actionTypes.AUTH_SUCCESS });
@@ -150,7 +148,7 @@ export function* refreshAccessTokenFlow() {
     try {
       const refreshToken = getRefreshToken();
       const result = yield fetch(
-        `http://localhost:5001/spotiflybackend/eur3/refresh?access_token=${getToken()}&refresh_token=${refreshToken}`
+        `${REFRESH_ACCESS_TOKEN_BACKEND_LOCATION}?access_token=${getToken()}&refresh_token=${refreshToken}`
       );
       const { access_token, expires_in } = yield result.json();
       yield call(

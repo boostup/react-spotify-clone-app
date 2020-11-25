@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// import { selectAuth } from ".redux/auth/selectors";
-import { selectItemPage } from "redux/item-page/selectors";
+import { selectAuthUser } from "redux/auth/selectors";
+import {
+  selectItem,
+  selectItemPage,
+  selectItemTracks,
+} from "redux/item-page/selectors";
 
 import {
   toggleDisplayItemToolbar,
@@ -20,7 +24,6 @@ import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
 import ItemBanner from "components/ItemBanner";
 import ItemToolbar from "components/ItemToolbar";
 import TrackList from "components/TrackList";
-import { selectAuthUser } from "redux/auth/selectors";
 
 /**
  * Is understood by Item :
@@ -39,8 +42,9 @@ function ItemPage({
   const dispatch = useDispatch();
   const user = useSelector(selectAuthUser);
   const pageState = useSelector(selectItemPage);
-  const { item } = pageState;
-  const tracks = item?.items || [];
+  const item = useSelector(selectItem);
+  const tracksObj = useSelector(selectItemTracks);
+  const tracks = tracksObj?.items || [];
   const pageTitle = item?.name;
   const isItemOwner =
     user?.display_name === item?.owner?.display_name ? true : false;
