@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { selectAuthUser } from "redux/auth/selectors";
@@ -34,11 +35,8 @@ import TrackList from "components/TrackList";
  *
  * Same applies for ItemsGrid, ItemBanner, TrackList
  */
-function ItemPage({
-  match: {
-    params: { id, variant },
-  },
-}) {
+function ItemPage() {
+  let { id, variant } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(selectAuthUser);
   const pageState = useSelector(selectItemPage);

@@ -4,7 +4,7 @@ import { eventsActionTypes } from "redux/events/types";
 import { spotifyAPI } from "libs/spotify";
 import { setItem } from "./actions";
 import { selectItem, selectIsItemPage, selectItemTracks } from "./selectors";
-import { addTracks, getFnName, normalizePlaylistTracks } from "./utils";
+import { addTracks, getFnName, normalizePlaylistTracks } from "./helpers";
 
 /**
  * WORKER SAGAS

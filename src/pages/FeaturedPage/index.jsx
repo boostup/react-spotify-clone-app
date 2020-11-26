@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import RadioIcon from "@material-ui/icons/Radio";
@@ -11,11 +12,8 @@ import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
 import TrackList from "components/TrackList";
 import ItemsGrid from "components/ItemsGrid";
 
-function FeaturedPage({
-  match: {
-    params: { trackId, trackName },
-  },
-}) {
+function FeaturedPage() {
+  let { trackId, trackName } = useParams();
   const dispatch = useDispatch();
   const pageState = useSelector(selectFeaturedPage);
   const { recommendedTracks, playlistsFeatured } = useSelector(
