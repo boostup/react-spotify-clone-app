@@ -20,14 +20,12 @@ const AppRouter = () => {
       <RouteDebugging>
         <ErrorBoundary>
           <Switch>
-            <PrivateRoute
-              path="/:variant(playlist|album)/:id"
-              component={ItemPage}
-            />
-            <PrivateRoute
-              path="/featured/:trackId/:trackName"
-              component={FeaturedPage}
-            />
+            <PrivateRoute path="/:variant(playlist|album)/:id">
+              <ItemPage />
+            </PrivateRoute>
+            <PrivateRoute path="/featured/:trackId/:trackName">
+              <FeaturedPage />
+            </PrivateRoute>
             <PrivateRoute path="/search">
               <SearchPage />
             </PrivateRoute>

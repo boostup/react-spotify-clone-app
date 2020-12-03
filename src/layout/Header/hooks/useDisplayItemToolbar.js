@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { toggleDisplayItemToolbar } from "redux/header/actions";
-import { selectHeader } from "redux/header/selectors";
-import { selectItemPage } from "redux/item-page/selectors";
+import { toggleDisplayItemToolbar } from "_redux/header/actions";
+import { selectHeader } from "_redux/header/selectors";
+import { selectItemPage } from "_redux/item-page/selectors";
 
 export function useDisplayItemToolbar(scrollValue) {
   const dispatch = useDispatch();

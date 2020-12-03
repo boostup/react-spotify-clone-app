@@ -1,6 +1,6 @@
 {
-    "compilerOptions": {
-      "baseUrl": "src",
-      "module": "es2015"
-    }
-  } 
+  "compilerOptions": {
+    "baseUrl": "./src"
+  },
+  "include": ["src"]
+}

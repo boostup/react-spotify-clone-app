@@ -1,24 +1,25 @@
 import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectAuthUser } from "redux/auth/selectors";
+import { selectAuthUser } from "_redux/auth/selectors";
 import {
   selectItem,
   selectItemPage,
   selectItemTracks,
-} from "redux/item-page/selectors";
+} from "_redux/item-page/selectors";
 
 import {
   toggleDisplayItemToolbar,
   // isPlaylistFollowedByUser,
-} from "redux/header/actions";
+} from "_redux/header/actions";
 
 import {
   fetchItemPageDataStart,
   toggleIsItemPage,
-} from "redux/item-page/actions";
+} from "_redux/item-page/actions";
 
-import { playItem } from "redux/footer/async-actions";
+import { playItem } from "_redux/footer/async-actions";
 
 import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
 import ItemBanner from "components/ItemBanner";
@@ -34,11 +35,8 @@ import TrackList from "components/TrackList";
  *
  * Same applies for ItemsGrid, ItemBanner, TrackList
  */
-function ItemPage({
-  match: {
-    params: { id, variant },
-  },
-}) {
+function ItemPage() {
+  let { id, variant } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(selectAuthUser);
   const pageState = useSelector(selectItemPage);

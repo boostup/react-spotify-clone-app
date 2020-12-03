@@ -2,8 +2,8 @@ import { createLogger } from "redux-logger";
 import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 
-import rootReducer from "redux/rootReducer";
-import rootSaga from "redux/rootSaga";
+import rootReducer from "_redux/rootReducer";
+import rootSaga from "_redux/rootSaga";
 
 //Create a logger with collapsed console log entries
 const logger = createLogger({

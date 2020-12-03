@@ -2,6 +2,7 @@ import { all, takeLatest, call, put } from "redux-saga/effects";
 import { sidebarActionTypes as actionTypes } from "./types";
 import { spotifyAPI } from "libs/spotify";
 import { setSidebarPlaylists } from "./actions";
+import { getRefreshToken, getToken, getUser } from "utils/localStorage";
 
 /**
  * WORKER SAGAS
@@ -9,7 +10,16 @@ import { setSidebarPlaylists } from "./actions";
 
 function* getMyPlaylistsAync() {
   try {
-    const playlists = yield spotifyAPI.getUserPlaylists();
+    const userId = getUser().id;
+    const offset = 25;
+    const refreshToken = getRefreshToken();
+    const accessToken = getToken();
+    const { REACT_APP_DOMAIN, REACT_APP_GET_ALL_PLAYLISTS } = process.env;
+
+    const url = `${REACT_APP_DOMAIN}${REACT_APP_GET_ALL_PLAYLISTS}?id=${userId}&offset=0&limit=${offset}&refresh_token=${refreshToken}&access_token=${accessToken}`;
+
+    const data = yield call(fetch, url);
+    const playlists = yield data.json();
     yield put(setSidebarPlaylists(playlists));
     return playlists;
   } catch (error) {

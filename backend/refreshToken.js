@@ -1,7 +1,7 @@
 require("dotenv").config();
 const formattedReturn = require("./helpers/formattedReturn");
 const spotifyUtils = require("./helpers/spotify.config");
-const queryParams = spotifyUtils.spotifyUtils;
+const queryParams = spotifyUtils.queryParams;
 const spotifyApi = spotifyUtils.spotifyApi;
 
 /**
@@ -10,25 +10,28 @@ const spotifyApi = spotifyUtils.spotifyApi;
  * 3) It sends the new refreshed token back to the Frontend using JSON
  */
 exports.handler = async (event, context, callback) => {
-  const expiredAccessToken =
-    event.queryStringParameters[queryParams.ACCESS_TOKEN];
-  const refreshToken = event.queryStringParameters[queryParams.REFRESH_TOKEN];
-
-  // Set the access token on the API object to use it in later calls
-  spotifyApi.setAccessToken(expiredAccessToken);
-  spotifyApi.setRefreshToken(refreshToken);
-
   try {
+    const expiredAccessToken =
+      event.queryStringParameters[queryParams.ACCESS_TOKEN];
+    const refreshToken = event.queryStringParameters[queryParams.REFRESH_TOKEN];
+
+    // Set the access token on the API object to use it in later calls
+    spotifyApi.setAccessToken(expiredAccessToken);
+    spotifyApi.setRefreshToken(refreshToken);
+
     const data = await spotifyApi.refreshAccessToken();
-    console.log("The access token has been refreshed!", data.body);
-    response.set("Access-Control-Allow-Origin", "*");
+    console.log(
+      "The access token has been refreshed!",
+      data.body[queryParams.ACCESS_TOKEN],
+      data.body[queryParams.EXPIRES_IN]
+    );
 
     return formattedReturn(200, {
       [queryParams.ACCESS_TOKEN]: data.body[queryParams.ACCESS_TOKEN],
       [queryParams.EXPIRES_IN]: data.body[queryParams.EXPIRES_IN],
     });
   } catch (error) {
-    console.error(err);
-    return formattedReturn(500, err);
+    console.error(error);
+    return formattedReturn(500, error);
   }
 };

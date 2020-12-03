@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectAuthUser } from "redux/auth/selectors";
-import { authStart } from "redux/auth/actions";
+import { selectAuthUser } from "_redux/auth/selectors";
+import { authStart } from "_redux/auth/actions";
 import { getUser } from "utils/localStorage";
 
 export default function useAuth() {
