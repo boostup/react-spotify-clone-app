@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { loadMore } from "redux/events/actions";
+import { loadMore } from "_redux/events/actions";
 
 /**
  *

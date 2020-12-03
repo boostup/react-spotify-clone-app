@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { toggleDisplaySearchBar } from "redux/header/actions";
+import { toggleDisplaySearchBar } from "_redux/header/actions";
 import {
   selectSearchPage,
   selectSearchPageSearchResults,
-} from "redux/search-page/selectors";
+} from "_redux/search-page/selectors";
 
 import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
 import SectionHeading from "components/SectionHeading";

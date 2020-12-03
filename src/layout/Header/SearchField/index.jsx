@@ -4,7 +4,7 @@ import SearchIcon from "@material-ui/icons/Search";
 
 import useDebounce from "utils/useDebounce";
 
-import { fetchSearchPageDataStart } from "redux/search-page/actions";
+import { fetchSearchPageDataStart } from "_redux/search-page/actions";
 
 import "./SearchField.css";
 

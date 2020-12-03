@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectAuthUser } from "redux/auth/selectors";
-import { logout } from "redux/auth/actions";
+import { selectAuthUser } from "_redux/auth/selectors";
+import { logout } from "_redux/auth/actions";
 import {
   toggleHeaderClick,
   // isPlaylistFollowedByUser,
-} from "redux/header/actions";
-import { playItem } from "redux/footer/async-actions";
+} from "_redux/header/actions";
+import { playItem } from "_redux/footer/async-actions";
 
 import { useDisplayHeaderBackground } from "./hooks/useDisplayHeaderBackground";
 import { useDisplayItemToolbar } from "./hooks/useDisplayItemToolbar";

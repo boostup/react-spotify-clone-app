@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { selectHeader } from "redux/header/selectors";
+import { selectHeader } from "_redux/header/selectors";
 
 export function useDisplaySearchBar() {
   const { displaySearchBar } = useSelector(selectHeader);

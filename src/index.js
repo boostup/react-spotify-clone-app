@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
-import store from "redux/store";
+import store from "_redux/store";
 
 import AppRouter from "router/AppRouter";
 

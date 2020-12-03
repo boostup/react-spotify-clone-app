@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectHomePage } from "redux/home-page/selectors";
+import { selectHomePage } from "_redux/home-page/selectors";
 
-import { fetchHomePageDataStart } from "redux/home-page/actions";
+import { fetchHomePageDataStart } from "_redux/home-page/actions";
 
 import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
 import TrackList from "components/TrackList";
@@ -14,7 +14,7 @@ import TopTracksIcon from "@material-ui/icons/Whatshot";
 import RecentTracksIcon from "@material-ui/icons/TrendingUp";
 
 import "./Home.css";
-import { selectAuth } from "redux/auth/selectors";
+import { selectAuth } from "_redux/auth/selectors";
 
 function Home() {
   const dispatch = useDispatch();

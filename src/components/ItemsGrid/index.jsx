@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { playItem } from "redux/footer/async-actions";
+import { playItem } from "_redux/footer/async-actions";
 import ItemCover from "../ItemCover";
 
 import "./ItemsGrid.css";

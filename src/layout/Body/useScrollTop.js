@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 
 import { useSelector } from "react-redux";
-import { selectHeaderClickToggle } from "redux/header/selectors";
-import { selectItem } from "redux/item-page/selectors";
+import { selectHeaderClickToggle } from "_redux/header/selectors";
+import { selectItem } from "_redux/item-page/selectors";
 
 /**
  *

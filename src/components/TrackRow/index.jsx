@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { addToMySavedTracks } from "redux/home-page/async-actions";
-import { addToQueue } from "redux/footer/async-actions";
+import { addToMySavedTracks } from "_redux/home-page/async-actions";
+import { addToQueue } from "_redux/footer/async-actions";
 
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import QueueIcon from "@material-ui/icons/Queue";

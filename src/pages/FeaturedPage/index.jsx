@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import RadioIcon from "@material-ui/icons/Radio";
 
-import { selectFeaturedPage } from "redux/featured-page/selectors";
-import { fetchFeaturedPageDataStart } from "redux/featured-page/actions";
+import { selectFeaturedPage } from "_redux/featured-page/selectors";
+import { fetchFeaturedPageDataStart } from "_redux/featured-page/actions";
 
 import SectionHeading from "components/SectionHeading";
 import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";

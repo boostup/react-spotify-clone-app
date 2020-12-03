@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { selectAuth } from "redux/auth/selectors";
-import { selectSidebarPlaylists } from "redux/sidebar/selectors";
-import { fetchSidebarDataStart } from "redux/sidebar/actions";
+import { selectAuth } from "_redux/auth/selectors";
+import { selectSidebarPlaylists } from "_redux/sidebar/selectors";
+import { fetchSidebarDataStart } from "_redux/sidebar/actions";
 
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
