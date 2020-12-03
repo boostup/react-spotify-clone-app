@@ -2,22 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Grow } from "@material-ui/core";
 
-import { DEVICE_NAME, useSpotifyWebPlaybackSDK } from "libs/spotify";
-import { getToken } from "utils/localStorage";
+// import { DEVICE_NAME, useSpotifyWebPlaybackSDK } from "libs/spotify";
+// import { getToken } from "utils/localStorage";
 
 import {
   selectFooterError,
   selectFooterCurrentPlaybackState,
-} from "redux/footer/selectors";
-import { fetchCurrentPlaybackState } from "redux/footer/actions";
-import * as actions from "redux/footer/async-actions";
+} from "_redux/footer/selectors";
+// import { fetchCurrentPlaybackState } from "_redux/footer/actions";
+import * as actions from "_redux/footer/async-actions";
 
 import "./SpotifyRemoteControl.css";
 
 import TrackPanel from "./TrackPanel";
 import CentralPanel from "./CentralPanel";
 import RightPanel from "./RightPanel";
-import { selectAuthUser } from "redux/auth/selectors";
+import { selectAuthUser } from "_redux/auth/selectors";
 
 function SpotifyRemoteControl() {
   const dispatch = useDispatch();
@@ -30,14 +30,14 @@ function SpotifyRemoteControl() {
     setDisplayError(remoteControlError);
   }, [remoteControlError]);
 
-  useSpotifyWebPlaybackSDK({
-    deviceName: DEVICE_NAME,
-    token: getToken(),
-    onPlayerStateChanged: (playbackState) => {
-      //Normally, i would use the values of the `playbackState` object returned here, however, the Spotify Playback SDK is in BETA at this very moment, and the data is not consistent with the data provided through the Spotify Web API.  Therefore, I make here yet another request, just to get consistent data object types
-      dispatch(fetchCurrentPlaybackState());
-    },
-  });
+  // useSpotifyWebPlaybackSDK({
+  //   deviceName: DEVICE_NAME,
+  //   token: getToken(),
+  //   onPlayerStateChanged: (playbackState) => {
+  //     //Normally, i would use the values of the `playbackState` object returned here, however, the Spotify Playback SDK is in BETA at this very moment, and the data is not consistent with the data provided through the Spotify Web API.  Therefore, I make here yet another request, just to get consistent data object types
+  //     dispatch(fetchCurrentPlaybackState());
+  //   },
+  // });
 
   const currentTrackName = currentplaybackState?.item.name;
   const albumImage = currentplaybackState?.item.album.images[2].url;

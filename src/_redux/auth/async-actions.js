@@ -69,7 +69,7 @@ function* storeAuthInLocalStorage(
 function* getTokenFromBrowserLocation() {
   const hash = yield getHashFromResponse(window.location.hash);
   /**
-   * "/access_token" has a "/", why ? Because of HashRouter.
+   * "/spotify_redirect?access_token" has a "/", why ? Because of HashRouter.
    * why HashRouter instead of typical BrowserRouter ?
    *
    * => https://github.com/boostup/react-spotify-clone-app/pull/2
