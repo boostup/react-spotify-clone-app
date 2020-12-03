@@ -58,9 +58,9 @@ export function getMeAsync() {
 
 function* storeAuthInLocalStorage(
   { token, expiry, refreshToken },
-  { display_name, images, product }
+  { id, display_name, images, product }
 ) {
-  yield display_name && call(storeUser, { display_name, images, product });
+  yield display_name && call(storeUser, { id, display_name, images, product });
   yield call(storeToken, token);
   yield call(storeTokenExpiry, addSecondsToNow(expiry));
   yield call(storeRefreshToken, refreshToken);
@@ -160,7 +160,8 @@ export function* refreshAccessTokenFlow() {
         },
         getUser()
       );
-      yield put(authWithStoredTokenStart());
+      // yield put(authWithStoredTokenStart());
+      window.location = "/";
     } catch (error) {
       yield put({ type: actionTypes.AUTH_ERROR, payload: error });
     }
