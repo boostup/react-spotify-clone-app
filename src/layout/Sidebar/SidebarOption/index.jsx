@@ -23,7 +23,7 @@ function SidebarOption({ title, Icon, to }) {
       {Icon ? (
         <h4>{title}</h4>
       ) : (
-        <Typography noWrap variant="p">
+        <Typography variant="inherit" noWrap>
           {title}
         </Typography>
       )}
