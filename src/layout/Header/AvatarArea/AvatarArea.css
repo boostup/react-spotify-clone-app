@@ -7,3 +7,9 @@
 .avatarArea__clicker > h4 {
   margin-left: 0.5rem;
 }
+
+@media (max-width: 375px) {
+  .avatarArea__clicker > h4 {
+    display: none;
+  }
+}

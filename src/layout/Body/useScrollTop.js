@@ -16,7 +16,11 @@ export default function useScrollTop() {
 
   useEffect(() => {
     return () => {
-      if (HTMLelementRef.current) HTMLelementRef.current.scrollTop = 0;
+      if (HTMLelementRef.current)
+        HTMLelementRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
     };
   }, [itemState?.id, headerClickToggle]);
 

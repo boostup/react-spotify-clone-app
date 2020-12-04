@@ -11,6 +11,7 @@ import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import RadioIcon from "@material-ui/icons/Radio";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
+import { Typography } from "@material-ui/core";
 
 import Artists from "../Artists";
 import Duration from "../Duration";
@@ -45,17 +46,19 @@ function TrackRow({ order, track, large = true, onPlay }) {
       {track?.album && (
         <ImageFader
           className="trackRow__album"
-          src={track?.album.images[large ? 0 : 1].url}
+          src={track?.album.images[large ? 0 : 2].url}
           alt={track?.name}
         />
       )}
 
       <div className="trackRow__info">
-        <span className="trackRow__info__duration">
-          <Duration ms={track?.duration_ms} />
-        </span>{" "}
-        <h1>{track?.name}</h1>
-        <p>
+        <Typography variant="h3" noWrap>
+          <span className="trackRow__info__duration">
+            <Duration ms={track?.duration_ms} />
+          </span>{" "}
+          <span>{track?.name}</span>
+        </Typography>
+        <Typography noWrap>
           {track.explicit && (
             <span title="Explicit" className="trackRow__explicit">
               e
@@ -63,7 +66,7 @@ function TrackRow({ order, track, large = true, onPlay }) {
           )}
           {track?.artists && <Artists items={track.artists} />}
           {track?.album && <> • {track.album.name}</>}
-        </p>
+        </Typography>
       </div>
 
       <div className="trackRow__toolbar">

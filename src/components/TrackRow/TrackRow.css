@@ -19,9 +19,13 @@
   margin-left: 1rem;
 }
 
-.trackRow__info h1 {
+.trackRow__info h3 {
   display: inline-block;
-  margin: 0.5rem 0;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: bold;
+  line-height: inherit;
+  letter-spacing: inherit;
 }
 
 .trackRow__info__duration {
@@ -32,6 +36,11 @@
   font-size: 1.3rem;
   margin-top: 3px;
   color: var(--main-interactive-text-color);
+}
+
+.trackRow__info h3,
+.trackRow__info p {
+  width: calc(80vw - var(--main-layout-sidebar-width));
 }
 
 .trackRow__explicit {
@@ -69,4 +78,26 @@
 .trackRow__more {
   color: var(--main-font-color);
   font-size: 2rem !important;
+}
+
+@media screen and (max-width: 960px) {
+  .trackRow__info h3,
+  .trackRow__info p {
+    width: calc(72vw - var(--main-layout-sidebar-width));
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .trackRow__info h3,
+  .trackRow__info p {
+    width: 49vw;
+  }
+
+  .trackRow__toolbar {
+    justify-content: flex-end;
+  }
+
+  .trackRow .heartToggle {
+    padding-right: 1rem;
+  }
 }

@@ -26,3 +26,11 @@
   transform: scale(0);
   animation: reveal 300ms ease 300ms 1 forwards;
 }
+
+@media (max-width: 600px) {
+  .itemHeaderToolbar__title {
+    font-size: 1.8rem;
+    width: 58%;
+    display: inline-block;
+  }
+}
