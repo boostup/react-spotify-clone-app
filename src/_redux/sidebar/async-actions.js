@@ -1,6 +1,5 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
 import { sidebarActionTypes as actionTypes } from "./types";
-import { spotifyAPI } from "libs/spotify";
 import { setSidebarPlaylists } from "./actions";
 import { getRefreshToken, getToken, getUser } from "utils/localStorage";
 

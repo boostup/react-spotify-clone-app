@@ -7,6 +7,7 @@ import Body from "../Body";
 import Footer from "../Footer";
 import SpotifyAnimated from "components/SpotifyAnimated/";
 import { useSplashScreen } from "components/SpotifyAnimated/useSplashScreen";
+import Busy from "components/Busy";
 
 import "./MainLayoutPageWrapper.css";
 
@@ -30,7 +31,7 @@ function MainLayoutPageWrapper({ title, isLoading, children }) {
       <Body onScroll={handleScroll} className="mainLayout__body body">
         <>
           {displaySplashScreen && <SpotifyAnimated logo name />}
-          {isLoading ? <SpotifyAnimated logo /> : children}
+          {isLoading ? <Busy /> : children}
         </>
       </Body>
       <Footer className="mainLayout__footer footer" />

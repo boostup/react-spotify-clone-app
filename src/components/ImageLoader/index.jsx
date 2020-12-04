@@ -1,18 +1,24 @@
 import React, { useState } from "react";
-import { Grow } from "@material-ui/core";
+import { CircularProgress, Grow } from "@material-ui/core";
+
+import "./ImageLoader.css";
+import Busy from "components/Busy";
 
 const ImageLoader = ({ className, src, alt }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   return (
-    <Grow in={isImageLoaded}>
-      <img
-        onLoad={() => setIsImageLoaded(true)}
-        className={className}
-        src={src}
-        alt={alt}
-        title={alt}
-      />
-    </Grow>
+    <div className="imageLoader">
+      <Grow in={isImageLoaded}>
+        <img
+          onLoad={() => setIsImageLoaded(true)}
+          className={isImageLoaded ? className : "hidden"}
+          src={src}
+          alt={alt}
+          title={alt}
+        />
+      </Grow>
+      {isImageLoaded ? null : <Busy />}
+    </div>
   );
 };
 

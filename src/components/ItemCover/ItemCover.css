@@ -18,17 +18,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 130px;
 }
 
-.itemCover img {
+.itemCover img,
+.itemCover .imageLoader {
   max-height: 150px;
   width: 100%;
 }
 
-.artist .itemCover img {
+.artist .itemCover img,
+.artist .itemCover .imageLoader {
   height: 130px;
   width: 130px;
   border-radius: 100%;
+}
+
+.artist .itemCover .imageLoader svg {
+  height: inherit;
+  width: inherit;
 }
 
 .artist .itemCover svg {
