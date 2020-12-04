@@ -1,8 +1,6 @@
 import { authActionTypes as actionTypes } from "./types.js";
 
 const initialState = {
-  token: "",
-  tokenExpiry: 0,
   user: null,
   error: null,
   success: null,
