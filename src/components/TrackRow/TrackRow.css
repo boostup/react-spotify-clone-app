@@ -19,9 +19,14 @@
   margin-left: 1rem;
 }
 
-.trackRow__info h1 {
+.trackRow__info h3 {
   display: inline-block;
-  margin: 0.5rem 0;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: bold;
+  line-height: inherit;
+  letter-spacing: inherit;
+  width: 51vw;
 }
 
 .trackRow__info__duration {
@@ -32,6 +37,7 @@
   font-size: 1.3rem;
   margin-top: 3px;
   color: var(--main-interactive-text-color);
+  width: 51vw;
 }
 
 .trackRow__explicit {
