@@ -16,10 +16,10 @@ function Body({ children, className, onScroll }) {
   return (
     <div
       //
-      ref={bodyRef}
       className={className}
       onScroll={handleScroll}
     >
+      <div id="topAnchor" ref={bodyRef}></div>
       {children}
     </div>
   );

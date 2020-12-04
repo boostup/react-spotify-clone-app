@@ -46,7 +46,7 @@ function TrackRow({ order, track, large = true, onPlay }) {
       {track?.album && (
         <ImageFader
           className="trackRow__album"
-          src={track?.album.images[large ? 0 : 1].url}
+          src={track?.album.images[large ? 0 : 2].url}
           alt={track?.name}
         />
       )}

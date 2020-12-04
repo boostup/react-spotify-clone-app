@@ -9,6 +9,7 @@ function AvatarArea({ userAvatar, userName, menuOptions }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
+    event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
 

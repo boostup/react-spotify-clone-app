@@ -19,7 +19,7 @@ import "./ItemCover.css";
 function ItemCover({ item, displayPlayButton, onGoTo, onPlay }) {
   const { images, name, owner, artists } = item;
 
-  const image = images ? images[0]?.url : "";
+  const image = images ? images[1]?.url : "";
 
   return (
     <div className="itemCover" onClick={onGoTo}>

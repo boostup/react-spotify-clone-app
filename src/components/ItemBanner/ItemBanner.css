@@ -8,7 +8,7 @@
 .itemBanner__info .imageLoader {
   height: 232px;
   width: 232px;
-  margin: 0 1.2rem 0 0.4rem;
+  margin: 0 1.2rem 0 0;
 }
 
 .itemBanner__info img {
@@ -45,6 +45,16 @@
     flex-direction: column;
     align-items: center;
   }
+  .itemBanner__info img,
+  .itemBanner__info .imageLoader {
+    margin: 0 1.2rem 0 0.4rem;
+  }
+
+  .itemBanner__infoText {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
   .itemBanner__infoText > h2 {
     font-size: 2rem;
   }
