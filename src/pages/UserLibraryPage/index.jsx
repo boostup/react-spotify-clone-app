@@ -25,7 +25,7 @@ function UserLibraryPage() {
     <MainLayoutPageWrapper
       //
       title="Your Library"
-      sLoading={pageState.isFetching}
+      isLoading={pageState.isFetching}
     >
       <div className="yourLibrary">
         <SectionHeading icon={PlaylistIcon} title="Your Playlists" />

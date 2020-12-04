@@ -15,7 +15,9 @@ export default function useScrollTop() {
   const HTMLelementRef = useRef();
 
   useEffect(() => {
-    HTMLelementRef.current.scrollTop = 0;
+    return () => {
+      if (HTMLelementRef.current) HTMLelementRef.current.scrollTop = 0;
+    };
   }, [itemState?.id, headerClickToggle]);
 
   return HTMLelementRef;
