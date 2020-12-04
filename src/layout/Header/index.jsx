@@ -1,8 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import MenuIcon from "@material-ui/icons/Menu";
+import { IconButton } from "@material-ui/core";
 
 import { selectAuthUser } from "_redux/auth/selectors";
 import { logout } from "_redux/auth/actions";
+import { toggleSidebarVisibility } from "_redux/sidebar/actions";
 import {
   toggleHeaderClick,
   // isPlaylistFollowedByUser,
@@ -46,6 +49,15 @@ function Header({ className, bodyComponentScrollValue }) {
       <div
         className={`header__left ${searchBarClassName()} ${itemToolbarClassName()} `}
       >
+        <IconButton
+          className="header__left--sidebarMenuButton"
+          onClick={(e) => {
+            e.stopPropagation();
+            dispatch(toggleSidebarVisibility());
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
         <SearchField {...{ dispatch, useSelector, displaySearchBar }} />
         <ItemHeaderToolbar
           title={itemName}

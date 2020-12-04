@@ -64,8 +64,11 @@
   z-index: 2;
 }
 
-/* For touch devices */
-@media (hover: none) {
+@media (max-width: 960px) {
+  :root {
+    --main-layout-sidebar-width: 0vw;
+  }
+
   .mainLayout__sidebar {
     padding-bottom: var(--main-layout-footer-height);
   }

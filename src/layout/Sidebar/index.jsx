@@ -1,9 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { useTheme } from "@material-ui/core";
+
 import { selectAuth } from "_redux/auth/selectors";
-import { selectSidebarPlaylists } from "_redux/sidebar/selectors";
-import { fetchSidebarDataStart } from "_redux/sidebar/actions";
+import {
+  selectSidebarPlaylists,
+  selectSidebarVisibility,
+} from "_redux/sidebar/selectors";
+import {
+  fetchSidebarDataStart,
+  toggleSidebarVisibility,
+} from "_redux/sidebar/actions";
 
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
@@ -21,6 +29,13 @@ function Sidebar({ className }) {
   const authState = useSelector(selectAuth);
   const playlists = useSelector(selectSidebarPlaylists);
 
+  const theme = useTheme();
+  const visible = useSelector(selectSidebarVisibility);
+  useEffect(() => {
+    // This affects only for small to medium screens due to the CSS media queries which define the "visible" & "hidden" classnames for this sidebar component
+    dispatch(toggleSidebarVisibility(false));
+  }, []);
+
   useEffect(() => {
     if (authState.success === true) {
       dispatch(fetchSidebarDataStart());
@@ -28,7 +43,7 @@ function Sidebar({ className }) {
   }, [dispatch, authState.success]);
 
   return (
-    <div className={className}>
+    <div className={`${className} ${visible ? "visible" : "hidden"}`}>
       <Logo />
       <SidebarOption title="Home" Icon={HomeIcon} to="/" />
       <SidebarOption title="Search" Icon={SearchIcon} to="/search" />

@@ -5,6 +5,7 @@ const initialState = {
   error: null,
   success: null,
   sidebarPlaylists: null,
+  sidebarVisible: true,
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +36,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         sidebarPlaylists: action.payload,
+      };
+
+    case actionTypes.TOGGLE_SIDEBAR_VISIBILITY:
+      return {
+        ...state,
+        sidebarVisible:
+          action.payload !== undefined ? action.payload : !state.sidebarVisible,
       };
 
     default:

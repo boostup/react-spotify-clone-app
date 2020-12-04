@@ -4,7 +4,11 @@
   align-items: center;
 }
 .header__left {
-  flex: 0.5;
+  flex: 0.9;
+}
+
+.header__left--sidebarMenuButton {
+  display: none !important;
 }
 
 .header__left.showSearchbar .searchField {
@@ -29,4 +33,28 @@
   pointer-events: none;
   user-select: none;
   display: none;
+}
+
+@media (max-width: 960px) {
+  .header__left {
+    flex: 1 1;
+    display: flex;
+  }
+  .header__left.showItemToolbar .itemHeaderToolbar {
+    display: none;
+  }
+
+  .header__left.showSearchbar .searchField {
+    flex: 0.7 1;
+    margin: auto;
+  }
+
+  .header__left--sidebarMenuButton {
+    display: inline-block !important;
+    color: white !important;
+  }
+
+  .header__left--sidebarMenuButton svg {
+    font-size: 2rem !important;
+  }
 }
