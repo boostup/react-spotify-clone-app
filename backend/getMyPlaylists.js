@@ -33,7 +33,7 @@ async function getAllPlaylists(event) {
       data = await spotifyApi.getUserPlaylists(userId, {
         limit,
         offset: nextOffset,
-        fields: "href,primary_color,tracks(total),items(id,name)",
+        fields: "href,primary_color,tracks(total),items(id,name,images)",
       });
       // console.log("data.body.items", data.body.items instanceof Array);
       playlists = playlists.concat(data.body.items);
