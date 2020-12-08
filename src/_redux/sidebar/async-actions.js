@@ -10,12 +10,11 @@ import { getRefreshToken, getToken, getUser } from "utils/localStorage";
 function* getMyPlaylistsAync() {
   try {
     const userId = getUser().id;
-    const offset = 25;
     const refreshToken = getRefreshToken();
     const accessToken = getToken();
     const { REACT_APP_DOMAIN, REACT_APP_GET_ALL_PLAYLISTS } = process.env;
 
-    const url = `${REACT_APP_DOMAIN}${REACT_APP_GET_ALL_PLAYLISTS}?id=${userId}&offset=0&limit=${offset}&refresh_token=${refreshToken}&access_token=${accessToken}`;
+    const url = `${REACT_APP_DOMAIN}${REACT_APP_GET_ALL_PLAYLISTS}?id=${userId}&refresh_token=${refreshToken}&access_token=${accessToken}`;
 
     const data = yield call(fetch, url);
     const playlists = yield data.json();

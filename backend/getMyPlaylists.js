@@ -20,8 +20,9 @@ async function getAllPlaylists(event) {
     const userId = event.queryStringParameters[queryParams.ID];
     const accessToken = event.queryStringParameters[queryParams.ACCESS_TOKEN];
     const refreshToken = event.queryStringParameters[queryParams.REFRESH_TOKEN];
-    const offset = event.queryStringParameters["offset"];
-    const limit = event.queryStringParameters["limit"];
+    const offset = 0;
+    //Max limit as per doc => https://developer.spotify.com/documentation/web-api/reference/playlists/get-a-list-of-current-users-playlists/
+    const limit = 50; 
 
     spotifyApi.setAccessToken(accessToken);
     spotifyApi.setRefreshToken(refreshToken);
