@@ -1,28 +1,16 @@
-import { all, takeLatest, call, put } from "redux-saga/effects";
+import { all, takeLatest, call, put, select } from "redux-saga/effects";
 import { userLibraryPageActionTypes as actionTypes } from "./types";
-import { spotifyAPI } from "libs/spotify";
 import { setMyPlaylists } from "./actions";
+import { selectSidebarPlaylists } from "../sidebar/selectors";
 
 /**
  * WORKER SAGAS
  */
 
-function* getMyPlaylistsAync() {
+function* fetchUserLibraryPageDataStart() {
   try {
-    const playlists = yield spotifyAPI.getUserPlaylists();
+    const playlists = yield select(selectSidebarPlaylists);
     yield put(setMyPlaylists(playlists));
-    return playlists;
-  } catch (error) {
-    throw error;
-  }
-}
-
-function* fetchUserLibraryPageDataStartAsync() {
-  try {
-    yield all([
-      //
-      call(getMyPlaylistsAync),
-    ]);
 
     yield put({
       type: actionTypes.FETCH_USER_LIBRARY_PAGE_DATA_SUCCESS,
@@ -42,7 +30,7 @@ function* fetchUserLibraryPageDataStartAsync() {
 export function* watchCanGetUserLibraryPageData() {
   yield takeLatest(
     actionTypes.FETCH_USER_LIBRARY_PAGE_DATA_START,
-    fetchUserLibraryPageDataStartAsync
+    fetchUserLibraryPageDataStart
   );
 }
 
