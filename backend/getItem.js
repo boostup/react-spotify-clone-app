@@ -80,7 +80,6 @@ async function mapFavoriteTracks(tracks) {
   try {
     const trackIds = tracks.map((track) => track.id);
     const favorites = await spotifyApi.containsMySavedTracks(trackIds);
-    console.log(favorites);
     return tracks.map((track, i) => {
       track.is_favorite = favorites.body[i];
       return track;
