@@ -7,7 +7,6 @@ const spotifyConfig = {
 };
 
 const queryParams = {
-  ID: "id",
   CODE: "code",
   ACCESS_TOKEN: "access_token",
   EXPIRES_IN: "expires_in",

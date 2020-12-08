@@ -4,5 +4,4 @@
 export const eventsActionTypes = {
   APP_BUSY_START: "APP_BUSY_START",
   APP_BUSY_STOP: "APP_BUSY_STOP",
-  LOAD_MORE: "LOAD_MORE",
 };
