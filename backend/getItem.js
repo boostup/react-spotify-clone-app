@@ -15,17 +15,18 @@ exports.handler = async (event, context, callback) => {
     let item = null;
     if (itemType === "album") {
       item = await getAlbum(itemId);
-    }
-    else if (itemType === "playlist") {
+    } else if (itemType === "playlist") {
       item = await getPlaylist(userId, itemId);
     }
+
+    item.tracks.items = await mapFavoriteTracks(item.tracks.items);
+
     return formattedReturn(200, item);
   } catch (error) {
     console.error(error);
     return formattedReturn(500, error);
   }
 };
-
 
 // /api/getItem?userId=lesliemurcy&variant=album&itemId=62U7xIHcID94o20Of5ea4D&access_token=BQAzlCbFBD6LTOgoX2Cd3-PkjTagFAr0kPR5Lp8yPQh3WwSsQkZJ3jUQni2x_AzFrMyC7o3hvhc7y2-mmVdMPyNq4jI2ZrVp1Uum772UBK2fhRff_2tcNF9KxlJE0vo3K9EyZHhBjz1V4SDQtcj-Eb1pPOHsMKPlq72vWuj5b67iTmuxkdvZ1Q9iwmmMFLNHnSeYWocbcXAoPz-IGQ
 async function getAlbum(itemId) {
@@ -40,7 +41,7 @@ async function getAlbum(itemId) {
     const result = {
       ...metadata.body,
       is_favorite: is_favorite.body[0],
-      tracks: { items: tracks }
+      tracks: { items: tracks },
     };
     return result;
   } catch (error) {
@@ -56,19 +57,35 @@ async function getPlaylist(userId, itemId) {
     const metadata = await spotifyApi.getPlaylist(itemId);
 
     // Check if user saved the Album => https://developer.spotify.com/documentation/web-api/reference/library/get-users-saved-albums/
-    const is_favorite = await spotifyApi.areFollowingPlaylist(null, itemId, [userId]);
+    const is_favorite = await spotifyApi.areFollowingPlaylist(null, itemId, [
+      userId,
+    ]);
 
-    const tracks = await getAllPaginatedData("getPlaylistTracks", itemId, { limit });
+    const tracks = await getAllPaginatedData("getPlaylistTracks", itemId, {
+      limit,
+    });
 
     const result = {
       ...metadata.body,
       is_favorite: is_favorite.body[0],
-      tracks: { items: tracks.map((i) => i.track) }
+      tracks: { items: tracks.map((i) => i.track) },
     };
     return result;
   } catch (error) {
     throw error;
   }
+}
 
-
+async function mapFavoriteTracks(tracks) {
+  try {
+    const trackIds = tracks.map((track) => track.id);
+    const favorites = await spotifyApi.containsMySavedTracks(trackIds);
+    console.log(favorites);
+    return tracks.map((track, i) => {
+      track.is_favorite = favorites.body[i];
+      return track;
+    });
+  } catch (error) {
+    throw error;
+  }
 }
