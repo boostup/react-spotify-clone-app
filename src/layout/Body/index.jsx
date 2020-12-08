@@ -1,9 +1,9 @@
 import React from "react";
 import { debounce } from "utils/debounce";
-import useScrollTop from "./useScrollTop";
+import useScrollIntoView from "./useScrollIntoView";
 
 function Body({ children, className, onScroll }) {
-  const bodyRef = useScrollTop();
+  useScrollIntoView("#topAnchor");
 
   const handleScroll = debounce((e) => {
     onScroll(e);
@@ -15,7 +15,7 @@ function Body({ children, className, onScroll }) {
       className={className}
       onScroll={handleScroll}
     >
-      <div id="topAnchor" ref={bodyRef}></div>
+      <div id="topAnchor"></div>
       {children}
     </div>
   );

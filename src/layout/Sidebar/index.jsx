@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useTheme } from "@material-ui/core";
-
 import { selectAuth } from "_redux/auth/selectors";
 import {
   selectSidebarPlaylists,
@@ -29,12 +27,11 @@ function Sidebar({ className }) {
   const authState = useSelector(selectAuth);
   const playlists = useSelector(selectSidebarPlaylists);
 
-  const theme = useTheme();
   const visible = useSelector(selectSidebarVisibility);
   useEffect(() => {
     // This affects only for small to medium screens due to the CSS media queries which define the "visible" & "hidden" classnames for this sidebar component
     dispatch(toggleSidebarVisibility(false));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (authState.success === true) {

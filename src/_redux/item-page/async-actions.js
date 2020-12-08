@@ -1,18 +1,15 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
 import { itemPageActionTypes as actionTypes } from "./types";
 import { setItem } from "./actions";
-import { getRefreshToken, getToken, getUser } from "utils/localStorage";
+import { getToken, getUser } from "utils/localStorage";
 
 /**
  * WORKER SAGAS
  */
 
 function* getItemAsync(id, variant) {
-
   try {
-
     const userId = getUser().id;
-    const refreshToken = getRefreshToken();
     const accessToken = getToken();
     const { REACT_APP_DOMAIN, REACT_APP_GET_ITEM } = process.env;
 

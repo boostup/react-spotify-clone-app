@@ -1,7 +1,7 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
 import { sidebarActionTypes as actionTypes } from "./types";
 import { setSidebarPlaylists } from "./actions";
-import { getRefreshToken, getToken, getUser } from "utils/localStorage";
+import { getToken, getUser } from "utils/localStorage";
 
 /**
  * WORKER SAGAS
@@ -10,7 +10,6 @@ import { getRefreshToken, getToken, getUser } from "utils/localStorage";
 function* getMyPlaylistsAync() {
   try {
     const userId = getUser().id;
-    const refreshToken = getRefreshToken();
     const accessToken = getToken();
     const { REACT_APP_DOMAIN, REACT_APP_GET_ALL_PLAYLISTS } = process.env;
 
