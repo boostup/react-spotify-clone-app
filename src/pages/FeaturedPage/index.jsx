@@ -10,7 +10,6 @@ import { fetchFeaturedPageDataStart } from "_redux/featured-page/actions";
 import SectionHeading from "components/SectionHeading";
 import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
 import TrackList from "components/TrackList";
-import ItemsGrid from "components/ItemsGrid";
 
 import "./FeaturedPage.css"
 
