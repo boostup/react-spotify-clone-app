@@ -4,7 +4,6 @@ const initialState = {
   isFetching: false,
   error: null,
   success: null,
-  playlistsFeatured: null,
   recommendedTracks: null,
 };
 
@@ -30,12 +29,6 @@ const reducer = (state = initialState, action) => {
         isFetching: false,
         error: false,
         success: true,
-      };
-
-    case actionTypes.SET_MY_PLAYLISTS_FEATURED:
-      return {
-        ...state,
-        playlistsFeatured: action.payload,
       };
 
     case actionTypes.SET_MY_RECOMMENDED_TRACKS:
