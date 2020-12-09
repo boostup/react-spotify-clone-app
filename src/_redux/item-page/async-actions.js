@@ -11,9 +11,9 @@ function* getItemAsync(id, variant) {
   try {
     const userId = getUser().id;
     const accessToken = getToken();
-    const { REACT_APP_DOMAIN, REACT_APP_GET_ITEM } = process.env;
+    const { REACT_APP_GET_ITEM } = process.env;
 
-    const url = `${REACT_APP_DOMAIN}${REACT_APP_GET_ITEM}?userId=${userId}&variant=${variant}&itemId=${id}&access_token=${accessToken}`;
+    const url = `${REACT_APP_GET_ITEM}?userId=${userId}&variant=${variant}&itemId=${id}&access_token=${accessToken}`;
 
     const data = yield call(fetch, url);
     const item = yield data.json();

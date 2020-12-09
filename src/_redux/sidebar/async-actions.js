@@ -11,9 +11,9 @@ function* getMyPlaylistsAync() {
   try {
     const userId = getUser().id;
     const accessToken = getToken();
-    const { REACT_APP_DOMAIN, REACT_APP_GET_ALL_PLAYLISTS } = process.env;
+    const { REACT_APP_GET_ALL_PLAYLISTS } = process.env;
 
-    const url = `${REACT_APP_DOMAIN}${REACT_APP_GET_ALL_PLAYLISTS}?userId=${userId}&access_token=${accessToken}`;
+    const url = `${REACT_APP_GET_ALL_PLAYLISTS}?userId=${userId}&access_token=${accessToken}`;
 
     const data = yield call(fetch, url);
     const playlists = yield data.json();

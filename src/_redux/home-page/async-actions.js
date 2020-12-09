@@ -1,7 +1,5 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
 import { homePageActionTypes as actionTypes } from "./types";
-import { spotifyAPI } from "libs/spotify";
-import { setMySavedTracks, setRecentTracks, setTopTracks } from "./actions";
 import { delay } from "utils/time";
 import {
   SPLASH_SCREEN_DURATION,
