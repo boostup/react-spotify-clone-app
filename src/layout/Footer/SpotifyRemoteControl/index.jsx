@@ -18,6 +18,7 @@ import TrackPanel from "./TrackPanel";
 import CentralPanel from "./CentralPanel";
 import RightPanel from "./RightPanel";
 import { selectAuthUser } from "_redux/auth/selectors";
+import { cleanRemoteControlApiError } from "_redux/footer/actions";
 
 function SpotifyRemoteControl() {
   const dispatch = useDispatch();
@@ -48,16 +49,22 @@ function SpotifyRemoteControl() {
     <div className="spotifyRemoteControl">
       <Grow in={displayError}>
         <div className="spotifyRemoteControl__error">
-          <p>{remoteControlError?.message}.&nbsp;</p>
-          {user?.product !== "premium" && (
+          {user?.product === "premium" && (
             <p>
+              {remoteControlError?.message}.&nbsp;
               Please start playing music on your spotify account for this remote
               control to work.
             </p>
           )}
+          {user?.product !== "premium" && (
+            <p>{remoteControlError?.message}</p>
+          )}
           <button
             className="spotifyButton"
-            onClick={() => setDisplayError(false)}
+            onClick={() => {
+              setDisplayError(false)
+              dispatch(cleanRemoteControlApiError())
+            }}
           >
             dismiss
           </button>

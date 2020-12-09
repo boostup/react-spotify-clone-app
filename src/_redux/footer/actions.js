@@ -13,3 +13,7 @@ export const caughtRemoteControlApiError = (error) => ({
   type: actionTypes.REMOTE_CONTROL_API_ERROR,
   payload: error,
 });
+
+export const cleanRemoteControlApiError = () => ({
+  type: actionTypes.CLEAN_REMOTE_CONTROL_API_ERROR,
+});
