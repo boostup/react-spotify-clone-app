@@ -1,5 +1,6 @@
 const formattedReturn = require("./helpers/formattedReturn");
 const getAllPaginatedData = require("./helpers/getAllPaginatedData");
+const mapFavoriteTracks = require("./helpers/mapFavoriteTracks");
 const spotifyUtils = require("./helpers/spotify.config");
 const queryParams = spotifyUtils.queryParams;
 const spotifyApi = spotifyUtils.spotifyApi;
@@ -71,19 +72,6 @@ async function getPlaylist(userId, itemId) {
       tracks: { items: tracks.map((i) => i.track) },
     };
     return result;
-  } catch (error) {
-    throw error;
-  }
-}
-
-async function mapFavoriteTracks(tracks) {
-  try {
-    const trackIds = tracks.map((track) => track.id);
-    const favorites = await spotifyApi.containsMySavedTracks(trackIds);
-    return tracks.map((track, i) => {
-      track.is_favorite = favorites.body[i];
-      return track;
-    });
   } catch (error) {
     throw error;
   }
