@@ -31,24 +31,9 @@ const reducer = (state = initialState, action) => {
         isFetching: false,
         error: false,
         success: true,
-      };
-
-    case actionTypes.SET_MY_RECENT_TRACKS:
-      return {
-        ...state,
-        recentTracks: action.payload,
-      };
-
-    case actionTypes.SET_MY_SAVED_TRACKS:
-      return {
-        ...state,
-        savedTracks: action.payload,
-      };
-
-    case actionTypes.SET_MY_TOP_TRACKS:
-      return {
-        ...state,
-        topTracks: action.payload,
+        recentTracks: action.payload.recentTracks,
+        savedTracks: action.payload.savedTracks,
+        topTracks: action.payload.topTracks,
       };
 
     default:

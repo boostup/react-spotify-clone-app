@@ -3,16 +3,18 @@
 }
 
 .heartToggle svg {
-  transition: font-size 300ms cubic-bezier(1, 0, 0, 1);
+  transition: all 300ms cubic-bezier(1, 0, 0, 1);
   font-size: 2rem !important;
   cursor: pointer;
 }
 
 .heartToggle svg.heartToggle__toggled {
   color: var(--main-theme-favorite-color-hover);
-  font-size: 4rem !important;
+  transform: scale(2);
+  stroke: var(--main-theme-favorite-color);
 }
 
-.heartToggle__untoggled {
-  color: var(--main-theme-color-secondary);
+.heartToggle svg.heartToggle__untoggled {
+  color: transparent;
+  stroke: var(--main-theme-color-secondary);
 }

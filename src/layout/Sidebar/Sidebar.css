@@ -1,4 +1,5 @@
 .sidebar {
+  transition: var(--transition);
 }
 
 .sidebar .spotifLyLogo {
@@ -17,4 +18,20 @@
   text-transform: uppercase;
   margin-left: 10px;
   font-size: 1rem;
+}
+
+@media (max-width: 960px) {
+  .sidebar {
+    height: 100vh;
+    width: 100vw;
+    max-width: 100vw !important;
+    top: 0;
+    transform: translateX(-100vw);
+    z-index: 100;
+    background: var(--chrome-main-color);
+  }
+  .sidebar.visible {
+    position: absolute;
+    transform: translateX(0vw);
+  }
 }

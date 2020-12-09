@@ -13,6 +13,12 @@ const reducer = (state = initialState, action) => {
         error: action.payload,
       };
 
+    case actionTypes.CLEAN_REMOTE_CONTROL_API_ERROR:
+      return {
+        ...state,
+        error: null,
+      };
+
     case actionTypes.SET_CURRENT_PLAYBACK_STATE:
       return {
         ...state,

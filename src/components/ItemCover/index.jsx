@@ -19,7 +19,7 @@ import "./ItemCover.css";
 function ItemCover({ item, displayPlayButton, onGoTo, onPlay }) {
   const { images, name, owner, artists } = item;
 
-  const image = images ? images[1]?.url : "";
+  const image = images ? images[images[1] ? 1 : 0]?.url : "";
 
   return (
     <div className="itemCover" onClick={onGoTo}>
@@ -39,9 +39,9 @@ function ItemCover({ item, displayPlayButton, onGoTo, onPlay }) {
         {image ? (
           <ImageFader src={image} alt={name} />
         ) : (
-          // Artists are the only items for which no image is guaranteed => if `image` is `null`, it is an artist
-          <ArtistPlaceholderImage title={name} />
-        )}
+            // Artists are the only items for which no image is guaranteed => if `image` is `null`, it is an artist
+            <ArtistPlaceholderImage title={name} />
+          )}
       </div>
       <div className="itemCover__name">{name}</div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CircularProgress, Grow } from "@material-ui/core";
+import { Grow } from "@material-ui/core";
 
 import "./ImageLoader.css";
 import Busy from "components/Busy";

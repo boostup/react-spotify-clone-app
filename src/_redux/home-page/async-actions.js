@@ -1,70 +1,38 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
 import { homePageActionTypes as actionTypes } from "./types";
-import { spotifyAPI } from "libs/spotify";
-import { setMySavedTracks, setRecentTracks, setTopTracks } from "./actions";
 import { delay } from "utils/time";
 import {
   SPLASH_SCREEN_DURATION,
   canDisplaySplashScreen,
 } from "components/SpotifyAnimated/useSplashScreen";
+import { getToken } from "utils/localStorage";
 
 /**
  * WORKER SAGAS
  */
-
-function* getMyTopTracksAsync() {
+function* getHomePageDataAsync() {
   try {
-    const data = yield spotifyAPI.getMyTopTracks({ limit: 5 });
-    const tracks = data.items;
-    yield put(setTopTracks(tracks));
-    return tracks;
+    const { REACT_APP_GET_HOME_PAGE_DATA } = process.env;
+    const url = `${REACT_APP_GET_HOME_PAGE_DATA}?access_token=${getToken()}`;
+    const data = yield call(fetch, url);
+    const item = yield data.json();
+    return item;
   } catch (error) {
     throw error;
   }
-}
-
-function* getMySavedTracksAsync() {
-  try {
-    const data = yield spotifyAPI.getMySavedTracks({ limit: 5 });
-    const tracks = data.items.map((item) => item.track);
-    yield put(setMySavedTracks(tracks));
-    return tracks;
-  } catch (error) {
-    throw error;
-  }
-}
-
-function* getMyRecentTracksAsync() {
-  try {
-    const data = yield spotifyAPI.getMyRecentlyPlayedTracks({ limit: 5 });
-    const tracks = data.items.map((item) => item.track);
-    yield put(setRecentTracks(tracks));
-    return tracks;
-  } catch (error) {
-    throw error;
-  }
-}
-
-//Latest 5 Saved Tracks are displayed in the home page, this is why I placed this function here ;)
-export function addToMySavedTracks(trackId) {
-  spotifyAPI.addToMySavedTracks({ ids: [trackId] });
 }
 
 function* fetchHomePageDataStartAsync() {
   try {
-    yield all([
-      //
-      call(getMySavedTracksAsync),
-      call(getMyTopTracksAsync),
-      call(getMyRecentTracksAsync),
-    ]);
-
     if (canDisplaySplashScreen()) {
       yield call(delay, SPLASH_SCREEN_DURATION);
     }
 
+    const homeData = yield call(getHomePageDataAsync);
+
     yield put({
       type: actionTypes.FETCH_HOME_PAGE_DATA_SUCCESS,
+      payload: homeData,
     });
   } catch (error) {
     yield put({ type: actionTypes.FETCH_HOME_PAGE_DATA_ERROR, payload: error });

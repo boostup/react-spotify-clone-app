@@ -4,22 +4,22 @@ import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilledTwoTone";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import EditIcon from "@material-ui/icons/Edit";
 
-import ContextualMenu from "../ContextualMenu";
-import HeartToggle from "../HeartToggle";
+import ContextualMenu from "components/ContextualMenu";
+import HeartToggle from "components/HeartToggle";
 
 import "./ItemToolbar.css";
 
 function ItemToolbar({
   displayHeart,
-  // isPlaylistFollower,
-  // toggleFollowPlaylist,
+  heartStatus,
+  onHeartToggleClick,
   onPlay,
 }) {
   const menuOptions = [
     {
       icon: EditIcon,
       title: "edit playlist (under construction 👷)",
-      fn: () => {},
+      fn: () => { },
     },
   ];
 
@@ -39,8 +39,8 @@ function ItemToolbar({
 
       {!displayHeart && (
         <HeartToggle
-          // status={false}
-          onToggle={() => console.log("toggled!!!!!!!!!!!!!!!!!!!!!")}
+          status={heartStatus}
+          onToggle={onHeartToggleClick}
         />
       )}
 

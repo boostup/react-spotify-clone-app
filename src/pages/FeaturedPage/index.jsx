@@ -10,13 +10,14 @@ import { fetchFeaturedPageDataStart } from "_redux/featured-page/actions";
 import SectionHeading from "components/SectionHeading";
 import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
 import TrackList from "components/TrackList";
-import ItemsGrid from "components/ItemsGrid";
+
+import "./FeaturedPage.css"
 
 function FeaturedPage() {
   let { trackId, trackName } = useParams();
   const dispatch = useDispatch();
   const pageState = useSelector(selectFeaturedPage);
-  const { recommendedTracks, playlistsFeatured } = useSelector(
+  const { recommendedTracks } = useSelector(
     selectFeaturedPage
   );
 
@@ -41,18 +42,6 @@ function FeaturedPage() {
           </>
         )}
 
-        {playlistsFeatured && (
-          <>
-            <SectionHeading
-              icon={RadioIcon}
-              title={playlistsFeatured.message}
-            />
-            <ItemsGrid
-              variant="playlist"
-              items={playlistsFeatured?.playlists?.items}
-            />
-          </>
-        )}
       </div>
     </MainLayoutPageWrapper>
   );

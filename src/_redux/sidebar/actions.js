@@ -8,3 +8,8 @@ export const setSidebarPlaylists = (playlists) => ({
   type: actionTypes.SET_SIDEBAR_PLAYLISTS,
   payload: playlists,
 });
+
+export const toggleSidebarVisibility = (value) => ({
+  type: actionTypes.TOGGLE_SIDEBAR_VISIBILITY,
+  payload: value,
+});

@@ -160,7 +160,6 @@ export function* refreshAccessTokenFlow() {
         },
         getUser()
       );
-      // yield put(authWithStoredTokenStart());
       window.location = "/";
     } catch (error) {
       yield put({ type: actionTypes.AUTH_ERROR, payload: error });

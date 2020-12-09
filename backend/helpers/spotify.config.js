@@ -7,7 +7,6 @@ const spotifyConfig = {
 };
 
 const queryParams = {
-  ID: "id",
   CODE: "code",
   ACCESS_TOKEN: "access_token",
   EXPIRES_IN: "expires_in",
@@ -15,6 +14,8 @@ const queryParams = {
 };
 
 const scopes = [
+  "playlist-modify-private",
+  "playlist-modify-public",
   "playlist-read-private",
   "playlist-read-collaborative",
   "streaming",

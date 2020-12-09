@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { addToMySavedTracks } from "_redux/home-page/async-actions";
+import { toggleTrackHeartStart } from "_redux/events/actions";
 import { addToQueue } from "_redux/footer/async-actions";
 
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import QueueIcon from "@material-ui/icons/Queue";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import RadioIcon from "@material-ui/icons/Radio";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import { Typography } from "@material-ui/core";
 
@@ -71,9 +70,9 @@ function TrackRow({ order, track, large = true, onPlay }) {
 
       <div className="trackRow__toolbar">
         <HeartToggle
-          status={false}
+          status={track?.is_favorite}
           onToggle={() => {
-            // console.log("toggled!!!!!!!!!!!!!!!!!!!!!");
+            dispatch(toggleTrackHeartStart(track.id, track.is_favorite))
           }}
         />
         <MoreHorizIcon className="trackRow__more" onClick={handleClick} />
@@ -83,14 +82,9 @@ function TrackRow({ order, track, large = true, onPlay }) {
         menuId="track-menu"
         menuOptions={[
           {
-            icon: FavoriteIcon,
-            title: "add to saved tracks",
-            fn: () => addToMySavedTracks(track.id),
-          },
-          {
             icon: PlaylistAddIcon,
             title: "add to playlist... (in construction)",
-            fn: () => {},
+            fn: () => { },
           },
           {
             icon: QueueIcon,
@@ -108,7 +102,7 @@ function TrackRow({ order, track, large = true, onPlay }) {
           {
             icon: ShareIcon,
             title: "copy link (in construction)",
-            fn: () => {},
+            fn: () => { },
           },
         ]}
         anchorEl={anchorEl}

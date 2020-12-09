@@ -136,3 +136,9 @@ button {
     transform: scale(1);
   }
 }
+
+@media (max-width: 960px) {
+  .header.scrolled {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}

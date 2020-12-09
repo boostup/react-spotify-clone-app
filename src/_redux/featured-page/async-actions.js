@@ -1,7 +1,7 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
 import { featuredPageActionTypes as actionTypes } from "./types";
 import { spotifyAPI } from "libs/spotify";
-import { setMyPlaylistsFeatured, setMyRecommendedTracks } from "./actions";
+import { setMyRecommendedTracks } from "./actions";
 
 /**
  * WORKER SAGAS
@@ -21,25 +21,11 @@ export function* getRecommendationsAsync(trackId) {
   }
 }
 
-export function* getMyPlaylistsFeaturedAsync() {
-  try {
-    const data = yield spotifyAPI.getFeaturedPlaylists({
-      limit: 5,
-      locale: navigator.language || "en-US",
-    });
-    yield put(setMyPlaylistsFeatured(data));
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
-
 function* fetchFeaturedPageDataStartAsync({ trackId }) {
   try {
     yield all([
       //
       call(getRecommendationsAsync, trackId),
-      call(getMyPlaylistsFeaturedAsync),
     ]);
 
     yield put({
