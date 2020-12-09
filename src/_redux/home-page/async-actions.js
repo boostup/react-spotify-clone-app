@@ -45,11 +45,6 @@ function* getMyRecentTracksAsync() {
   }
 }
 
-//Latest 5 Saved Tracks are displayed in the home page, this is why I placed this function here ;)
-export function addToMySavedTracks(trackId) {
-  spotifyAPI.addToMySavedTracks({ ids: [trackId] });
-}
-
 function* fetchHomePageDataStartAsync() {
   try {
     yield all([

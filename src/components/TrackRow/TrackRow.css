@@ -76,7 +76,11 @@
 }
 
 .trackRow__more {
-  color: var(--main-font-color);
+  font-size: 2rem !important;
+}
+
+.trackRow .heartToggle svg.heartToggle__toggled {
+  color: var(--main-theme-color-secondary);
   font-size: 2rem !important;
 }
 

@@ -1,21 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import "./HeartToggle.css";
 
-function HeartToggle({ status = false, onToggle = () => {} }) {
+function HeartToggle({ status = false, onToggle = () => { } }) {
+
+  const [_status, _setStatus] = useState(status);
+
   const handleClick = (event) => {
     event.stopPropagation();
     onToggle();
-    status = !status;
+    _setStatus(!_status);
   };
 
   return (
     <div className="heartToggle" onClick={handleClick}>
-      {status && <FavoriteIcon className="heartToggle__toggled" />}
-      {!status && <FavoriteBorderIcon className="heartToggle__untoggled" />}
+      {_status && <FavoriteIcon className="heartToggle__toggled" />}
+      {!_status && <FavoriteBorderIcon className="heartToggle__untoggled" />}
     </div>
   );
 }
