@@ -4,8 +4,8 @@ import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilledTwoTone";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import EditIcon from "@material-ui/icons/Edit";
 
-import ContextualMenu from "../ContextualMenu";
-import HeartToggle from "../HeartToggle";
+import ContextualMenu from "components/ContextualMenu";
+import HeartToggle from "components/HeartToggle";
 
 import "./ItemToolbar.css";
 

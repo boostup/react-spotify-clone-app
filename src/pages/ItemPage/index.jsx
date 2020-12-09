@@ -23,8 +23,8 @@ import {
 import { playItem } from "_redux/footer/async-actions";
 
 import MainLayoutPageWrapper from "layout/MainLayoutPageWrapper";
-import ItemBanner from "components/ItemBanner";
-import ItemToolbar from "components/ItemToolbar";
+import ItemBanner from "./ItemBanner";
+import ItemToolbar from "./ItemToolbar";
 import TrackList from "components/TrackList";
 
 /**

@@ -1,7 +1,7 @@
 import React from "react";
 
-import Duration from "../Duration";
-import ImageFader from "../ImageLoader";
+import Duration from "components/Duration";
+import ImageFader from "components/ImageLoader";
 
 import "./ItemBanner.css";
 
