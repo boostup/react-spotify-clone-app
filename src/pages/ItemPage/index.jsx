@@ -11,8 +11,9 @@ import {
 
 import {
   toggleDisplayItemToolbar,
-  // isPlaylistFollowedByUser,
 } from "_redux/header/actions";
+
+import { toggleItemHeartStart } from "_redux/events/actions";
 
 import {
   fetchItemPageDataStart,
@@ -69,6 +70,10 @@ function ItemPage() {
 
         <ItemToolbar
           displayHeart={isItemOwner}
+          heartStatus={item?.is_favorite}
+          onHeartToggleClick={() => {
+            dispatch(toggleItemHeartStart(id, variant, item.is_favorite))
+          }}
           onPlay={() => playItem(item?.uri, dispatch)}
         />
         <TrackList firstLarge={false} items={tracks} />

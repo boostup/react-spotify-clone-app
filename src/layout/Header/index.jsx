@@ -8,7 +8,6 @@ import { logout } from "_redux/auth/actions";
 import { toggleSidebarVisibility } from "_redux/sidebar/actions";
 import {
   toggleHeaderClick,
-  // isPlaylistFollowedByUser,
 } from "_redux/header/actions";
 import { playItem } from "_redux/footer/async-actions";
 

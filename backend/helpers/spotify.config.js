@@ -14,6 +14,8 @@ const queryParams = {
 };
 
 const scopes = [
+  "playlist-modify-private",
+  "playlist-modify-public",
   "playlist-read-private",
   "playlist-read-collaborative",
   "streaming",

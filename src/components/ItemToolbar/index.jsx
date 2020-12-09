@@ -11,15 +11,15 @@ import "./ItemToolbar.css";
 
 function ItemToolbar({
   displayHeart,
-  // isPlaylistFollower,
-  // toggleFollowPlaylist,
+  heartStatus,
+  onHeartToggleClick,
   onPlay,
 }) {
   const menuOptions = [
     {
       icon: EditIcon,
       title: "edit playlist (under construction 👷)",
-      fn: () => {},
+      fn: () => { },
     },
   ];
 
@@ -39,8 +39,8 @@ function ItemToolbar({
 
       {!displayHeart && (
         <HeartToggle
-          // status={false}
-          onToggle={() => console.log("toggled!!!!!!!!!!!!!!!!!!!!!")}
+          status={heartStatus}
+          onToggle={onHeartToggleClick}
         />
       )}
 

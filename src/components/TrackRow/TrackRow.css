@@ -80,8 +80,7 @@
 }
 
 .trackRow .heartToggle svg.heartToggle__toggled {
-  color: var(--main-theme-color-secondary);
-  font-size: 2rem !important;
+  transform: scale(1);
 }
 
 @media screen and (max-width: 960px) {

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import "./HeartToggle.css";
 
@@ -17,8 +16,7 @@ function HeartToggle({ status = false, onToggle = () => { } }) {
 
   return (
     <div className="heartToggle" onClick={handleClick}>
-      {_status && <FavoriteIcon className="heartToggle__toggled" />}
-      {!_status && <FavoriteBorderIcon className="heartToggle__untoggled" />}
+      <FavoriteIcon className={_status ? "heartToggle__toggled" : "heartToggle__untoggled"} />
     </div>
   );
 }
