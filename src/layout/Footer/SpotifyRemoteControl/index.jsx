@@ -1,15 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grow } from "@material-ui/core";
 
-// import { DEVICE_NAME, useSpotifyWebPlaybackSDK } from "libs/spotify";
-// import { getToken } from "utils/localStorage";
+import { selectFooterCurrentPlaybackState } from "_redux/footer/selectors";
 
-import {
-  selectFooterError,
-  selectFooterCurrentPlaybackState,
-} from "_redux/footer/selectors";
-// import { fetchCurrentPlaybackState } from "_redux/footer/actions";
 import * as actions from "_redux/footer/async-actions";
 
 import "./SpotifyRemoteControl.css";
@@ -17,28 +10,10 @@ import "./SpotifyRemoteControl.css";
 import TrackPanel from "./TrackPanel";
 import CentralPanel from "./CentralPanel";
 import RightPanel from "./RightPanel";
-import { selectAuthUser } from "_redux/auth/selectors";
-import { cleanRemoteControlApiError } from "_redux/footer/actions";
 
 function SpotifyRemoteControl() {
   const dispatch = useDispatch();
-  const user = useSelector(selectAuthUser);
   const currentplaybackState = useSelector(selectFooterCurrentPlaybackState);
-  const remoteControlError = useSelector(selectFooterError);
-  const [displayError, setDisplayError] = useState(remoteControlError !== null);
-
-  useEffect(() => {
-    setDisplayError(remoteControlError);
-  }, [remoteControlError]);
-
-  // useSpotifyWebPlaybackSDK({
-  //   deviceName: DEVICE_NAME,
-  //   token: getToken(),
-  //   onPlayerStateChanged: (playbackState) => {
-  //     //Normally, i would use the values of the `playbackState` object returned here, however, the Spotify Playback SDK is in BETA at this very moment, and the data is not consistent with the data provided through the Spotify Web API.  Therefore, I make here yet another request, just to get consistent data object types
-  //     dispatch(fetchCurrentPlaybackState());
-  //   },
-  // });
 
   const currentTrackName = currentplaybackState?.item.name;
   const albumImage = currentplaybackState?.item.album.images[2].url;
@@ -47,30 +22,6 @@ function SpotifyRemoteControl() {
 
   return (
     <div className="spotifyRemoteControl">
-      <Grow in={displayError}>
-        <div className="spotifyRemoteControl__error">
-          {user?.product === "premium" && (
-            <p>
-              {remoteControlError?.message}.&nbsp;
-              Please start playing music on your spotify account for this remote
-              control to work.
-            </p>
-          )}
-          {user?.product !== "premium" && (
-            <p>{remoteControlError?.message}</p>
-          )}
-          <button
-            className="spotifyButton"
-            onClick={() => {
-              setDisplayError(false)
-              dispatch(cleanRemoteControlApiError())
-            }}
-          >
-            dismiss
-          </button>
-        </div>
-      </Grow>
-
       <div className="spotifyRemoteControl__left">
         <TrackPanel
           shouldDisplay={currentplaybackState?.item}

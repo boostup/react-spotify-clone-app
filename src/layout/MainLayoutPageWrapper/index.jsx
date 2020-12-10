@@ -10,6 +10,7 @@ import { useSplashScreen } from "components/SpotifyAnimated/useSplashScreen";
 import Busy from "components/Busy";
 
 import "./MainLayoutPageWrapper.css";
+import RemoteControlError from "./RemoteControlError";
 
 function MainLayoutPageWrapper({ title, isLoading, children }) {
   const displaySplashScreen = useSplashScreen();
@@ -30,6 +31,7 @@ function MainLayoutPageWrapper({ title, isLoading, children }) {
       />
       <Body onScroll={handleScroll} className="mainLayout__body body">
         <>
+          <RemoteControlError />
           {displaySplashScreen && <SpotifyAnimated logo name />}
           {isLoading ? <Busy /> : children}
         </>
