@@ -83,6 +83,32 @@
   transform: scale(1);
 }
 
+/**
+* FIRST LARGE TRACK (keyword: firstLarge)
+*/
+.large .trackRow.large {
+  margin-left: 0;
+}
+
+.trackRow.large .trackRow__info {
+  align-self: flex-end;
+}
+
+.large .trackRow.large .trackRow__order,
+.trackRow.large .trackRow__info p {
+  font-size: 2rem;
+  color: var(--main-font-color);
+}
+
+.trackRow.large .trackRow__album {
+  height: 300px;
+  width: 300px;
+}
+
+.large .trackRow {
+  margin-left: 4rem;
+}
+
 @media screen and (max-width: 960px) {
   .trackRow__info h3,
   .trackRow__info p {

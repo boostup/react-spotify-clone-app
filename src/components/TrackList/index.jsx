@@ -7,17 +7,21 @@ import TrackRow from "../TrackRow";
 
 import "./TrackList.css";
 import { useDispatch } from "react-redux";
+import { useMediaQuery, useTheme } from "@material-ui/core";
 
 function TrackList({ items, onPlay, firstLarge = true }) {
   const dispatch = useDispatch();
 
+  const theme = useTheme();
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <div className={`trackList ${firstLarge ? "large" : ""}`}>
+    <div className={`trackList ${firstLarge && !matchesSM ? "large" : ""}`}>
       {items
         .filter((item) => item?.is_local === false)
         .map((track, i) => (
           <TrackRow
-            large={firstLarge && i === 0 ? true : false}
+            large={firstLarge && !matchesSM && i === 0 ? true : false}
             //
             onPlay={(uri) => {
               playTrack(uri, dispatch);
