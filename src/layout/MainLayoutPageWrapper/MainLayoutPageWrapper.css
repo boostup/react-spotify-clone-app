@@ -77,3 +77,10 @@
     height: calc(100vh - var(--main-layout-footer-height));
   }
 }
+
+@media (max-width: 600px) {
+  .mainLayout__sidebar,
+  .mainLayout__body {
+    padding-top: var(--main-layout-header-height);
+  }
+}

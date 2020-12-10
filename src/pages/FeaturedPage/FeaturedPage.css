@@ -1,3 +1,9 @@
 .featuredPage {
   padding-top: var(--main-layout-header-height);
 }
+
+@media (max-width: 600px) {
+  .featuredPage {
+    padding-top: 0;
+  }
+}

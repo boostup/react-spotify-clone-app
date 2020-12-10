@@ -84,3 +84,11 @@
 .itemCover__name {
   font-weight: 800;
 }
+
+@media screen and (max-width: 600px) {
+  .itemCover {
+    margin-right: 0;
+    padding: 0;
+    width: 150px;
+  }
+}

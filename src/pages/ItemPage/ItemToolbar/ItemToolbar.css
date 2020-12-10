@@ -30,7 +30,7 @@
 @media (max-width: 960px) {
   .itemToolbar {
     position: sticky;
-    top: calc(var(--main-layout-header-height) - 10px);
+    top: 0;
     padding: 0;
     margin: 0 -10px;
     background: linear-gradient(
