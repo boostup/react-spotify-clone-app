@@ -7,9 +7,7 @@ import { addToQueue } from "_redux/footer/async-actions";
 
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import QueueIcon from "@material-ui/icons/Queue";
-import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import RadioIcon from "@material-ui/icons/Radio";
-import ShareIcon from "@material-ui/icons/Share";
 import { Typography } from "@material-ui/core";
 
 import Artists from "../Artists";
@@ -81,11 +79,7 @@ function TrackRow({ order, track, large = true, onPlay }) {
       <ContextualMenu
         menuId="track-menu"
         menuOptions={[
-          {
-            icon: PlaylistAddIcon,
-            title: "add to playlist... (in construction)",
-            fn: () => { },
-          },
+
           {
             icon: QueueIcon,
             title: "add to queue",
@@ -99,11 +93,7 @@ function TrackRow({ order, track, large = true, onPlay }) {
                 `/featured/${track.id}/${encodeURIComponent(track.name)}`
               ),
           },
-          {
-            icon: ShareIcon,
-            title: "copy link (in construction)",
-            fn: () => { },
-          },
+
         ]}
         anchorEl={anchorEl}
         onClose={handleClose}
