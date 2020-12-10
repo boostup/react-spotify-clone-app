@@ -8,3 +8,8 @@ export const setMyPlaylists = (playlists) => ({
   type: actionTypes.SET_MY_PLAYLISTS,
   payload: playlists,
 });
+
+export const setMySavedAlbums = (albums) => ({
+  type: actionTypes.SET_MY_SAVED_ALBUMS,
+  payload: albums,
+});

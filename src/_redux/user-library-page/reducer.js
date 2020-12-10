@@ -5,6 +5,7 @@ const initialState = {
   error: null,
   success: null,
   myPlaylists: [],
+  myAlbums: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +36,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         myPlaylists: action.payload,
+      };
+
+    case actionTypes.SET_MY_SAVED_ALBUMS:
+      return {
+        ...state,
+        myAlbums: action.payload,
       };
 
     default:

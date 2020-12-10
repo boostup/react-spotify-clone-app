@@ -1,3 +1,9 @@
 .searchPage {
   padding-top: calc(1rem + var(--main-layout-header-height));
 }
+
+@media (max-width: 600px) {
+  .searchPage {
+    padding-top: 0;
+  }
+}

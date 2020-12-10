@@ -1,5 +1,5 @@
 const formattedReturn = require("./helpers/formattedReturn");
-const getAllPaginatedData = require("./helpers/getAllPaginatedData");
+const { getAllPaginatedDataForId } = require("./helpers/getAllPaginatedData");
 const mapFavoriteTracks = require("./helpers/mapFavoriteTracks");
 const spotifyUtils = require("./helpers/spotify.config");
 const queryParams = spotifyUtils.queryParams;
@@ -37,7 +37,7 @@ async function getAlbum(itemId) {
     //Check if user Follows the Playlist => https://developer.spotify.com/documentation/web-api/reference/follow/check-user-following-playlist/
     const is_favorite = await spotifyApi.containsMySavedAlbums([itemId]);
 
-    const tracks = await getAllPaginatedData("getAlbumTracks", itemId);
+    const tracks = await getAllPaginatedDataForId("getAlbumTracks", itemId);
 
     const result = {
       ...metadata.body,
@@ -62,7 +62,7 @@ async function getPlaylist(userId, itemId) {
       userId,
     ]);
 
-    const tracks = await getAllPaginatedData("getPlaylistTracks", itemId, {
+    const tracks = await getAllPaginatedDataForId("getPlaylistTracks", itemId, {
       limit,
     });
 

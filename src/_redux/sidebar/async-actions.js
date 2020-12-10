@@ -1,19 +1,18 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
 import { sidebarActionTypes as actionTypes } from "./types";
 import { setSidebarPlaylists } from "./actions";
-import { getToken, getUser } from "utils/localStorage";
+import { getToken } from "utils/localStorage";
 
 /**
  * WORKER SAGAS
  */
 
-function* getMyPlaylistsAync() {
+export function* getMyPlaylistsAync() {
   try {
-    const userId = getUser().id;
     const accessToken = getToken();
     const { REACT_APP_GET_ALL_PLAYLISTS } = process.env;
 
-    const url = `${REACT_APP_GET_ALL_PLAYLISTS}?userId=${userId}&access_token=${accessToken}`;
+    const url = `${REACT_APP_GET_ALL_PLAYLISTS}?access_token=${accessToken}`;
 
     const data = yield call(fetch, url);
     const playlists = yield data.json();

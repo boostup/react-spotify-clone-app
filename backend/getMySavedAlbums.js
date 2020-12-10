@@ -1,4 +1,3 @@
-require("dotenv").config();
 const formattedReturn = require("./helpers/formattedReturn");
 const spotifyUtils = require("./helpers/spotify.config");
 const { getAllPaginatedData } = require("./helpers/getAllPaginatedData");
@@ -8,7 +7,7 @@ const queryParams = spotifyUtils.queryParams;
 
 exports.handler = async (event, context, callback) => {
   try {
-    const data = await getAllPlaylists(event);
+    const data = await getAllSavedAlbums(event);
     return formattedReturn(200, {
       items: data,
     });
@@ -20,17 +19,17 @@ exports.handler = async (event, context, callback) => {
   }
 };
 
-async function getAllPlaylists(event) {
+async function getAllSavedAlbums(event) {
   try {
     const accessToken = event.queryStringParameters[queryParams.ACCESS_TOKEN];
-
     spotifyApi.setAccessToken(accessToken);
 
-    const playlists = await getAllPaginatedData("getUserPlaylists", {
-      fields: "href,primary_color,tracks(total),items(id,name,images)",
-    });
-
-    return playlists;
+    const albums = await getAllPaginatedData("getMySavedAlbums");
+    return albums.map((item) => ({
+      id: item.album.id,
+      name: item.album.name,
+      images: item.album.images,
+    }));
   } catch (error) {
     throw error;
   }
