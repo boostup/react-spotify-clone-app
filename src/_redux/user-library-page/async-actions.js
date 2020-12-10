@@ -1,9 +1,7 @@
-import { all, takeLatest, call, put, select } from "redux-saga/effects";
+import { all, takeLatest, call, put } from "redux-saga/effects";
 import { userLibraryPageActionTypes as actionTypes } from "./types";
 import { setMyPlaylists, setMySavedAlbums } from "./actions";
-import { selectSidebarPlaylists } from "../sidebar/selectors";
 import { getToken } from "utils/localStorage";
-import { getMyPlaylistsAync } from "_redux/sidebar/async-actions";
 
 /**
  * WORKER SAGAS
