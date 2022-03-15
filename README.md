@@ -10,6 +10,56 @@
     <img src="public/images/react-spotify-clone-app-screenshot.png" />
 </a>
 
+# About
+
+This project was created with [Create React App](https://github.com/facebook/create-react-app).
+
+However, it is now bootstrapped by netlify cli.
+
+Meaning that running one command (`netlify dev`) will start both:
+
+- the backend (`netlify functions` living inside the `[root]/backend/` directory)
+- the frontend (a `create-react-app` app living inside the `[root]/src/` directory)
+
+This means that both backend AND frontend logs will print within the same console. No need to open a separate terminal windows for each, which is great !
+
+This project can be locally ran on your dev machine.
+
+Here's how :
+
+- clone this repository on your local machine
+- from the root directory, run the following commands in the terminal:
+
+```
+- yarn
+- netlify login
+- netlify status
+- netlify link
+    - Choose option: `use current git remote origin (https://github.com/boostup/react-spotify-clone-app)`
+- netlify dev
+```
+
+## Troubleshooting
+
+### [WSL only] After running the `netlify dev` command, if you see this error in the terminal:
+
+`Error: Unable to open browser automatically: Command failed: wslpath \System32\WindowsPowerShell\v1.0\powershell.exe wslpath: \System32\WindowsPowerShell\v1.0\powershell.exe`
+
+- restart the terminal (by closing it and opening it again for example).
+- run `netlify dev` again
+- the message should no longer appear, as it actually managed to open the browser window which failed previously
+
+### Local Environment Variables
+
+- create a file called exactly: `.env.development`
+- grab all variables stored in netlify
+- replace all instances of `jovial-mccarthy-6875cf.netlify.app` with `localhost:8888`
+- save the file at root directory level (so same level as other directories such as `src` or `backend`)
+- run `netlify dev`
+- `◈ Injected .env.development file env var: APP_DOMAIN` for example will confirm that it work, as it would otherwise show:
+  `◈ Injected build setting env var: APP_DOMAIN`
+  => pay attention to the difference : `Injected .env.development` vs `Injected build` portions
+
 ---
 
 # Getting Started with Create React App
