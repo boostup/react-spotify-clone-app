@@ -6,6 +6,7 @@ import { AUTH_BACKEND_LOCATION } from "libs/spotify";
 import { ReactComponent as Logo } from "assets/spotifLylogo.svg";
 
 import "./LoginPage.css";
+import WelcomeRecruiter from "./WelcomeRecruiter";
 
 function LoginPage() {
   const location = useLocation();
@@ -26,6 +27,7 @@ function LoginPage() {
           <p>{error}</p>
         </div>
       )}
+      <WelcomeRecruiter />
     </div>
   );
 }

@@ -18,6 +18,10 @@ const useStyles = makeStyles(() => ({
     textAlign: "center",
     padding: "1rem",
   },
+  childrenWrapper: {
+    padding: "5rem",
+    marginBottom: "2rem",
+  },
 }));
 
 function Modal({ when, buttonLabel, onDismiss, children }) {
@@ -36,7 +40,7 @@ function Modal({ when, buttonLabel, onDismiss, children }) {
   return (
     <Grow in={displayMsg}>
       <div className={classes.modal}>
-        {children}
+        <div className={classes.childrenWrapper}>{children}</div>
         <button className="spotifyButton" onClick={handleClick}>
           {buttonLabel ? buttonLabel : "dismiss"}
         </button>
