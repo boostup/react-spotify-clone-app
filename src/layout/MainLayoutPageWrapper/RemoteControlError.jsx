@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectFooterError } from "_redux/footer/selectors";
 import { selectAuthUser } from "_redux/auth/selectors";
 import { cleanRemoteControlApiError } from "_redux/footer/actions";
-import Modal from "layout/Modal/Modal";
+import Modal from "layout/Modal";
 
 function RemoteControlError() {
   const dispatch = useDispatch();

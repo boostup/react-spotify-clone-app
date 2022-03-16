@@ -1,4 +1,4 @@
-import Modal from "layout/Modal/Modal";
+import Modal from "layout/Modal";
 import { useState } from "react";
 
 function WelcomeRecruiter() {
