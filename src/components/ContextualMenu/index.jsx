@@ -43,7 +43,7 @@ export default function ContextualMenu({
 
   const handleUrl = (url) => {
     if (isExternalResource(url)) {
-      window.location = url;
+      window.open(url, "_newtab");
     } else {
       onClose();
       history.push(url);
