@@ -54,6 +54,11 @@
   width: 100%;
 }
 
+.mainLayout__body > .content {
+  display: grid;
+  place-items: center;
+}
+
 .mainLayout__footer {
   box-sizing: border-box;
   position: fixed;

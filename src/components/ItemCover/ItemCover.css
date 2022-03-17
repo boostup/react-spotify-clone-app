@@ -1,6 +1,6 @@
 .itemCover {
   height: 250px;
-  width: 170px;
+  width: 100%;
   margin-right: 2rem;
   margin-bottom: 2rem;
   text-align: center;
@@ -25,6 +25,7 @@
 .itemCover .imageLoader {
   max-height: 150px;
   width: 100%;
+  object-fit: cover;
 }
 
 .artist .itemCover img,
@@ -89,6 +90,5 @@
   .itemCover {
     margin-right: 0;
     padding: 0;
-    width: 150px;
   }
 }
