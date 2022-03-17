@@ -14,6 +14,7 @@ import {
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
 import LibraryMusicIcon from "@material-ui/icons/LibraryMusic";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 import SidebarOption from "./SidebarOption";
 
@@ -48,6 +49,11 @@ function Sidebar({ className }) {
         title="Your Library"
         Icon={LibraryMusicIcon}
         to="/library"
+      />
+      <SidebarOption
+        title="Liked titles"
+        Icon={FavoriteIcon}
+        to="/savedtitles"
       />
 
       <SidebarPlaylistsList playlists={playlists} />

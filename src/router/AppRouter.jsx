@@ -13,6 +13,7 @@ import UserLibraryPage from "pages/UserLibraryPage";
 import ItemPage from "pages/ItemPage";
 import FeaturedPage from "pages/FeaturedPage";
 import ErrorBoundary from "components/ErrorBoundary";
+import UserSavedTitles from "pages/UserSavedTitles";
 
 const AppRouter = () => {
   return (
@@ -31,6 +32,9 @@ const AppRouter = () => {
             </PrivateRoute>
             <PrivateRoute path="/library">
               <UserLibraryPage />
+            </PrivateRoute>
+            <PrivateRoute path="/savedtitles">
+              <UserSavedTitles />
             </PrivateRoute>
             <PrivateRoute exact path="/">
               <Home />
