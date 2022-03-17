@@ -28,6 +28,7 @@ exports.handler = async (event, context, callback) => {
     return redirect(frontEndRedirect, callback);
   } catch (err) {
     console.error(err);
+    if (err.statusCode === 400) return redirect("/", callback);
     return formattedReturn(500, err);
   }
 };

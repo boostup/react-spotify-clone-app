@@ -9,6 +9,7 @@ import itemPageReducer from "./item-page/reducer";
 import searchPageReducer from "./search-page/reducer";
 import sidebarReducer from "./sidebar/reducer";
 import userLibraryPageReducer from "./user-library-page/reducer";
+import userSavedTitlesPageReducer from "./user-saved-titles-page/reducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   searchPage: searchPageReducer,
   sidebar: sidebarReducer,
   userLibraryPage: userLibraryPageReducer,
+  userSavedTitlesPage: userSavedTitlesPageReducer,
 });
 
 export default rootReducer;

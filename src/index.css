@@ -124,6 +124,10 @@ button {
   background-color: var(--main-theme-color-secondary-hover);
 }
 
+.MuiTooltip-popper .MuiTooltip-tooltip {
+  font-size: 1.5rem;
+}
+
 /**
 * Animations
 */
