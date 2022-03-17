@@ -36,7 +36,7 @@ export function CopyField({
     if (!enabled) {
       typeof onCopyError == "function" && onCopyError(CopyError.NotAvailable);
     }
-  }, []);
+  }, [onCopyError]);
 
   const copyText = () => {
     if ("clipboard" in navigator) {
