@@ -40,7 +40,7 @@ function SearchPage() {
       //
       title="Search for Albums, Artists and Playlists"
     >
-      <div className="searchPage">
+      <div className="searchPage content">
         {!searchResults && <h1>Search millions of tracks...</h1>}
 
         {albums && (

@@ -28,13 +28,12 @@ function UserLibraryPage() {
       title="Your Library"
       isLoading={pageState.isFetching}
     >
-      <div className="yourLibrary">
+      <div className="yourLibrary content">
         <SectionHeading icon={PlaylistIcon} title="Your Playlists" />
         <ItemsGrid variant="playlist" items={myPlaylists.items} />
 
         <SectionHeading icon={AlbumIcon} title="Your Saved Albums" />
         <ItemsGrid variant="album" items={myAlbums.items} />
-
       </div>
     </MainLayoutPageWrapper>
   );
